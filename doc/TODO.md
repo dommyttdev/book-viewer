@@ -32,55 +32,55 @@
 
 ### ディレクトリ構成
 
-- [x] `doc/00_product/vision/` を作成する
-- [ ] `doc/00_product/roadmap/` を作成する
-- [ ] `doc/00_product/personas/` を作成する
-- [x] `doc/00_product/user_story_map/` を作成する
-- [x] `doc/00_product/glossary/` を作成する
-- [ ] `doc/01_backlog/epics/` を作成する
-- [ ] `doc/01_backlog/user_stories/` を作成する
-- [ ] `doc/01_backlog/acceptance_criteria/` を作成する
-- [ ] `doc/01_backlog/story_templates/` を作成する
-- [ ] `doc/02_architecture/overview/` を作成する
-- [ ] `doc/02_architecture/technology_stack/` を作成する
-- [ ] `doc/02_architecture/adr/` を作成する
-- [ ] `doc/02_architecture/system_context/` を作成する
-- [ ] `doc/02_architecture/container_diagram/` を作成する
-- [ ] `doc/02_architecture/data_flow/` を作成する
-- [ ] `doc/02_architecture/quality_attributes/` を作成する
-- [ ] `doc/03_design/ui_flows/` を作成する
-- [ ] `doc/03_design/screen_notes/` を作成する
-- [ ] `doc/03_design/api_contracts/` を作成する
-- [ ] `doc/03_design/data_model/` を作成する
-- [ ] `doc/03_design/search_design/` を作成する
-- [ ] `doc/03_design/file_storage_design/` を作成する
-- [ ] `doc/03_design/image_conversion_design/` を作成する
-- [ ] `doc/03_design/authorization_design/` を作成する
-- [ ] `doc/04_development/coding_rules/` を作成する
-- [ ] `doc/04_development/branch_strategy/` を作成する
-- [ ] `doc/04_development/environment_setup/` を作成する
-- [ ] `doc/04_development/local_development/` を作成する
-- [ ] `doc/04_development/definition_of_done/` を作成する
-- [ ] `doc/05_testing/test_strategy/` を作成する
-- [ ] `doc/05_testing/acceptance_tests/` を作成する
-- [ ] `doc/05_testing/regression_tests/` を作成する
-- [ ] `doc/05_testing/exploratory_testing/` を作成する
-- [ ] `doc/05_testing/test_data/` を作成する
-- [ ] `doc/06_operations/runbook/` を作成する
-- [ ] `doc/06_operations/backup_restore/` を作成する
-- [ ] `doc/06_operations/monitoring/` を作成する
-- [ ] `doc/06_operations/release_notes/` を作成する
-- [ ] `doc/06_operations/incident_log/` を作成する
-- [ ] `doc/90_decisions/product_decisions/` を作成する
-- [ ] `doc/90_decisions/technical_decisions/` を作成する
-- [ ] `doc/90_decisions/tradeoffs/` を作成する
-- [ ] `doc/99_archive/old_versions/` を作成する
-- [ ] `doc/99_archive/obsolete/` を作成する
+- [x] `doc/01_product/01_vision/` を作成する
+- [ ] `doc/01_product/02_roadmap/` を作成する
+- [ ] `doc/01_product/03_personas/` を作成する
+- [x] `doc/01_product/04_user_story_map/` を作成する
+- [x] `doc/01_product/05_glossary/` を作成する
+- [ ] `doc/02_backlog/01_epics/` を作成する
+- [ ] `doc/02_backlog/02_user_stories/` を作成する
+- [ ] `doc/02_backlog/03_acceptance_criteria/` を作成する
+- [ ] `doc/02_backlog/04_story_templates/` を作成する
+- [ ] `doc/03_architecture/01_overview/` を作成する
+- [ ] `doc/03_architecture/02_technology_stack/` を作成する
+- [ ] `doc/03_architecture/03_adr/` を作成する
+- [ ] `doc/03_architecture/04_system_context/` を作成する
+- [ ] `doc/03_architecture/05_container_diagram/` を作成する
+- [ ] `doc/03_architecture/06_data_flow/` を作成する
+- [ ] `doc/03_architecture/07_quality_attributes/` を作成する
+- [ ] `doc/04_design/01_ui_flows/` を作成する
+- [ ] `doc/04_design/02_screen_notes/` を作成する
+- [ ] `doc/04_design/03_api_contracts/` を作成する
+- [ ] `doc/04_design/04_data_model/` を作成する
+- [ ] `doc/04_design/05_search_design/` を作成する
+- [ ] `doc/04_design/06_file_storage_design/` を作成する
+- [ ] `doc/04_design/07_image_conversion_design/` を作成する
+- [ ] `doc/04_design/08_authorization_design/` を作成する
+- [ ] `doc/05_development/01_coding_rules/` を作成する
+- [ ] `doc/05_development/02_branch_strategy/` を作成する
+- [ ] `doc/05_development/03_environment_setup/` を作成する
+- [ ] `doc/05_development/04_local_development/` を作成する
+- [ ] `doc/05_development/05_definition_of_done/` を作成する
+- [ ] `doc/06_testing/01_test_strategy/` を作成する
+- [ ] `doc/06_testing/02_acceptance_tests/` を作成する
+- [ ] `doc/06_testing/03_regression_tests/` を作成する
+- [ ] `doc/06_testing/04_exploratory_testing/` を作成する
+- [ ] `doc/06_testing/05_test_data/` を作成する
+- [ ] `doc/07_operations/01_runbook/` を作成する
+- [ ] `doc/07_operations/02_backup_restore/` を作成する
+- [ ] `doc/07_operations/03_monitoring/` を作成する
+- [ ] `doc/07_operations/04_release_notes/` を作成する
+- [ ] `doc/07_operations/05_incident_log/` を作成する
+- [ ] `doc/90_decisions/01_product_decisions/` を作成する
+- [ ] `doc/90_decisions/02_technical_decisions/` を作成する
+- [ ] `doc/90_decisions/03_tradeoffs/` を作成する
+- [ ] `doc/99_archive/01_old_versions/` を作成する
+- [ ] `doc/99_archive/02_obsolete/` を作成する
 
 ### 初期ドキュメント
 
 - [x] プロダクトビジョンを作成する
-  - 作成先: `doc/00_product/vision/product_vision.md`
+  - 作成先: `doc/01_product/01_vision/01_product_vision.md`
   - 記載内容:
     - このアプリで解決したい課題
     - 対象ユーザ
@@ -89,7 +89,7 @@
     - MVP外の範囲
     - 成功指標
 - [x] 用語集を作成する
-  - 作成先: `doc/00_product/glossary/glossary.md`
+  - 作成先: `doc/01_product/05_glossary/01_glossary.md`
   - 記載候補:
     - 自炊本
     - 原本ファイル
@@ -103,7 +103,7 @@
     - 管理ユーザ
     - ロール
 - [x] ユーザーストーリーマップを作成する
-  - 作成先: `doc/00_product/user_story_map/user_story_map.md`
+  - 作成先: `doc/01_product/04_user_story_map/01_user_story_map.md`
   - 軸:
     - 登録する
     - アップロードする
@@ -115,14 +115,14 @@
     - ユーザ管理する
     - 運用する
 - [ ] ロードマップ初版を作成する
-  - 作成先: `doc/00_product/roadmap/product_roadmap.md`
+  - 作成先: `doc/01_product/02_roadmap/01_product_roadmap.md`
   - 区分:
     - MVP
     - Beta
     - v1.0
     - 将来対応
 - [ ] Definition of Doneを作成する
-  - 作成先: `doc/04_development/definition_of_done/definition_of_done.md`
+  - 作成先: `doc/05_development/05_definition_of_done/01_definition_of_done.md`
   - 含める条件:
     - 受入条件を満たす
     - 単体テストが通る
@@ -135,7 +135,7 @@
 ### システム概要
 
 - [ ] システム概要を作成する
-  - 作成先: `doc/02_architecture/overview/system_overview.md`
+  - 作成先: `doc/03_architecture/01_overview/01_system_overview.md`
   - 記載内容:
     - システム目的
     - 主要機能
@@ -147,7 +147,7 @@
     - ファイル処理の大まかな流れ
     - 検索処理の大まかな流れ
 - [ ] 技術スタック初版を作成する
-  - 作成先: `doc/02_architecture/technology_stack/technology_stack.md`
+  - 作成先: `doc/03_architecture/02_technology_stack/01_technology_stack.md`
   - 記載内容:
     - フロントエンド技術: Next.js
     - バックエンド技術: Spring Boot 4.0.6
@@ -161,7 +161,7 @@
     - ローカル開発環境 / 本番運用環境: Docker Compose
     - パフォーマンス上の選定理由
 - [ ] システムコンテキストを作成する
-  - 作成先: `doc/02_architecture/system_context/system_context.md`
+  - 作成先: `doc/03_architecture/04_system_context/01_system_context.md`
   - 記載内容:
     - 一般ユーザ
     - 管理ユーザ
@@ -174,7 +174,7 @@
     - 専用キューによる非同期画像変換処理
     - 7-Zip for Linux コンソール版
 - [ ] コンテナ図を作成する
-  - 作成先: `doc/02_architecture/container_diagram/container_diagram.md`
+  - 作成先: `doc/03_architecture/05_container_diagram/01_container_diagram.md`
   - 記載内容:
     - Next.jsフロントエンドWebアプリケーション
     - Spring BootバックエンドAPI
@@ -187,7 +187,7 @@
     - APIと変換ワーカーの責務分離
     - 単一Linuxホスト上のDocker Compose構成
 - [ ] 品質特性初版を作成する
-  - 作成先: `doc/02_architecture/quality_attributes/quality_attributes.md`
+  - 作成先: `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
   - 記載内容:
     - レスポンス時間の目標
     - アップロード後の変換待ち時間の考え方
@@ -200,7 +200,7 @@
 ### ADR
 
 - [ ] ADRテンプレートを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-template.md`
+  - 作成先: `doc/03_architecture/03_adr/01_ADR-template.md`
   - 項目:
     - Status
     - Context
@@ -208,28 +208,28 @@
     - Consequences
     - Alternatives
 - [ ] Spring Boot採用ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0001-use-spring-boot.md`
+  - 作成先: `doc/03_architecture/03_adr/02_ADR-0001-use-spring-boot.md`
   - 判断観点:
     - バックエンドAPI開発の生産性
     - 認証、バリデーション、DBアクセス、監視との統合
     - パフォーマンスチューニングのしやすさ
     - チームの習熟性
 - [ ] モジュラーモノリス採用ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0002-use-modular-monolith.md`
+  - 作成先: `doc/03_architecture/03_adr/03_ADR-0002-use-modular-monolith.md`
   - 判断観点:
     - 小から中規模での開発速度
     - モジュール境界の明確化
     - 将来的なサービス分割余地
     - デプロイと運用の単純さ
 - [ ] PostgreSQL採用ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0003-use-postgresql.md`
+  - 作成先: `doc/03_architecture/03_adr/04_ADR-0003-use-postgresql.md`
   - 判断観点:
     - リレーショナルなメタ情報管理
     - トランザクション
     - タグ、著者、シリーズ、ユーザ、ロールの関連管理
     - 変換ジョブ状態の一貫性
 - [ ] Elasticsearch採用ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0004-use-elasticsearch.md`
+  - 作成先: `doc/03_architecture/03_adr/05_ADR-0004-use-elasticsearch.md`
   - 判断観点:
     - タイトル、著者、タグ、シリーズのあいまい検索
     - 日本語検索: analysis-kuromojiを使用
@@ -238,7 +238,7 @@
     - 将来的なスコアリング調整
     - PostgreSQLから再構築可能な派生インデックスとして扱う方針
 - [ ] webp変換方針ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0005-convert-images-to-webp.md`
+  - 作成先: `doc/03_architecture/03_adr/06_ADR-0005-convert-images-to-webp.md`
   - 判断観点:
     - 表示速度
     - 保存容量
@@ -247,7 +247,7 @@
     - スマートフォン閲覧前提、拡大表示は想定しない
     - 漫画や小説の本文・セリフの可読性
 - [ ] アーカイブ展開方式ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0006-extract-archive-files.md`
+  - 作成先: `doc/03_architecture/03_adr/07_ADR-0006-extract-archive-files.md`
   - 判断観点:
     - zip / rar / 7zip対応: 7-Zip for Linux コンソール版を使用
     - Java標準ライブラリおよび Apache Commons Compress のrar対応には依存しない
@@ -256,7 +256,7 @@
     - パストラバーサル対策
     - 破損ファイル対応
 - [ ] 非同期変換ジョブ方式ADRを作成する
-  - 作成先: `doc/02_architecture/adr/ADR-0007-use-async-conversion-worker.md`
+  - 作成先: `doc/03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md`
   - 判断観点:
     - アップロード後の待ち時間
     - バックエンドAPIと変換ワーカーの責務分離
@@ -270,7 +270,7 @@
 ### 主要設計
 
 - [ ] データモデル初版を作成する
-  - 作成先: `doc/03_design/data_model/data_model.md`
+  - 作成先: `doc/04_design/04_data_model/01_data_model.md`
   - 対象エンティティ:
     - user
     - admin_user
@@ -297,7 +297,7 @@
     - 論理削除の有無
     - 変換ジョブ実行は専用キュー、ジョブ状態管理はDBに保持するか
 - [ ] 検索設計初版を作成する
-  - 作成先: `doc/03_design/search_design/search_design.md`
+  - 作成先: `doc/04_design/05_search_design/01_search_design.md`
   - 記載内容:
     - 検索対象項目
     - タイトル検索
@@ -312,7 +312,7 @@
     - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
     - 更新失敗時は再試行キューに積む
 - [ ] ファイル保存設計初版を作成する
-  - 作成先: `doc/03_design/file_storage_design/file_storage_design.md`
+  - 作成先: `doc/04_design/06_file_storage_design/01_file_storage_design.md`
   - 記載内容:
     - 原本ファイルの保存有無: 保存し続ける
     - 変換後webpの保存場所
@@ -322,7 +322,7 @@
     - 削除時の扱い
     - バックアップ対象: バックアップは行わない
 - [ ] 画像変換設計初版を作成する
-  - 作成先: `doc/03_design/image_conversion_design/image_conversion_design.md`
+  - 作成先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
   - 記載内容:
     - Spring Boot変換ワーカーの責務
     - 非同期ジョブの投入、取得、実行方式: 専用キュー
@@ -338,7 +338,7 @@
     - 変換ジョブ状態
     - リソース制限: 同時実行数10、1ジョブのタイムアウト30分、メモリ / CPU制限はOSまたはコンテナ側で制御
 - [ ] 権限設計初版を作成する
-  - 作成先: `doc/03_design/authorization_design/authorization_design.md`
+  - 作成先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - 記載内容:
     - 一般ユーザの権限: 書籍アップロード不可、閲覧のみ
     - 管理ユーザの権限: 書籍アップロード可能
@@ -353,15 +353,15 @@
 ### エピック: 自炊本管理
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/book_management.md`
+  - 作成先: `doc/02_backlog/01_epics/01_book_management.md`
   - 目的:
     - 自炊した本をアップロードし、メタ情報を管理できるようにする
 - [ ] 本アップロードのユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/book_upload.md`
+  - 作成先: `doc/02_backlog/02_user_stories/01_book_upload.md`
   - 例:
     - 管理ユーザとして、自炊本のアーカイブファイルをアップロードしたい。なぜなら一般ユーザがWeb上で本を読めるようにしたいから。
 - [ ] 本アップロードの受入条件を作成する
-  - 作成先: `doc/01_backlog/acceptance_criteria/book_upload.md`
+  - 作成先: `doc/02_backlog/03_acceptance_criteria/01_book_upload.md`
   - 条件候補:
     - 管理ユーザのみアップロードできる
     - 一般ユーザはアップロードできない
@@ -373,7 +373,7 @@
     - アップロード後に変換ジョブが作成される
     - 変換状態を画面で確認できる
 - [ ] 本メタ情報編集のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/book_metadata_edit.md`
+  - 作成先: `doc/02_backlog/02_user_stories/02_book_metadata_edit.md`
   - 対象項目:
     - タイトル
     - 著者
@@ -385,8 +385,8 @@
     - 表紙画像
 - [ ] 本削除の仕様を決める
   - 反映先:
-    - `doc/03_design/file_storage_design/file_storage_design.md`
-    - `doc/03_design/data_model/data_model.md`
+    - `doc/04_design/06_file_storage_design/01_file_storage_design.md`
+    - `doc/04_design/04_data_model/01_data_model.md`
   - 決定事項:
     - 管理ユーザのみ書籍を削除できる
     - 一般ユーザは書籍を保持しない
@@ -397,9 +397,9 @@
 ### エピック: 画像変換
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/image_conversion.md`
+  - 作成先: `doc/02_backlog/01_epics/02_image_conversion.md`
 - [ ] アーカイブ展開の仕様を決める
-  - 反映先: `doc/03_design/image_conversion_design/image_conversion_design.md`
+  - 反映先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
   - 決定事項:
     - rar / 7zipは7-Zip for Linux コンソール版で展開する
     - 7-Zipは変換ワーカーコンテナ内で利用する
@@ -442,8 +442,8 @@
     - failed
     - canceled
   - 反映先:
-    - `doc/03_design/data_model/data_model.md`
-    - `doc/03_design/image_conversion_design/image_conversion_design.md`
+    - `doc/04_design/04_data_model/01_data_model.md`
+    - `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
 - [ ] 再変換仕様を決める
   - 検討事項:
     - 手動再実行できるか
@@ -454,13 +454,13 @@
 ### エピック: 本の閲覧
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/book_viewer.md`
+  - 作成先: `doc/02_backlog/01_epics/03_book_viewer.md`
 - [ ] 本一覧表示のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/book_list.md`
+  - 作成先: `doc/02_backlog/02_user_stories/03_book_list.md`
 - [ ] ビューア表示のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/book_viewing.md`
+  - 作成先: `doc/02_backlog/02_user_stories/04_book_viewing.md`
 - [ ] ビューア操作仕様を決める
-  - 反映先: `doc/03_design/ui_flows/ui_flows.md`
+  - 反映先: `doc/04_design/01_ui_flows/01_ui_flows.md`
   - 検討事項:
     - 1ページ表示
     - 見開き表示
@@ -481,9 +481,9 @@
     - ユーザ単位で持つか
     - 端末単位で持つか
 - [ ] お気に入り登録のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/favorite.md`
+  - 作成先: `doc/02_backlog/02_user_stories/05_favorite.md`
 - [ ] お気に入りの受入条件を作成する
-  - 作成先: `doc/01_backlog/acceptance_criteria/favorite.md`
+  - 作成先: `doc/02_backlog/03_acceptance_criteria/02_favorite.md`
   - 条件候補:
     - 本をお気に入り登録できる
     - お気に入り解除できる
@@ -493,11 +493,11 @@
 ### エピック: 検索
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/search.md`
+  - 作成先: `doc/02_backlog/01_epics/04_search.md`
 - [ ] 検索ユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/book_search.md`
+  - 作成先: `doc/02_backlog/02_user_stories/06_book_search.md`
 - [ ] 検索対象項目を確定する
-  - 反映先: `doc/03_design/search_design/search_design.md`
+  - 反映先: `doc/04_design/05_search_design/01_search_design.md`
   - 対象候補:
     - タイトル
     - 著者名
@@ -515,7 +515,7 @@
     - typo許容
     - ひらがなカタカナ
 - [ ] Elasticsearchインデックス設計を作成する
-  - 作成先: `doc/03_design/search_design/search_index_design.md`
+  - 作成先: `doc/04_design/05_search_design/02_search_index_design.md`
   - 記載内容:
     - index name
     - mapping
@@ -542,17 +542,17 @@
 ### エピック: アカウント管理
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/account_management.md`
+  - 作成先: `doc/02_backlog/01_epics/05_account_management.md`
 - [ ] 会員登録のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/user_registration.md`
+  - 作成先: `doc/02_backlog/02_user_stories/07_user_registration.md`
 - [ ] ログイン・ログアウトのユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/user_login_logout.md`
+  - 作成先: `doc/02_backlog/02_user_stories/08_user_login_logout.md`
 - [ ] 会員情報編集のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/user_profile_edit.md`
+  - 作成先: `doc/02_backlog/02_user_stories/09_user_profile_edit.md`
 - [ ] 退会のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/user_withdrawal.md`
+  - 作成先: `doc/02_backlog/02_user_stories/10_user_withdrawal.md`
 - [ ] 認証方式を決める
-  - 反映先: `doc/03_design/authorization_design/authorization_design.md`
+  - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - 決定事項:
     - メール認証を行う
     - 登録時だけでなく、ログイン時の2段階認証にもメールを活用する
@@ -572,22 +572,22 @@
 ### エピック: 管理機能
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/admin_management.md`
+  - 作成先: `doc/02_backlog/01_epics/06_admin_management.md`
 - [ ] 管理ユーザログインのユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/admin_login_logout.md`
+  - 作成先: `doc/02_backlog/02_user_stories/11_admin_login_logout.md`
 - [ ] 管理ユーザ管理のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/admin_user_management.md`
+  - 作成先: `doc/02_backlog/02_user_stories/12_admin_user_management.md`
 - [ ] ロール設定のユーザーストーリーを作成する
-  - 作成先: `doc/01_backlog/user_stories/role_management.md`
+  - 作成先: `doc/02_backlog/02_user_stories/13_role_management.md`
 - [ ] 管理ロール一覧を定義する
-  - 反映先: `doc/03_design/authorization_design/authorization_design.md`
+  - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - ロール候補:
     - super_admin
     - admin
     - operator
     - viewer
 - [ ] 権限マトリクスを作成する
-  - 作成先: `doc/03_design/authorization_design/permission_matrix.md`
+  - 作成先: `doc/04_design/08_authorization_design/02_permission_matrix.md`
   - 操作候補:
     - 管理ユーザ登録
     - 管理ユーザ編集
@@ -603,9 +603,9 @@
 ### エピック: 運用
 
 - [ ] エピック定義を作成する
-  - 作成先: `doc/01_backlog/epics/operations.md`
+  - 作成先: `doc/02_backlog/01_epics/07_operations.md`
 - [ ] Runbookを作成する
-  - 作成先: `doc/06_operations/runbook/runbook.md`
+  - 作成先: `doc/07_operations/01_runbook/01_runbook.md`
   - 記載内容:
     - Docker Composeによる単一Linuxホスト運用手順
     - Spring BootバックエンドAPIの起動手順
@@ -618,14 +618,14 @@
     - 全件再インデックス手順
     - 書籍単位の再インデックス手順
 - [ ] バックアップなし方針を作成する
-  - 作成先: `doc/06_operations/backup_restore/backup_restore.md`
+  - 作成先: `doc/07_operations/02_backup_restore/01_backup_restore.md`
   - 記載内容:
     - バックアップは行わない
     - PostgreSQL / Elasticsearch / 原本ファイル / 変換済みwebp / サムネイルはバックアップ対象にしない
     - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う
     - バックアップなし運用のリスクと許容範囲
 - [ ] 監視方針を作成する
-  - 作成先: `doc/06_operations/monitoring/monitoring.md`
+  - 作成先: `doc/07_operations/03_monitoring/01_monitoring.md`
   - 監視候補:
     - Spring BootバックエンドAPI死活
     - Spring Boot変換ワーカー死活
@@ -640,7 +640,7 @@
     - 変換ワーカーの同時実行数
     - 1ジョブ30分タイムアウトの発生数
 - [ ] 障害ログの記録形式を作成する
-  - 作成先: `doc/06_operations/incident_log/incident_log_template.md`
+  - 作成先: `doc/07_operations/05_incident_log/01_incident_log_template.md`
   - 項目:
     - 発生日時
     - 影響範囲
@@ -649,7 +649,7 @@
     - 恒久対応
     - 再発防止策
 - [ ] リリースノート形式を作成する
-  - 作成先: `doc/06_operations/release_notes/release_note_template.md`
+  - 作成先: `doc/07_operations/04_release_notes/01_release_note_template.md`
   - 項目:
     - バージョン
     - リリース日
@@ -661,7 +661,7 @@
 ## テスト関連ToDo
 
 - [ ] テスト戦略を作成する
-  - 作成先: `doc/05_testing/test_strategy/test_strategy.md`
+  - 作成先: `doc/06_testing/01_test_strategy/01_test_strategy.md`
   - 記載内容:
     - テスト範囲
     - 単体テスト方針
@@ -672,7 +672,7 @@
     - 手動確認方針
     - 回帰テスト方針
 - [ ] アップロード機能の受入テストを作成する
-  - 作成先: `doc/05_testing/acceptance_tests/book_upload_acceptance_tests.md`
+  - 作成先: `doc/06_testing/02_acceptance_tests/01_book_upload_acceptance_tests.md`
   - 観点:
     - 管理ユーザによる正常アップロード
     - 一般ユーザによるアップロード不可
@@ -681,7 +681,7 @@
     - 破損ファイル
     - 変換ジョブ作成
 - [ ] 画像変換機能の受入テストを作成する
-  - 作成先: `doc/05_testing/acceptance_tests/image_conversion_acceptance_tests.md`
+  - 作成先: `doc/06_testing/02_acceptance_tests/02_image_conversion_acceptance_tests.md`
   - 観点:
     - zip展開
     - 7-Zip for Linux コンソール版によるrar展開
@@ -692,7 +692,7 @@
     - 1ジョブ30分タイムアウト
     - 同時実行数10
 - [ ] 検索機能の受入テストを作成する
-  - 作成先: `doc/05_testing/acceptance_tests/search_acceptance_tests.md`
+  - 作成先: `doc/06_testing/02_acceptance_tests/03_search_acceptance_tests.md`
   - 観点:
     - タイトル検索
     - 著者検索
@@ -703,7 +703,7 @@
     - Elasticsearch再インデックス
     - 検索結果なし
 - [ ] 閲覧機能の受入テストを作成する
-  - 作成先: `doc/05_testing/acceptance_tests/viewer_acceptance_tests.md`
+  - 作成先: `doc/06_testing/02_acceptance_tests/04_viewer_acceptance_tests.md`
   - 観点:
     - ページ表示
     - ページ送り
@@ -711,7 +711,7 @@
     - 拡大縮小
     - スマートフォン表示
 - [ ] 権限機能の受入テストを作成する
-  - 作成先: `doc/05_testing/acceptance_tests/authorization_acceptance_tests.md`
+  - 作成先: `doc/06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md`
   - 観点:
     - 未ログインアクセス
     - 一般ユーザアクセス
@@ -719,7 +719,7 @@
     - ロール別アクセス制御
     - 他ユーザデータの操作可否
 - [ ] 回帰テスト一覧を作成する
-  - 作成先: `doc/05_testing/regression_tests/regression_tests.md`
+  - 作成先: `doc/06_testing/03_regression_tests/01_regression_tests.md`
   - 対象:
     - ログイン
     - アップロード
@@ -732,7 +732,7 @@
 ## API契約ToDo
 
 - [ ] API設計方針を作成する
-  - 作成先: `doc/03_design/api_contracts/api_design_policy.md`
+  - 作成先: `doc/04_design/03_api_contracts/01_api_design_policy.md`
   - 記載内容:
     - Spring BootバックエンドAPIの前提
     - URL命名
@@ -742,7 +742,7 @@
     - エラーレスポンス
     - バリデーションエラー形式
 - [ ] 自炊本管理API契約を作成する
-  - 作成先: `doc/03_design/api_contracts/book_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/02_book_api.md`
   - API候補:
     - 本一覧取得
     - 本詳細取得
@@ -750,13 +750,13 @@
     - 本メタ情報更新
     - 本削除
 - [ ] 変換ジョブAPI契約を作成する
-  - 作成先: `doc/03_design/api_contracts/conversion_job_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/03_conversion_job_api.md`
   - API候補:
     - ジョブ状態取得
     - ジョブ再実行
     - ジョブキャンセル
 - [ ] 検索API契約を作成する
-  - 作成先: `doc/03_design/api_contracts/search_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/04_search_api.md`
   - API候補:
     - キーワード検索
     - タグ検索
@@ -764,13 +764,13 @@
     - シリーズ検索
     - サジェスト
 - [ ] 閲覧API契約を作成する
-  - 作成先: `doc/03_design/api_contracts/viewer_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/05_viewer_api.md`
   - API候補:
     - ページ一覧取得
     - ページ画像取得
     - 閲覧位置保存
 - [ ] アカウントAPI契約を作成する
-  - 作成先: `doc/03_design/api_contracts/account_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/06_account_api.md`
   - API候補:
     - 会員登録
     - ログイン
@@ -779,7 +779,7 @@
     - 会員情報更新
     - 退会
 - [ ] 管理API契約を作成する
-  - 作成先: `doc/03_design/api_contracts/admin_api.md`
+  - 作成先: `doc/04_design/03_api_contracts/07_admin_api.md`
   - API候補:
     - 管理ユーザ一覧
     - 管理ユーザ登録
@@ -791,7 +791,7 @@
 ## UI関連ToDo
 
 - [ ] UIフロー全体図を作成する
-  - 作成先: `doc/03_design/ui_flows/ui_flows.md`
+  - 作成先: `doc/04_design/01_ui_flows/01_ui_flows.md`
   - 対象:
     - 一般ユーザ登録
     - ログイン
@@ -803,7 +803,7 @@
     - お気に入り
     - 管理ユーザ管理
 - [ ] 画面メモを作成する
-  - 作成先: `doc/03_design/screen_notes/screen_notes.md`
+  - 作成先: `doc/04_design/02_screen_notes/01_screen_notes.md`
   - 画面候補:
     - ログイン画面
     - 会員登録画面
