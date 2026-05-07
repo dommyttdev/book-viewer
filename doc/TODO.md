@@ -57,7 +57,7 @@
 - [ ] `doc/04_design/07_image_conversion_design/` を作成する
 - [ ] `doc/04_design/08_authorization_design/` を作成する
 - [x] `doc/05_development/01_coding_rules/` を作成する
-- [ ] `doc/05_development/02_branch_strategy/` を作成する
+- [x] `doc/05_development/02_branch_strategy/` を作成する
 - [ ] `doc/05_development/03_environment_setup/` を作成する
 - [ ] `doc/05_development/04_local_development/` を作成する
 - [x] `doc/05_development/05_definition_of_done/` を作成する
@@ -155,7 +155,7 @@
     - 命名、責務分離、例外処理、ログ、テストの基本方針
     - APIモデル、永続化エンティティ、ドメインモデルの分離方針
     - セキュリティ上の注意点
-- [ ] ブランチ戦略を作成する
+- [x] ブランチ戦略を作成する
   - 作成先: `doc/05_development/02_branch_strategy/01_branch_strategy.md`
   - 記載内容:
     - `doc/CONTRIBUTING.md` との関係

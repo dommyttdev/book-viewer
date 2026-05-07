@@ -12,8 +12,23 @@ This document defines contribution, commit, branch, pull request, and verificati
 4. Run tests or checks proportional to the affected area.
 5. Use clear Japanese commit messages with the required prefix.
 6. Keep pull requests focused and reviewable.
+7. Follow the branch strategy in `doc/05_development/02_branch_strategy/01_branch_strategy.md`.
 
 ## Branch Rules
+
+This repository uses Git-flow as the basic branch strategy.
+
+Branch roles:
+
+- `main`: Stable branch for released or releasable code.
+- `develop`: Integration branch for the next release.
+- `feature/*`: Feature work created from `develop` and merged back into `develop`.
+- `fix/*`: Normal bug fixes created from `develop` and merged back into `develop`.
+- `docs/*`: Documentation-only changes created from `develop` and merged back into `develop`.
+- `release/*`: Release preparation created from `develop` and merged into both `main` and `develop`.
+- `hotfix/*`: Urgent fixes for released code created from `main` and merged into both `main` and `develop`.
+
+Do not commit directly to `main` or `develop`. Use pull requests for integration.
 
 Use short, descriptive branch names.
 
@@ -26,15 +41,17 @@ Recommended format:
 Examples:
 
 ```text
-feat/book-search
+feature/book-search
 fix/job-status-update
 docs/architecture-guidelines
 security/archive-path-validation
+release/0.1.0
+hotfix/login-failure
 ```
 
 Allowed branch type prefixes:
 
-- `feat`
+- `feature`
 - `fix`
 - `docs`
 - `refactor`
@@ -45,7 +62,11 @@ Allowed branch type prefixes:
 - `security`
 - `build`
 - `ci`
+- `release`
+- `hotfix`
 - `revert`
+
+Use `feature/*` for Git-flow feature branches. Use `feat` as the commit type for feature commits.
 
 ## Commit Rules
 
@@ -134,6 +155,14 @@ A pull request should include:
 - Migration or operational notes if needed
 
 Keep pull requests small. If a change affects unrelated areas, split it.
+
+Merge targets:
+
+- Daily work branches such as `feature/*`, `fix/*`, `docs/*`, `refactor/*`, `test/*`, `chore/*`, `style/*`, `perf/*`, `security/*`, `build/*`, and `ci/*` should target `develop`.
+- `release/*` should be merged into `main`, tagged, and then reflected back into `develop`.
+- `hotfix/*` should be merged into `main`, tagged, and then reflected back into `develop`.
+
+Before merging, confirm that the branch is up to date with the appropriate base branch, conflicts are resolved, required documentation is updated, and verification results are recorded.
 
 ## Documentation Updates
 
