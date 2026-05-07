@@ -42,7 +42,7 @@
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Closed | ファイル保存設計初版を作成する |
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Closed | 画像変換設計初版を作成する |
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
-| [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
+| [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Closed | 権限設計初版を作成する |
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
@@ -98,7 +98,7 @@
 - [x] `doc/04_design/05_search_design/` を作成する
 - [x] `doc/04_design/06_file_storage_design/` を作成する
 - [x] `doc/04_design/07_image_conversion_design/` を作成する
-- [ ] `doc/04_design/08_authorization_design/` を作成する
+- [x] `doc/04_design/08_authorization_design/` を作成する
 - [x] `doc/05_development/01_coding_rules/` を作成する
 - [x] `doc/05_development/02_branch_strategy/` を作成する
 - [ ] `doc/05_development/03_environment_setup/` を作成する
@@ -437,7 +437,7 @@
     - 再変換仕様
     - 変換ジョブ状態
     - リソース制限: 同時実行数10、1ジョブのタイムアウト30分、メモリ / CPU制限はOSまたはコンテナ側で制御
-- [ ] 権限設計初版を作成する
+- [x] 権限設計初版を作成する
   - 作成先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - 記載内容:
     - 一般ユーザの権限: 書籍アップロード不可、閲覧のみ
@@ -651,7 +651,7 @@
   - 作成先: `doc/02_backlog/02_user_stories/09_user_profile_edit.md`
 - [ ] 退会のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/10_user_withdrawal.md`
-- [ ] 認証方式を決める
+- [x] 認証方式を決める
   - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - 決定事項:
     - メール認証を行う
@@ -661,7 +661,7 @@
     - セッション認証
     - JWT
     - ログイン失敗制限
-- [ ] 退会時のデータ扱いを決める
+- [x] 退会時のデータ扱いを決める
   - 決定事項:
     - 一般ユーザは書籍を保持しないため、退会時のアップロード済み書籍削除は対象外
   - 検討事項:
@@ -679,7 +679,7 @@
   - 作成先: `doc/02_backlog/02_user_stories/12_admin_user_management.md`
 - [ ] ロール設定のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/13_role_management.md`
-- [ ] 管理ロール一覧を定義する
+- [x] 管理ロール一覧を定義する
   - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
   - ロール候補:
     - super_admin
