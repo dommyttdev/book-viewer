@@ -41,7 +41,7 @@
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Open | ファイル保存設計初版を作成する |
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
-| [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Open | 検索設計初版を作成する |
+| [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
@@ -95,7 +95,7 @@
 - [ ] `doc/04_design/02_screen_notes/` を作成する
 - [ ] `doc/04_design/03_api_contracts/` を作成する
 - [x] `doc/04_design/04_data_model/` を作成する
-- [ ] `doc/04_design/05_search_design/` を作成する
+- [x] `doc/04_design/05_search_design/` を作成する
 - [ ] `doc/04_design/06_file_storage_design/` を作成する
 - [ ] `doc/04_design/07_image_conversion_design/` を作成する
 - [ ] `doc/04_design/08_authorization_design/` を作成する
@@ -396,7 +396,7 @@
     - シリーズ順序の持ち方
     - 論理削除の有無
     - 変換ジョブ実行は専用キュー、ジョブ状態管理はDBに保持するか
-- [ ] 検索設計初版を作成する
+- [x] 検索設計初版を作成する
   - 作成先: `doc/04_design/05_search_design/01_search_design.md`
   - 記載内容:
     - 検索対象項目
@@ -596,7 +596,7 @@
   - 作成先: `doc/02_backlog/01_epics/04_search.md`
 - [ ] 検索ユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/06_book_search.md`
-- [ ] 検索対象項目を確定する
+- [x] 検索対象項目を確定する
   - 反映先: `doc/04_design/05_search_design/01_search_design.md`
   - 対象候補:
     - タイトル
@@ -605,7 +605,7 @@
     - シリーズ名
     - 種別
     - シリーズ概要
-- [ ] あいまい検索仕様を決める
+- [x] あいまい検索仕様を決める
   - 決定事項:
     - 日本語の形態素解析: analysis-kuromojiを使用
     - タイトル / 著者 / タグ検索にはkuromojiベースのカスタムアナライザを使用する
@@ -628,7 +628,7 @@
     - 更新タイミング
     - PostgreSQLからの全件再インデックス手順
     - 書籍単位の再インデックス手順
-- [ ] 検索結果表示仕様を決める
+- [x] 検索結果表示仕様を決める
   - 検討事項:
     - 表紙サムネイル
     - タイトル
