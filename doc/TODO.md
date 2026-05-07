@@ -39,7 +39,7 @@
 | [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Open | 技術スタック初版を作成する |
 | [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
-| [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Open | ファイル保存設計初版を作成する |
+| [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Closed | ファイル保存設計初版を作成する |
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
@@ -96,7 +96,7 @@
 - [ ] `doc/04_design/03_api_contracts/` を作成する
 - [x] `doc/04_design/04_data_model/` を作成する
 - [x] `doc/04_design/05_search_design/` を作成する
-- [ ] `doc/04_design/06_file_storage_design/` を作成する
+- [x] `doc/04_design/06_file_storage_design/` を作成する
 - [ ] `doc/04_design/07_image_conversion_design/` を作成する
 - [ ] `doc/04_design/08_authorization_design/` を作成する
 - [x] `doc/05_development/01_coding_rules/` を作成する
@@ -411,7 +411,7 @@
     - インデックス更新タイミング
     - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
     - 更新失敗時は再試行キューに積む
-- [ ] ファイル保存設計初版を作成する
+- [x] ファイル保存設計初版を作成する
   - 作成先: `doc/04_design/06_file_storage_design/01_file_storage_design.md`
   - 記載内容:
     - 原本ファイルの保存有無: 保存し続ける
