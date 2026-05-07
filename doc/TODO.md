@@ -32,7 +32,7 @@
 
 ### ディレクトリ構成
 
-- [ ] `doc/00_product/vision/` を作成する
+- [x] `doc/00_product/vision/` を作成する
 - [ ] `doc/00_product/roadmap/` を作成する
 - [ ] `doc/00_product/personas/` を作成する
 - [ ] `doc/00_product/user_story_map/` を作成する
@@ -79,7 +79,7 @@
 
 ### 初期ドキュメント
 
-- [ ] プロダクトビジョンを作成する
+- [x] プロダクトビジョンを作成する
   - 作成先: `doc/00_product/vision/product_vision.md`
   - 記載内容:
     - このアプリで解決したい課題
