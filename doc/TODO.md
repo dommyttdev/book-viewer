@@ -37,7 +37,7 @@
 | --- | --- | --- |
 | [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
 | [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Open | 技術スタック初版を作成する |
-| [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Open | 非同期変換ジョブ方式ADRを作成する |
+| [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Open | データモデル初版を作成する |
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Open | ファイル保存設計初版を作成する |
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
@@ -355,7 +355,7 @@
     - セキュリティ
     - パストラバーサル対策
     - 破損ファイル対応
-- [ ] 非同期変換ジョブ方式ADRを作成する
+- [x] 非同期変換ジョブ方式ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md`
   - 判断観点:
     - アップロード後の待ち時間
