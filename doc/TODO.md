@@ -40,7 +40,7 @@
 | [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Closed | ファイル保存設計初版を作成する |
-| [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
+| [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Closed | 画像変換設計初版を作成する |
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
@@ -97,7 +97,7 @@
 - [x] `doc/04_design/04_data_model/` を作成する
 - [x] `doc/04_design/05_search_design/` を作成する
 - [x] `doc/04_design/06_file_storage_design/` を作成する
-- [ ] `doc/04_design/07_image_conversion_design/` を作成する
+- [x] `doc/04_design/07_image_conversion_design/` を作成する
 - [ ] `doc/04_design/08_authorization_design/` を作成する
 - [x] `doc/05_development/01_coding_rules/` を作成する
 - [x] `doc/05_development/02_branch_strategy/` を作成する
@@ -421,7 +421,7 @@
     - ファイル命名規則
     - 削除時の扱い
     - バックアップ対象: バックアップは行わない
-- [ ] 画像変換設計初版を作成する
+- [x] 画像変換設計初版を作成する
   - 作成先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
   - 記載内容:
     - Spring Boot変換ワーカーの責務
@@ -498,7 +498,7 @@
 
 - [ ] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/02_image_conversion.md`
-- [ ] アーカイブ展開の仕様を決める
+- [x] アーカイブ展開の仕様を決める
   - 反映先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
   - 決定事項:
     - rar / 7zipは7-Zip for Linux コンソール版で展開する
@@ -509,19 +509,19 @@
     - パストラバーサル対策
     - 暗号化アーカイブの扱い
     - 破損アーカイブの扱い
-- [ ] 画像ファイル判定の仕様を決める
+- [x] 画像ファイル判定の仕様を決める
   - 検討事項:
     - 拡張子で判定するか
     - MIME typeで判定するか
     - 実体を読んで判定するか
     - 対応画像形式
-- [ ] ページ順序の仕様を決める
+- [x] ページ順序の仕様を決める
   - 検討事項:
     - ファイル名順
     - 自然順ソート
     - サブディレクトリを含む場合の順序
     - 表紙の決定方法
-- [ ] webp変換条件を決める
+- [x] webp変換条件を決める
   - 決定事項:
     - 品質値: 80
     - スマートフォンでの閲覧を想定する
@@ -533,7 +533,7 @@
     - 透過画像の扱い
     - 縦長画像の扱い
     - 変換後のファイルサイズ目安
-- [ ] 変換ジョブ状態を定義する
+- [x] 変換ジョブ状態を定義する
   - 状態候補:
     - queued
     - extracting
@@ -544,7 +544,7 @@
   - 反映先:
     - `doc/04_design/04_data_model/01_data_model.md`
     - `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
-- [ ] 再変換仕様を決める
+- [x] 再変換仕様を決める
   - 検討事項:
     - 手動再実行できるか
     - 失敗ページだけ再実行するか
