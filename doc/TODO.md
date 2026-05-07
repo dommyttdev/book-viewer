@@ -85,7 +85,7 @@
 - [ ] `doc/02_backlog/03_acceptance_criteria/` を作成する
 - [ ] `doc/02_backlog/04_story_templates/` を作成する
 - [x] `doc/03_architecture/01_overview/` を作成する
-- [ ] `doc/03_architecture/02_technology_stack/` を作成する
+- [x] `doc/03_architecture/02_technology_stack/` を作成する
 - [ ] `doc/03_architecture/03_adr/` を作成する
 - [ ] `doc/03_architecture/04_system_context/` を作成する
 - [ ] `doc/03_architecture/05_container_diagram/` を作成する
@@ -237,7 +237,7 @@
     - 外部依存コンポーネント
     - ファイル処理の大まかな流れ
     - 検索処理の大まかな流れ
-- [ ] 技術スタック初版を作成する
+- [x] 技術スタック初版を作成する
   - 作成先: `doc/03_architecture/02_technology_stack/01_technology_stack.md`
   - 記載内容:
     - フロントエンド技術: Next.js
