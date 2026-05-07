@@ -28,6 +28,49 @@
 - 仕様判断が必要なものはADRまたは設計ドキュメントに理由を残す
 - 実装後に仕様が変わった場合は、該当するユーザーストーリー、受入条件、設計メモ、Runbookを更新する
 
+## GitHub Issue対応表
+
+`doc/issues.json` から GitHub Issue を起票済み。
+完了済みタスクの Issue は、対応コミットをコメントしたうえで close 済み。
+
+| Issue | 状態 | 対応する主なTODO |
+| --- | --- | --- |
+| [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
+| [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Open | 技術スタック初版を作成する |
+| [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Open | 非同期変換ジョブ方式ADRを作成する |
+| [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Open | データモデル初版を作成する |
+| [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Open | ファイル保存設計初版を作成する |
+| [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
+| [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Open | 検索設計初版を作成する |
+| [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
+| [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
+| [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
+| [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Open | システムコンテキストとコンテナ図を作成する |
+| [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Open | データフローと品質特性初版を作成する |
+| [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Open | ADRテンプレートと主要ADRを作成する |
+| [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Open | 自炊本管理のユーザーストーリーと受入条件を作成する |
+| [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Open | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
+| [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Open | 検索エピックのユーザーストーリーとインデックス設計を作成する |
+| [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
+| [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
+| [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
+| [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Open | テスト戦略と主要受入テストを作成する |
+| [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Open | 運用ドキュメント初版を作成する |
+| [#22](https://github.com/dommyttdev/book-viewer/issues/22) | Closed | プロダクトビジョンを作成する |
+| [#23](https://github.com/dommyttdev/book-viewer/issues/23) | Closed | 用語集を作成する |
+| [#24](https://github.com/dommyttdev/book-viewer/issues/24) | Closed | ユーザーストーリーマップを作成する |
+| [#25](https://github.com/dommyttdev/book-viewer/issues/25) | Closed | ロードマップ初版を作成する |
+| [#26](https://github.com/dommyttdev/book-viewer/issues/26) | Closed | Definition of Doneを作成する |
+| [#27](https://github.com/dommyttdev/book-viewer/issues/27) | Closed | コーディングルールを作成する |
+| [#28](https://github.com/dommyttdev/book-viewer/issues/28) | Closed | ブランチ戦略を作成する |
+| [#29](https://github.com/dommyttdev/book-viewer/issues/29) | Closed | システム概要を作成する |
+| [#30](https://github.com/dommyttdev/book-viewer/issues/30) | Closed | 技術とアーキテクチャの基本決定事項を記録する |
+| [#31](https://github.com/dommyttdev/book-viewer/issues/31) | Closed | ファイル保存と閲覧に関する基本決定事項を記録する |
+| [#32](https://github.com/dommyttdev/book-viewer/issues/32) | Closed | 認証とアカウントに関する基本決定事項を記録する |
+| [#33](https://github.com/dommyttdev/book-viewer/issues/33) | Closed | 変換ワーカーと画像変換に関する基本決定事項を記録する |
+| [#34](https://github.com/dommyttdev/book-viewer/issues/34) | Closed | Elasticsearchと検索に関する基本決定事項を記録する |
+| [#35](https://github.com/dommyttdev/book-viewer/issues/35) | Closed | バックアップなし運用の基本決定事項を記録する |
+
 ## Sprint 0: ドキュメント基盤整備
 
 ### ディレクトリ構成
