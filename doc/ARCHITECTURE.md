@@ -151,13 +151,13 @@ Use ADRs for decisions that affect long-term maintainability or system behavior.
 Recommended path:
 
 ```text
-doc/adr/0001-title.md
+doc/03_architecture/03_adr/NN_ADR-0000-title.md
 ```
 
 ADR template:
 
 ```markdown
-# ADR-0001: Title
+# ADR-0000: Title
 
 ## Status
 
@@ -174,4 +174,14 @@ What decision was made?
 ## Consequences
 
 What are the positive and negative consequences?
+
+## Alternatives
+
+What alternatives were considered?
+```
+
+The full repository template is maintained at:
+
+```text
+doc/03_architecture/03_adr/01_ADR-template.md
 ```

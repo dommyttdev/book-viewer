@@ -47,7 +47,7 @@
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Open | データフローと品質特性初版を作成する |
-| [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Open | ADRテンプレートと主要ADRを作成する |
+| [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Open | 自炊本管理のユーザーストーリーと受入条件を作成する |
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Open | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Open | 検索エピックのユーザーストーリーとインデックス設計を作成する |
@@ -86,7 +86,7 @@
 - [ ] `doc/02_backlog/04_story_templates/` を作成する
 - [x] `doc/03_architecture/01_overview/` を作成する
 - [x] `doc/03_architecture/02_technology_stack/` を作成する
-- [ ] `doc/03_architecture/03_adr/` を作成する
+- [x] `doc/03_architecture/03_adr/` を作成する
 - [x] `doc/03_architecture/04_system_context/` を作成する
 - [x] `doc/03_architecture/05_container_diagram/` を作成する
 - [x] `doc/03_architecture/06_data_flow/` を作成する
@@ -299,7 +299,7 @@
 
 ### ADR
 
-- [ ] ADRテンプレートを作成する
+- [x] ADRテンプレートを作成する
   - 作成先: `doc/03_architecture/03_adr/01_ADR-template.md`
   - 項目:
     - Status
@@ -307,28 +307,28 @@
     - Decision
     - Consequences
     - Alternatives
-- [ ] Spring Boot採用ADRを作成する
+- [x] Spring Boot採用ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/02_ADR-0001-use-spring-boot.md`
   - 判断観点:
     - バックエンドAPI開発の生産性
     - 認証、バリデーション、DBアクセス、監視との統合
     - パフォーマンスチューニングのしやすさ
     - チームの習熟性
-- [ ] モジュラーモノリス採用ADRを作成する
+- [x] モジュラーモノリス採用ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/03_ADR-0002-use-modular-monolith.md`
   - 判断観点:
     - 小から中規模での開発速度
     - モジュール境界の明確化
     - 将来的なサービス分割余地
     - デプロイと運用の単純さ
-- [ ] PostgreSQL採用ADRを作成する
+- [x] PostgreSQL採用ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/04_ADR-0003-use-postgresql.md`
   - 判断観点:
     - リレーショナルなメタ情報管理
     - トランザクション
     - タグ、著者、シリーズ、ユーザ、ロールの関連管理
     - 変換ジョブ状態の一貫性
-- [ ] Elasticsearch採用ADRを作成する
+- [x] Elasticsearch採用ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/05_ADR-0004-use-elasticsearch.md`
   - 判断観点:
     - タイトル、著者、タグ、シリーズのあいまい検索
@@ -337,7 +337,7 @@
     - 補完 / 部分一致: 必要な項目にedge n-gram系フィールドを追加
     - 将来的なスコアリング調整
     - PostgreSQLから再構築可能な派生インデックスとして扱う方針
-- [ ] webp変換方針ADRを作成する
+- [x] webp変換方針ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/06_ADR-0005-convert-images-to-webp.md`
   - 判断観点:
     - 表示速度
@@ -346,7 +346,7 @@
     - 画質: 品質値80
     - スマートフォン閲覧前提、拡大表示は想定しない
     - 漫画や小説の本文・セリフの可読性
-- [ ] アーカイブ展開方式ADRを作成する
+- [x] アーカイブ展開方式ADRを作成する
   - 作成先: `doc/03_architecture/03_adr/07_ADR-0006-extract-archive-files.md`
   - 判断観点:
     - zip / rar / 7zip対応: 7-Zip for Linux コンソール版を使用
