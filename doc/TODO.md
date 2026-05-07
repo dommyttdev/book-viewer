@@ -45,7 +45,7 @@
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Open | 権限設計初版を作成する |
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
-| [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Open | システムコンテキストとコンテナ図を作成する |
+| [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Open | データフローと品質特性初版を作成する |
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Open | ADRテンプレートと主要ADRを作成する |
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Open | 自炊本管理のユーザーストーリーと受入条件を作成する |
@@ -87,8 +87,8 @@
 - [x] `doc/03_architecture/01_overview/` を作成する
 - [x] `doc/03_architecture/02_technology_stack/` を作成する
 - [ ] `doc/03_architecture/03_adr/` を作成する
-- [ ] `doc/03_architecture/04_system_context/` を作成する
-- [ ] `doc/03_architecture/05_container_diagram/` を作成する
+- [x] `doc/03_architecture/04_system_context/` を作成する
+- [x] `doc/03_architecture/05_container_diagram/` を作成する
 - [ ] `doc/03_architecture/06_data_flow/` を作成する
 - [ ] `doc/03_architecture/07_quality_attributes/` を作成する
 - [ ] `doc/04_design/01_ui_flows/` を作成する
@@ -251,7 +251,7 @@
     - 非同期ジョブ実行方式: 専用キュー
     - ローカル開発環境 / 本番運用環境: Docker Compose
     - パフォーマンス上の選定理由
-- [ ] システムコンテキストを作成する
+- [x] システムコンテキストを作成する
   - 作成先: `doc/03_architecture/04_system_context/01_system_context.md`
   - 記載内容:
     - 一般ユーザ
@@ -264,7 +264,7 @@
     - 書籍ファイル保存領域
     - 専用キューによる非同期画像変換処理
     - 7-Zip for Linux コンソール版
-- [ ] コンテナ図を作成する
+- [x] コンテナ図を作成する
   - 作成先: `doc/03_architecture/05_container_diagram/01_container_diagram.md`
   - 記載内容:
     - Next.jsフロントエンドWebアプリケーション
