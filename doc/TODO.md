@@ -41,7 +41,7 @@
 - [ ] `doc/02_backlog/02_user_stories/` を作成する
 - [ ] `doc/02_backlog/03_acceptance_criteria/` を作成する
 - [ ] `doc/02_backlog/04_story_templates/` を作成する
-- [ ] `doc/03_architecture/01_overview/` を作成する
+- [x] `doc/03_architecture/01_overview/` を作成する
 - [ ] `doc/03_architecture/02_technology_stack/` を作成する
 - [ ] `doc/03_architecture/03_adr/` を作成する
 - [ ] `doc/03_architecture/04_system_context/` を作成する
@@ -182,7 +182,7 @@
 
 ### システム概要
 
-- [ ] システム概要を作成する
+- [x] システム概要を作成する
   - 作成先: `doc/03_architecture/01_overview/01_system_overview.md`
   - 記載内容:
     - システム目的
