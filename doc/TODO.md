@@ -77,6 +77,25 @@
 - [ ] `doc/99_archive/01_old_versions/` を作成する
 - [ ] `doc/99_archive/02_obsolete/` を作成する
 
+補足:
+
+- 以下のディレクトリは、現時点では個別ドキュメント作成ToDoがなくても問題ないものとして扱う
+  - `doc/01_product/03_personas/`
+    - 一般ユーザ、管理ユーザという利用者種別は既存のプロダクトビジョンと用語集で扱っており、詳細なペルソナはUI設計や利用者理解が必要になった段階で作成する
+  - `doc/02_backlog/04_story_templates/`
+    - 現時点では個別のユーザーストーリー作成ToDoを優先し、ストーリー形式の標準化が必要になった段階でテンプレート化する
+  - `doc/06_testing/04_exploratory_testing/`
+    - 探索的テストはMVPの主要画面や機能が具体化してから計画する方が実効性が高いため、初期作成対象から外す
+  - `doc/06_testing/05_test_data/`
+    - テストデータはデータモデル、受入テスト、回帰テストの内容が固まってから作成する方が重複や手戻りを避けやすいため、初期作成対象から外す
+  - `doc/90_decisions/01_product_decisions/`
+  - `doc/90_decisions/02_technical_decisions/`
+  - `doc/90_decisions/03_tradeoffs/`
+    - 当面の設計判断はADRまたは各設計ドキュメントに記録し、横断的な決定ログが必要になった段階で整理する
+  - `doc/99_archive/01_old_versions/`
+  - `doc/99_archive/02_obsolete/`
+    - アーカイブ対象となる旧版文書や廃止文書が発生してから利用する置き場であり、初期ドキュメントとして作成する必要はない
+
 ### 初期ドキュメント
 
 - [x] プロダクトビジョンを作成する
@@ -129,6 +148,35 @@
     - 主要な異常系が確認済み
     - 関連ドキュメントが更新済み
     - ログ、エラー処理、権限確認が実装済み
+- [ ] コーディングルールを作成する
+  - 作成先: `doc/05_development/01_coding_rules/01_coding_rules.md`
+  - 記載内容:
+    - `doc/CODING_STANDARDS.md` との関係
+    - 命名、責務分離、例外処理、ログ、テストの基本方針
+    - APIモデル、永続化エンティティ、ドメインモデルの分離方針
+    - セキュリティ上の注意点
+- [ ] ブランチ戦略を作成する
+  - 作成先: `doc/05_development/02_branch_strategy/01_branch_strategy.md`
+  - 記載内容:
+    - `doc/CONTRIBUTING.md` との関係
+    - ブランチ命名規則
+    - 作業単位とコミット粒度
+    - プルリクエスト運用
+- [ ] 環境構築手順を作成する
+  - 作成先: `doc/05_development/03_environment_setup/01_environment_setup.md`
+  - 記載内容:
+    - 必要なツールとバージョン
+    - Java 25、Node.js、Docker、PostgreSQL、Elasticsearchの準備
+    - 7-Zip for Linux コンソール版の扱い
+    - 環境変数とシークレット管理方針
+- [ ] ローカル開発手順を作成する
+  - 作成先: `doc/05_development/04_local_development/01_local_development.md`
+  - 記載内容:
+    - Next.jsフロントエンドの起動方法
+    - Spring BootバックエンドAPIの起動方法
+    - Spring Boot変換ワーカーの起動方法
+    - Docker Composeによるミドルウェア起動方法
+    - テスト、ログ確認、よく使う開発コマンド
 
 ## Sprint 0: アーキテクチャと主要設計
 
@@ -186,6 +234,15 @@
     - 7-Zip for Linux コンソール版
     - APIと変換ワーカーの責務分離
     - 単一Linuxホスト上のDocker Compose構成
+- [ ] データフローを作成する
+  - 作成先: `doc/03_architecture/06_data_flow/01_data_flow.md`
+  - 記載内容:
+    - 書籍アップロードから原本保存までの流れ
+    - 変換ジョブ投入、取得、実行、状態更新の流れ
+    - アーカイブ展開からwebp変換、サムネイル生成までの流れ
+    - PostgreSQL更新とElasticsearchインデックス更新の流れ
+    - 閲覧時の画像配信と検索時のデータ参照の流れ
+    - 失敗時の再試行、再構築、整合性回復の流れ
 - [ ] 品質特性初版を作成する
   - 作成先: `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
   - 記載内容:
