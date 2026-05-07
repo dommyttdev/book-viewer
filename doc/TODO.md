@@ -1,0 +1,902 @@
+# アジャイル開発ドキュメント整備 ToDo
+
+## 前提
+
+- 対象システム: 自炊本閲覧Webアプリケーション
+- 開発方式: アジャイル開発
+- アーキテクチャ方針: パフォーマンスを意識したモジュラーモノリス構成
+- ドキュメント方針: 開発前にすべてを固定するのではなく、プロダクト、バックログ、設計判断、運用知識を継続的に更新する
+- 想定規模: 小から中規模のWebアプリケーション
+- 主な構成要素:
+  - Next.jsフロントエンドWebアプリケーション
+  - Spring Boot 4.0.6バックエンドAPI
+  - Spring Boot 4.0.6変換ワーカー
+  - PostgreSQL: メタ情報、ユーザ、権限、ジョブ状態の正本
+  - Elasticsearch: タイトル、著者、タグ、シリーズの検索用インデックス
+  - 書籍ファイル保存領域: 原本ファイル、変換済みwebp、サムネイルを保存
+  - 専用キューによるzip / rar / 7zip 展開処理
+  - 非同期ジョブによるwebp変換処理
+  - 一般ユーザ向け機能
+  - 管理ユーザ向け機能
+
+## ToDo管理ルール
+
+- `[ ]`: 未着手
+- `[~]`: 作業中
+- `[x]`: 完了
+- 各ToDoは、完了時に関連ドキュメントへ反映する
+- 仕様判断が必要なものはADRまたは設計ドキュメントに理由を残す
+- 実装後に仕様が変わった場合は、該当するユーザーストーリー、受入条件、設計メモ、Runbookを更新する
+
+## Sprint 0: ドキュメント基盤整備
+
+### ディレクトリ構成
+
+- [ ] `doc/00_product/vision/` を作成する
+- [ ] `doc/00_product/roadmap/` を作成する
+- [ ] `doc/00_product/personas/` を作成する
+- [ ] `doc/00_product/user_story_map/` を作成する
+- [ ] `doc/00_product/glossary/` を作成する
+- [ ] `doc/01_backlog/epics/` を作成する
+- [ ] `doc/01_backlog/user_stories/` を作成する
+- [ ] `doc/01_backlog/acceptance_criteria/` を作成する
+- [ ] `doc/01_backlog/story_templates/` を作成する
+- [ ] `doc/02_architecture/overview/` を作成する
+- [ ] `doc/02_architecture/technology_stack/` を作成する
+- [ ] `doc/02_architecture/adr/` を作成する
+- [ ] `doc/02_architecture/system_context/` を作成する
+- [ ] `doc/02_architecture/container_diagram/` を作成する
+- [ ] `doc/02_architecture/data_flow/` を作成する
+- [ ] `doc/02_architecture/quality_attributes/` を作成する
+- [ ] `doc/03_design/ui_flows/` を作成する
+- [ ] `doc/03_design/screen_notes/` を作成する
+- [ ] `doc/03_design/api_contracts/` を作成する
+- [ ] `doc/03_design/data_model/` を作成する
+- [ ] `doc/03_design/search_design/` を作成する
+- [ ] `doc/03_design/file_storage_design/` を作成する
+- [ ] `doc/03_design/image_conversion_design/` を作成する
+- [ ] `doc/03_design/authorization_design/` を作成する
+- [ ] `doc/04_development/coding_rules/` を作成する
+- [ ] `doc/04_development/branch_strategy/` を作成する
+- [ ] `doc/04_development/environment_setup/` を作成する
+- [ ] `doc/04_development/local_development/` を作成する
+- [ ] `doc/04_development/definition_of_done/` を作成する
+- [ ] `doc/05_testing/test_strategy/` を作成する
+- [ ] `doc/05_testing/acceptance_tests/` を作成する
+- [ ] `doc/05_testing/regression_tests/` を作成する
+- [ ] `doc/05_testing/exploratory_testing/` を作成する
+- [ ] `doc/05_testing/test_data/` を作成する
+- [ ] `doc/06_operations/runbook/` を作成する
+- [ ] `doc/06_operations/backup_restore/` を作成する
+- [ ] `doc/06_operations/monitoring/` を作成する
+- [ ] `doc/06_operations/release_notes/` を作成する
+- [ ] `doc/06_operations/incident_log/` を作成する
+- [ ] `doc/90_decisions/product_decisions/` を作成する
+- [ ] `doc/90_decisions/technical_decisions/` を作成する
+- [ ] `doc/90_decisions/tradeoffs/` を作成する
+- [ ] `doc/99_archive/old_versions/` を作成する
+- [ ] `doc/99_archive/obsolete/` を作成する
+
+### 初期ドキュメント
+
+- [ ] プロダクトビジョンを作成する
+  - 作成先: `doc/00_product/vision/product_vision.md`
+  - 記載内容:
+    - このアプリで解決したい課題
+    - 対象ユーザ
+    - 主要価値
+    - MVPの範囲
+    - MVP外の範囲
+    - 成功指標
+- [ ] 用語集を作成する
+  - 作成先: `doc/00_product/glossary/glossary.md`
+  - 記載候補:
+    - 自炊本
+    - 原本ファイル
+    - 変換済み画像
+    - webp
+    - シリーズ
+    - タグ
+    - 著者
+    - お気に入り
+    - 一般ユーザ
+    - 管理ユーザ
+    - ロール
+- [ ] ユーザーストーリーマップを作成する
+  - 作成先: `doc/00_product/user_story_map/user_story_map.md`
+  - 軸:
+    - 登録する
+    - アップロードする
+    - 変換する
+    - 整理する
+    - 探す
+    - 読む
+    - お気に入り管理する
+    - ユーザ管理する
+    - 運用する
+- [ ] ロードマップ初版を作成する
+  - 作成先: `doc/00_product/roadmap/product_roadmap.md`
+  - 区分:
+    - MVP
+    - Beta
+    - v1.0
+    - 将来対応
+- [ ] Definition of Doneを作成する
+  - 作成先: `doc/04_development/definition_of_done/definition_of_done.md`
+  - 含める条件:
+    - 受入条件を満たす
+    - 単体テストが通る
+    - 主要な異常系が確認済み
+    - 関連ドキュメントが更新済み
+    - ログ、エラー処理、権限確認が実装済み
+
+## Sprint 0: アーキテクチャと主要設計
+
+### システム概要
+
+- [ ] システム概要を作成する
+  - 作成先: `doc/02_architecture/overview/system_overview.md`
+  - 記載内容:
+    - システム目的
+    - 主要機能
+    - システム構成: 単一Linuxホスト上のDocker Compose構成
+    - パフォーマンス上の基本方針
+    - モジュラーモノリス構成の採用理由: 単一アプリ内モジュール構成、将来的にAPI / Workerを別アプリへ分離可能にする
+    - 利用者種別
+    - 外部依存コンポーネント
+    - ファイル処理の大まかな流れ
+    - 検索処理の大まかな流れ
+- [ ] 技術スタック初版を作成する
+  - 作成先: `doc/02_architecture/technology_stack/technology_stack.md`
+  - 記載内容:
+    - フロントエンド技術: Next.js
+    - バックエンド技術: Spring Boot 4.0.6
+    - Javaバージョン: 25
+    - PostgreSQL
+    - Elasticsearch: analysis-kuromojiを使用
+    - ファイル保存方式: 原本ファイル、変換済みwebp、サムネイルを保存
+    - 画像変換方式: webp品質値80、サムネイル生成あり
+    - アーカイブ展開方式: 7-Zip for Linux コンソール版を外部プロセスで呼び出す
+    - 非同期ジョブ実行方式: 専用キュー
+    - ローカル開発環境 / 本番運用環境: Docker Compose
+    - パフォーマンス上の選定理由
+- [ ] システムコンテキストを作成する
+  - 作成先: `doc/02_architecture/system_context/system_context.md`
+  - 記載内容:
+    - 一般ユーザ
+    - 管理ユーザ
+    - Next.jsフロントエンドWebアプリケーション
+    - Spring Boot 4.0.6バックエンドAPI
+    - Spring Boot 4.0.6変換ワーカー
+    - PostgreSQL
+    - Elasticsearch + analysis-kuromoji
+    - 書籍ファイル保存領域
+    - 専用キューによる非同期画像変換処理
+    - 7-Zip for Linux コンソール版
+- [ ] コンテナ図を作成する
+  - 作成先: `doc/02_architecture/container_diagram/container_diagram.md`
+  - 記載内容:
+    - Next.jsフロントエンドWebアプリケーション
+    - Spring BootバックエンドAPI
+    - Spring Boot変換ワーカー
+    - PostgreSQL
+    - Elasticsearch + analysis-kuromoji
+    - 書籍ファイル保存領域
+    - 専用ジョブキュー
+    - 7-Zip for Linux コンソール版
+    - APIと変換ワーカーの責務分離
+    - 単一Linuxホスト上のDocker Compose構成
+- [ ] 品質特性初版を作成する
+  - 作成先: `doc/02_architecture/quality_attributes/quality_attributes.md`
+  - 記載内容:
+    - レスポンス時間の目標
+    - アップロード後の変換待ち時間の考え方
+    - 同時利用ユーザ数の想定
+    - 1冊あたりのページ数、ファイルサイズの想定: アップロード上限なし
+    - 変換ワーカーのスループット目標: 同時実行数10、1ジョブのタイムアウト30分
+    - ストレージ容量増加への対応方針: 1ユーザあたりの保存容量上限なし
+    - 検索レスポンスの目標
+
+### ADR
+
+- [ ] ADRテンプレートを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-template.md`
+  - 項目:
+    - Status
+    - Context
+    - Decision
+    - Consequences
+    - Alternatives
+- [ ] Spring Boot採用ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0001-use-spring-boot.md`
+  - 判断観点:
+    - バックエンドAPI開発の生産性
+    - 認証、バリデーション、DBアクセス、監視との統合
+    - パフォーマンスチューニングのしやすさ
+    - チームの習熟性
+- [ ] モジュラーモノリス採用ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0002-use-modular-monolith.md`
+  - 判断観点:
+    - 小から中規模での開発速度
+    - モジュール境界の明確化
+    - 将来的なサービス分割余地
+    - デプロイと運用の単純さ
+- [ ] PostgreSQL採用ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0003-use-postgresql.md`
+  - 判断観点:
+    - リレーショナルなメタ情報管理
+    - トランザクション
+    - タグ、著者、シリーズ、ユーザ、ロールの関連管理
+    - 変換ジョブ状態の一貫性
+- [ ] Elasticsearch採用ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0004-use-elasticsearch.md`
+  - 判断観点:
+    - タイトル、著者、タグ、シリーズのあいまい検索
+    - 日本語検索: analysis-kuromojiを使用
+    - 表記揺れ対策: ICU normalizerの利用を検討
+    - 補完 / 部分一致: 必要な項目にedge n-gram系フィールドを追加
+    - 将来的なスコアリング調整
+    - PostgreSQLから再構築可能な派生インデックスとして扱う方針
+- [ ] webp変換方針ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0005-convert-images-to-webp.md`
+  - 判断観点:
+    - 表示速度
+    - 保存容量
+    - 対応ブラウザ
+    - 画質: 品質値80
+    - スマートフォン閲覧前提、拡大表示は想定しない
+    - 漫画や小説の本文・セリフの可読性
+- [ ] アーカイブ展開方式ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0006-extract-archive-files.md`
+  - 判断観点:
+    - zip / rar / 7zip対応: 7-Zip for Linux コンソール版を使用
+    - Java標準ライブラリおよび Apache Commons Compress のrar対応には依存しない
+    - Spring Bootアプリケーションから外部プロセスとして呼び出す
+    - セキュリティ
+    - パストラバーサル対策
+    - 破損ファイル対応
+- [ ] 非同期変換ジョブ方式ADRを作成する
+  - 作成先: `doc/02_architecture/adr/ADR-0007-use-async-conversion-worker.md`
+  - 判断観点:
+    - アップロード後の待ち時間
+    - バックエンドAPIと変換ワーカーの責務分離
+    - 失敗時の再実行
+    - ジョブ状態管理
+    - 専用キューを使用する
+    - DB依存を排除する
+    - 変換ワーカーの同時実行数: 10
+    - 将来的なスケール
+
+### 主要設計
+
+- [ ] データモデル初版を作成する
+  - 作成先: `doc/03_design/data_model/data_model.md`
+  - 対象エンティティ:
+    - user
+    - admin_user
+    - role
+    - permission
+    - book
+    - book_file
+    - book_page
+    - author
+    - series
+    - tag
+    - favorite
+    - conversion_job
+    - reading_history
+  - 検討事項:
+    - Spring Bootアプリケーションで扱うドメイン境界
+    - 一般ユーザと管理ユーザを同一テーブルにするか分けるか
+    - 一般ユーザは書籍を保持しない
+    - 書籍アップロードは管理ユーザのみ可能
+    - 書籍と著者の多対多
+    - 書籍とタグの多対多
+    - シリーズ順序の持ち方
+    - 論理削除の有無
+    - 変換ジョブ実行は専用キュー、ジョブ状態管理はDBに保持するか
+- [ ] 検索設計初版を作成する
+  - 作成先: `doc/03_design/search_design/search_design.md`
+  - 記載内容:
+    - 検索対象項目
+    - タイトル検索
+    - 著者検索
+    - タグ検索
+    - シリーズ検索
+    - 複合検索
+    - ソート条件
+    - ページング
+    - 日本語検索の方針: analysis-kuromojiを使用
+    - インデックス更新タイミング
+    - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
+    - 更新失敗時は再試行キューに積む
+- [ ] ファイル保存設計初版を作成する
+  - 作成先: `doc/03_design/file_storage_design/file_storage_design.md`
+  - 記載内容:
+    - 原本ファイルの保存有無: 保存し続ける
+    - 変換後webpの保存場所
+    - サムネイルの保存場所
+    - ディレクトリ命名規則
+    - ファイル命名規則
+    - 削除時の扱い
+    - バックアップ対象: バックアップは行わない
+- [ ] 画像変換設計初版を作成する
+  - 作成先: `doc/03_design/image_conversion_design/image_conversion_design.md`
+  - 記載内容:
+    - Spring Boot変換ワーカーの責務
+    - 非同期ジョブの投入、取得、実行方式: 専用キュー
+    - 対応アーカイブ形式: zip / rar / 7zip
+    - rar / 7zip展開方式: 7-Zip for Linux コンソール版を外部プロセスとして呼び出す
+    - 対応画像形式
+    - 展開処理: ジョブごとに専用作業ディレクトリで実行
+    - 画像ソート順
+    - webp変換条件: 品質値80、application.propertiesで設定可能にする
+    - サムネイル生成条件: 生成する
+    - 変換失敗時の扱い
+    - 再変換仕様
+    - 変換ジョブ状態
+    - リソース制限: 同時実行数10、1ジョブのタイムアウト30分、メモリ / CPU制限はOSまたはコンテナ側で制御
+- [ ] 権限設計初版を作成する
+  - 作成先: `doc/03_design/authorization_design/authorization_design.md`
+  - 記載内容:
+    - 一般ユーザの権限: 書籍アップロード不可、閲覧のみ
+    - 管理ユーザの権限: 書籍アップロード可能
+    - 管理ロール
+    - ロール別操作可否
+    - 退会時のデータ扱い: 一般ユーザは書籍を保持しない
+    - 自分の書籍のみ操作できるか: 一般ユーザは書籍を保持しない
+    - 管理者が一般ユーザの書籍を操作できるか: 対象外
+
+## エピック別ToDo
+
+### エピック: 自炊本管理
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/book_management.md`
+  - 目的:
+    - 自炊した本をアップロードし、メタ情報を管理できるようにする
+- [ ] 本アップロードのユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/book_upload.md`
+  - 例:
+    - 管理ユーザとして、自炊本のアーカイブファイルをアップロードしたい。なぜなら一般ユーザがWeb上で本を読めるようにしたいから。
+- [ ] 本アップロードの受入条件を作成する
+  - 作成先: `doc/01_backlog/acceptance_criteria/book_upload.md`
+  - 条件候補:
+    - 管理ユーザのみアップロードできる
+    - 一般ユーザはアップロードできない
+    - zipファイルをアップロードできる
+    - rarファイルをアップロードできる
+    - 7zipファイルをアップロードできる
+    - 許可されていない拡張子は拒否される
+    - 1冊あたりのアップロード上限サイズは設けない
+    - アップロード後に変換ジョブが作成される
+    - 変換状態を画面で確認できる
+- [ ] 本メタ情報編集のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/book_metadata_edit.md`
+  - 対象項目:
+    - タイトル
+    - 著者
+    - タグ
+    - シリーズ
+    - シリーズ概要
+    - 巻数または並び順
+    - 表紙画像
+- [ ] 本削除の仕様を決める
+  - 反映先:
+    - `doc/03_design/file_storage_design/file_storage_design.md`
+    - `doc/03_design/data_model/data_model.md`
+  - 決定事項:
+    - 管理ユーザのみ書籍を削除できる
+    - 一般ユーザは書籍を保持しない
+    - 原本ファイルは通常運用では保存し続ける
+    - 書籍削除時の原本 / 変換済みwebp / サムネイルの物理削除タイミングを設計に明記する
+    - ElasticsearchのインデックスはPostgreSQLを正として削除 / 再構築できるようにする
+
+### エピック: 画像変換
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/image_conversion.md`
+- [ ] アーカイブ展開の仕様を決める
+  - 反映先: `doc/03_design/image_conversion_design/image_conversion_design.md`
+  - 決定事項:
+    - rar / 7zipは7-Zip for Linux コンソール版で展開する
+    - 7-Zipは変換ワーカーコンテナ内で利用する
+    - 展開先はジョブごとの専用作業ディレクトリとする
+  - 検討事項:
+    - 展開後のクリーンアップ
+    - パストラバーサル対策
+    - 暗号化アーカイブの扱い
+    - 破損アーカイブの扱い
+- [ ] 画像ファイル判定の仕様を決める
+  - 検討事項:
+    - 拡張子で判定するか
+    - MIME typeで判定するか
+    - 実体を読んで判定するか
+    - 対応画像形式
+- [ ] ページ順序の仕様を決める
+  - 検討事項:
+    - ファイル名順
+    - 自然順ソート
+    - サブディレクトリを含む場合の順序
+    - 表紙の決定方法
+- [ ] webp変換条件を決める
+  - 決定事項:
+    - 品質値: 80
+    - スマートフォンでの閲覧を想定する
+    - 拡大表示は想定しない
+    - application.propertiesで設定可能にする
+  - 検討事項:
+    - 最大幅
+    - 最大高さ
+    - 透過画像の扱い
+    - 縦長画像の扱い
+    - 変換後のファイルサイズ目安
+- [ ] 変換ジョブ状態を定義する
+  - 状態候補:
+    - queued
+    - extracting
+    - converting
+    - completed
+    - failed
+    - canceled
+  - 反映先:
+    - `doc/03_design/data_model/data_model.md`
+    - `doc/03_design/image_conversion_design/image_conversion_design.md`
+- [ ] 再変換仕様を決める
+  - 検討事項:
+    - 手動再実行できるか
+    - 失敗ページだけ再実行するか
+    - 全ページを再実行するか
+    - 再変換時に既存webpを上書きするか
+
+### エピック: 本の閲覧
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/book_viewer.md`
+- [ ] 本一覧表示のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/book_list.md`
+- [ ] ビューア表示のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/book_viewing.md`
+- [ ] ビューア操作仕様を決める
+  - 反映先: `doc/03_design/ui_flows/ui_flows.md`
+  - 検討事項:
+    - 1ページ表示
+    - 見開き表示
+    - 次ページ
+    - 前ページ
+    - 最初のページへ移動
+    - 最後のページへ移動
+    - ページ番号指定
+    - 拡大縮小
+    - キーボード操作
+    - スマートフォン操作
+- [ ] 閲覧履歴仕様を決める
+  - 決定事項:
+    - 閲覧履歴は保存する
+  - 検討事項:
+    - 最後に読んだページ
+    - 最終閲覧日時
+    - ユーザ単位で持つか
+    - 端末単位で持つか
+- [ ] お気に入り登録のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/favorite.md`
+- [ ] お気に入りの受入条件を作成する
+  - 作成先: `doc/01_backlog/acceptance_criteria/favorite.md`
+  - 条件候補:
+    - 本をお気に入り登録できる
+    - お気に入り解除できる
+    - お気に入り一覧を表示できる
+    - 同じ本を重複登録できない
+
+### エピック: 検索
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/search.md`
+- [ ] 検索ユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/book_search.md`
+- [ ] 検索対象項目を確定する
+  - 反映先: `doc/03_design/search_design/search_design.md`
+  - 対象候補:
+    - タイトル
+    - 著者名
+    - タグ
+    - シリーズ名
+    - シリーズ概要
+- [ ] あいまい検索仕様を決める
+  - 決定事項:
+    - 日本語の形態素解析: analysis-kuromojiを使用
+    - タイトル / 著者 / タグ検索にはkuromojiベースのカスタムアナライザを使用する
+    - 全角 / 半角などの表記揺れ対策としてICU normalizerの利用を検討する
+    - 補完 / 部分一致が必要な項目にはedge n-gram系フィールドを追加する
+  - 検討事項:
+    - typo許容
+    - ひらがなカタカナ
+- [ ] Elasticsearchインデックス設計を作成する
+  - 作成先: `doc/03_design/search_design/search_index_design.md`
+  - 記載内容:
+    - index name
+    - mapping
+    - analyzer: analysis-kuromojiベースのカスタムアナライザ
+    - ICU normalizer
+    - edge n-gram系フィールド
+    - searchable fields
+    - sortable fields
+    - boost設定
+    - 更新タイミング
+    - PostgreSQLからの全件再インデックス手順
+    - 書籍単位の再インデックス手順
+- [ ] 検索結果表示仕様を決める
+  - 検討事項:
+    - 表紙サムネイル
+    - タイトル
+    - 著者
+    - タグ
+    - シリーズ
+    - 並び順
+    - ページング
+    - 絞り込み
+
+### エピック: アカウント管理
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/account_management.md`
+- [ ] 会員登録のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/user_registration.md`
+- [ ] ログイン・ログアウトのユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/user_login_logout.md`
+- [ ] 会員情報編集のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/user_profile_edit.md`
+- [ ] 退会のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/user_withdrawal.md`
+- [ ] 認証方式を決める
+  - 反映先: `doc/03_design/authorization_design/authorization_design.md`
+  - 決定事項:
+    - メール認証を行う
+    - 登録時だけでなく、ログイン時の2段階認証にもメールを活用する
+    - パスワードリセットを提供する
+  - 検討事項:
+    - セッション認証
+    - JWT
+    - ログイン失敗制限
+- [ ] 退会時のデータ扱いを決める
+  - 決定事項:
+    - 一般ユーザは書籍を保持しないため、退会時のアップロード済み書籍削除は対象外
+  - 検討事項:
+    - ユーザ情報の論理削除
+    - お気に入りの削除
+    - 監査ログの保持
+
+### エピック: 管理機能
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/admin_management.md`
+- [ ] 管理ユーザログインのユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/admin_login_logout.md`
+- [ ] 管理ユーザ管理のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/admin_user_management.md`
+- [ ] ロール設定のユーザーストーリーを作成する
+  - 作成先: `doc/01_backlog/user_stories/role_management.md`
+- [ ] 管理ロール一覧を定義する
+  - 反映先: `doc/03_design/authorization_design/authorization_design.md`
+  - ロール候補:
+    - super_admin
+    - admin
+    - operator
+    - viewer
+- [ ] 権限マトリクスを作成する
+  - 作成先: `doc/03_design/authorization_design/permission_matrix.md`
+  - 操作候補:
+    - 管理ユーザ登録
+    - 管理ユーザ編集
+    - 管理ユーザ削除
+    - ロール設定
+    - 一般ユーザ閲覧
+    - 一般ユーザ停止
+    - 書籍アップロード: 管理ユーザのみ
+    - 書籍閲覧
+    - 書籍削除: 管理ユーザのみ
+    - 変換ジョブ再実行
+
+### エピック: 運用
+
+- [ ] エピック定義を作成する
+  - 作成先: `doc/01_backlog/epics/operations.md`
+- [ ] Runbookを作成する
+  - 作成先: `doc/06_operations/runbook/runbook.md`
+  - 記載内容:
+    - Docker Composeによる単一Linuxホスト運用手順
+    - Spring BootバックエンドAPIの起動手順
+    - Spring Boot変換ワーカーの起動手順
+    - 停止手順
+    - 再起動手順
+    - ログ確認手順
+    - 変換ジョブ失敗時の確認手順
+    - Elasticsearch再インデックス手順
+    - 全件再インデックス手順
+    - 書籍単位の再インデックス手順
+- [ ] バックアップなし方針を作成する
+  - 作成先: `doc/06_operations/backup_restore/backup_restore.md`
+  - 記載内容:
+    - バックアップは行わない
+    - PostgreSQL / Elasticsearch / 原本ファイル / 変換済みwebp / サムネイルはバックアップ対象にしない
+    - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う
+    - バックアップなし運用のリスクと許容範囲
+- [ ] 監視方針を作成する
+  - 作成先: `doc/06_operations/monitoring/monitoring.md`
+  - 監視候補:
+    - Spring BootバックエンドAPI死活
+    - Spring Boot変換ワーカー死活
+    - JVMメトリクス
+    - DB接続
+    - Elasticsearch接続
+    - ストレージ容量
+    - 変換ジョブ滞留
+    - 変換失敗数
+    - 画像変換処理時間
+    - 7-Zip外部プロセスの失敗数
+    - 変換ワーカーの同時実行数
+    - 1ジョブ30分タイムアウトの発生数
+- [ ] 障害ログの記録形式を作成する
+  - 作成先: `doc/06_operations/incident_log/incident_log_template.md`
+  - 項目:
+    - 発生日時
+    - 影響範囲
+    - 原因
+    - 暫定対応
+    - 恒久対応
+    - 再発防止策
+- [ ] リリースノート形式を作成する
+  - 作成先: `doc/06_operations/release_notes/release_note_template.md`
+  - 項目:
+    - バージョン
+    - リリース日
+    - 追加機能
+    - 修正
+    - 既知の問題
+    - 移行作業
+
+## テスト関連ToDo
+
+- [ ] テスト戦略を作成する
+  - 作成先: `doc/05_testing/test_strategy/test_strategy.md`
+  - 記載内容:
+    - テスト範囲
+    - 単体テスト方針
+    - 結合テスト方針
+    - E2Eテスト方針
+    - パフォーマンステスト方針
+    - 画像変換ワーカーの負荷テスト方針
+    - 手動確認方針
+    - 回帰テスト方針
+- [ ] アップロード機能の受入テストを作成する
+  - 作成先: `doc/05_testing/acceptance_tests/book_upload_acceptance_tests.md`
+  - 観点:
+    - 管理ユーザによる正常アップロード
+    - 一般ユーザによるアップロード不可
+    - 非対応形式
+    - アップロードサイズ上限なし
+    - 破損ファイル
+    - 変換ジョブ作成
+- [ ] 画像変換機能の受入テストを作成する
+  - 作成先: `doc/05_testing/acceptance_tests/image_conversion_acceptance_tests.md`
+  - 観点:
+    - zip展開
+    - 7-Zip for Linux コンソール版によるrar展開
+    - 7-Zip for Linux コンソール版による7zip展開
+    - webp変換: 品質値80
+    - サムネイル生成
+    - 失敗時のステータス
+    - 1ジョブ30分タイムアウト
+    - 同時実行数10
+- [ ] 検索機能の受入テストを作成する
+  - 作成先: `doc/05_testing/acceptance_tests/search_acceptance_tests.md`
+  - 観点:
+    - タイトル検索
+    - 著者検索
+    - タグ検索
+    - シリーズ検索
+    - 表記揺れ
+    - analysis-kuromojiによる日本語検索
+    - Elasticsearch再インデックス
+    - 検索結果なし
+- [ ] 閲覧機能の受入テストを作成する
+  - 作成先: `doc/05_testing/acceptance_tests/viewer_acceptance_tests.md`
+  - 観点:
+    - ページ表示
+    - ページ送り
+    - 見開き
+    - 拡大縮小
+    - スマートフォン表示
+- [ ] 権限機能の受入テストを作成する
+  - 作成先: `doc/05_testing/acceptance_tests/authorization_acceptance_tests.md`
+  - 観点:
+    - 未ログインアクセス
+    - 一般ユーザアクセス
+    - 管理ユーザアクセス
+    - ロール別アクセス制御
+    - 他ユーザデータの操作可否
+- [ ] 回帰テスト一覧を作成する
+  - 作成先: `doc/05_testing/regression_tests/regression_tests.md`
+  - 対象:
+    - ログイン
+    - アップロード
+    - 変換
+    - 検索
+    - 閲覧
+    - お気に入り
+    - 管理ユーザ管理
+
+## API契約ToDo
+
+- [ ] API設計方針を作成する
+  - 作成先: `doc/03_design/api_contracts/api_design_policy.md`
+  - 記載内容:
+    - Spring BootバックエンドAPIの前提
+    - URL命名
+    - HTTPメソッド
+    - 認証方式
+    - ページング
+    - エラーレスポンス
+    - バリデーションエラー形式
+- [ ] 自炊本管理API契約を作成する
+  - 作成先: `doc/03_design/api_contracts/book_api.md`
+  - API候補:
+    - 本一覧取得
+    - 本詳細取得
+    - 本アップロード
+    - 本メタ情報更新
+    - 本削除
+- [ ] 変換ジョブAPI契約を作成する
+  - 作成先: `doc/03_design/api_contracts/conversion_job_api.md`
+  - API候補:
+    - ジョブ状態取得
+    - ジョブ再実行
+    - ジョブキャンセル
+- [ ] 検索API契約を作成する
+  - 作成先: `doc/03_design/api_contracts/search_api.md`
+  - API候補:
+    - キーワード検索
+    - タグ検索
+    - 著者検索
+    - シリーズ検索
+    - サジェスト
+- [ ] 閲覧API契約を作成する
+  - 作成先: `doc/03_design/api_contracts/viewer_api.md`
+  - API候補:
+    - ページ一覧取得
+    - ページ画像取得
+    - 閲覧位置保存
+- [ ] アカウントAPI契約を作成する
+  - 作成先: `doc/03_design/api_contracts/account_api.md`
+  - API候補:
+    - 会員登録
+    - ログイン
+    - ログアウト
+    - 会員情報取得
+    - 会員情報更新
+    - 退会
+- [ ] 管理API契約を作成する
+  - 作成先: `doc/03_design/api_contracts/admin_api.md`
+  - API候補:
+    - 管理ユーザ一覧
+    - 管理ユーザ登録
+    - 管理ユーザ編集
+    - 管理ユーザ削除
+    - ロール一覧
+    - ロール設定
+
+## UI関連ToDo
+
+- [ ] UIフロー全体図を作成する
+  - 作成先: `doc/03_design/ui_flows/ui_flows.md`
+  - 対象:
+    - 一般ユーザ登録
+    - ログイン
+    - 本一覧
+    - 本アップロード
+    - メタ情報編集
+    - 検索
+    - 閲覧
+    - お気に入り
+    - 管理ユーザ管理
+- [ ] 画面メモを作成する
+  - 作成先: `doc/03_design/screen_notes/screen_notes.md`
+  - 画面候補:
+    - ログイン画面
+    - 会員登録画面
+    - 本一覧画面
+    - 本詳細画面
+    - 本アップロード画面
+    - メタ情報編集画面
+    - 検索結果画面
+    - ビューア画面
+    - お気に入り画面
+    - 管理ログイン画面
+    - 管理ユーザ一覧画面
+    - 管理ユーザ編集画面
+    - ロール設定画面
+
+## 決定事項
+
+- [x] フロントエンド技術: Next.js
+- [x] Javaバージョン: 25
+- [x] Spring Bootバージョン: 4.0.6
+- [x] Spring Bootプロジェクト構成: 単一アプリ内モジュールとする
+  - 今後の規模拡大を想定し、API / Workerを別アプリへ分離可能な構成にする
+- [x] 原本ファイル: 保存し続ける
+- [x] 1冊あたりのアップロード上限サイズ: なし
+- [x] 1ユーザあたりの保存容量上限: なし
+- [x] 非同期ジョブの実装方式: DB依存を排除するため専用キューとする
+- [x] 変換ワーカーの同時実行数: 10
+  - application.propertiesで設定可能にする
+- [x] サムネイル: 生成する
+- [x] 閲覧履歴: 保存する
+- [x] 一般ユーザ同士の書籍共有: しない
+- [x] 書籍アップロード権限: 管理者のみアップロード可能とする
+  - 一般ユーザは書籍を保持しない
+- [x] 管理者による一般ユーザの書籍閲覧: 対象外
+  - 一般ユーザは書籍を保持しないため
+- [x] 管理者による一般ユーザの書籍削除: 対象外
+  - 一般ユーザは書籍を保持しないため
+- [x] 退会時のアップロード済み書籍削除: 対象外
+  - 一般ユーザは書籍を保持しないため
+- [x] メール認証: 行う
+  - 登録時だけでなく、ログイン時の2段階認証にもメールを活用する
+- [x] パスワードリセット: 提供する
+- [x] バックアップ: 行わない
+- [x] デプロイ方式: Spring Boot APIと変換ワーカーを同一ホストに配置する
+  - 今後の規模拡大を想定し、別ホストへ分離可能な構成にする
+- [x] rar / 7zip の解凍方式: 外部アプリケーションの 7-Zip for Linux コンソール版を使用する
+  - https://7-zip.opensource.jp/download.html
+  - Java標準ライブラリおよび Apache Commons Compress の rar 対応には依存しない
+  - Spring Bootアプリケーションから外部プロセスとして呼び出す
+- [x] 変換ワーカーのリソース制限
+  - 変換ワーカーの同時実行数: 10
+  - 1ジョブのタイムアウト: 30分
+  - 1ジョブの一時ディスク使用量: 上限なし
+  - 外部プロセス: ジョブごとに専用作業ディレクトリで実行
+  - メモリ / CPU制限: OSまたはコンテナ側で制御
+- [x] PostgreSQLとElasticsearchの整合性回復手順
+  - PostgreSQLを正とする
+  - ElasticsearchはPostgreSQLから再構築可能な派生データとする
+  - 書籍単位でElasticsearchへ再インデックスできる管理コマンドを用意する
+  - 全件再インデックスできる管理コマンドを用意する
+  - Elasticsearchインデックスは破棄してPostgreSQLから再構築可能とする
+  - 更新失敗時は再試行キューに積む
+  - 全件再インデックス手順をRunbookに記載する
+- [x] Elasticsearchの日本語アナライザ: analysis-kuromojiを使用する
+  - 日本語のタイトル / 著者 / タグ検索にはkuromojiベースのカスタムアナライザを使用する
+  - 全角 / 半角などの表記揺れ対策としてICU normalizerの利用を検討する
+  - 補完 / 部分一致が必要な項目には別途edge n-gram系フィールドを追加する
+- [x] webpの品質値: 80
+  - スマートフォンでの閲覧を想定する
+  - 拡大表示は想定しない
+  - 漫画や小説の本文・セリフの可読性を確保しつつ、過度な高品質設定にはしない
+  - application.propertiesで設定可能にする
+- [x] 本番運用環境: 単一Linuxホスト上のDocker Compose構成とする
+  - Spring Boot API / Worker、Next.js、PostgreSQL、Elasticsearch、専用キューを同一ホストに配置する
+  - 7-Zip for Linux コンソール版を変換ワーカーコンテナ内で利用する
+  - 将来的にAPI / Worker / ミドルウェアを別ホストへ分離可能な構成にする
+
+## 未決事項
+
+- なし
+
+## 優先着手順
+
+1. プロダクトビジョン
+2. ユーザーストーリーマップ
+3. エピック定義
+4. MVP範囲の決定
+5. 技術スタック
+6. システム概要
+7. 非同期変換ジョブ方式ADR
+8. データモデル
+9. ファイル保存設計
+10. 画像変換設計
+11. 検索設計
+12. 権限設計
+13. API契約
+14. UIフロー
+15. テスト戦略
+16. Runbook
