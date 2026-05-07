@@ -89,8 +89,8 @@
 - [ ] `doc/03_architecture/03_adr/` を作成する
 - [x] `doc/03_architecture/04_system_context/` を作成する
 - [x] `doc/03_architecture/05_container_diagram/` を作成する
-- [ ] `doc/03_architecture/06_data_flow/` を作成する
-- [ ] `doc/03_architecture/07_quality_attributes/` を作成する
+- [x] `doc/03_architecture/06_data_flow/` を作成する
+- [x] `doc/03_architecture/07_quality_attributes/` を作成する
 - [ ] `doc/04_design/01_ui_flows/` を作成する
 - [ ] `doc/04_design/02_screen_notes/` を作成する
 - [ ] `doc/04_design/03_api_contracts/` を作成する
@@ -277,7 +277,7 @@
     - 7-Zip for Linux コンソール版
     - APIと変換ワーカーの責務分離
     - 単一Linuxホスト上のDocker Compose構成
-- [ ] データフローを作成する
+- [x] データフローを作成する
   - 作成先: `doc/03_architecture/06_data_flow/01_data_flow.md`
   - 記載内容:
     - 書籍アップロードから原本保存までの流れ
@@ -286,7 +286,7 @@
     - PostgreSQL更新とElasticsearchインデックス更新の流れ
     - 閲覧時の画像配信と検索時のデータ参照の流れ
     - 失敗時の再試行、再構築、整合性回復の流れ
-- [ ] 品質特性初版を作成する
+- [x] 品質特性初版を作成する
   - 作成先: `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
   - 記載内容:
     - レスポンス時間の目標
