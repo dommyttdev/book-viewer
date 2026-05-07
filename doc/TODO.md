@@ -56,7 +56,7 @@
 - [ ] `doc/04_design/06_file_storage_design/` を作成する
 - [ ] `doc/04_design/07_image_conversion_design/` を作成する
 - [ ] `doc/04_design/08_authorization_design/` を作成する
-- [ ] `doc/05_development/01_coding_rules/` を作成する
+- [x] `doc/05_development/01_coding_rules/` を作成する
 - [ ] `doc/05_development/02_branch_strategy/` を作成する
 - [ ] `doc/05_development/03_environment_setup/` を作成する
 - [ ] `doc/05_development/04_local_development/` を作成する
@@ -148,7 +148,7 @@
     - 主要な異常系が確認済み
     - 関連ドキュメントが更新済み
     - ログ、エラー処理、権限確認が実装済み
-- [ ] コーディングルールを作成する
+- [x] コーディングルールを作成する
   - 作成先: `doc/05_development/01_coding_rules/01_coding_rules.md`
   - 記載内容:
     - `doc/CODING_STANDARDS.md` との関係

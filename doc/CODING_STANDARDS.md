@@ -7,12 +7,14 @@ These standards define the default coding expectations for this repository. They
 ## General Principles
 
 - Prioritize readability, correctness, maintainability, and security over cleverness.
+- Follow clean code principles: names, functions, classes, and modules should each have one clear intent.
 - Prefer explicit behavior over implicit behavior.
 - Follow DRY for shared knowledge and business rules, but do not over-abstract just to remove small structural similarities.
 - Keep code simple and avoid unnecessary abstractions.
 - Do not implement speculative features or extension points that are not currently required.
 - Follow the principle of least astonishment: names, behavior, return values, and side effects should match developer expectations.
 - Keep changes small, cohesive, and easy to review.
+- Follow clean architecture principles where practical: domain and use case code should not depend on frameworks, databases, external services, or UI details.
 
 ## Naming
 
@@ -53,6 +55,20 @@ These standards define the default coding expectations for this repository. They
 - Repositories should encapsulate persistence access.
 - Infrastructure code should handle PostgreSQL, Elasticsearch, file system access, external processes, and other technical integrations.
 - Conversion worker logic should be isolated from API request handling.
+- Dependencies should point inward toward business policy. Outer details such as HTTP, persistence, search indexes, file storage, queues, external commands, and UI formats should depend on inner abstractions rather than the other way around.
+- Boundary conversions should be explicit. Do not pass transport models, persistence entities, or search documents deep into domain logic as substitutes for domain models.
+
+## Clean Code
+
+- Keep functions and methods focused on one purpose.
+- Keep abstraction levels consistent within a function. Avoid mixing high-level use case flow with low-level technical details in the same block.
+- Prefer clear names and structure over explanatory comments.
+- Use comments to explain why something exists, not to restate what the code already says.
+- Replace complex conditionals with named methods, domain concepts, value objects, or small focused services when that improves readability.
+- Avoid magic numbers and magic strings. Use named constants, enums, configuration properties, or domain objects.
+- Treat `null`, blank values, empty collections, and missing values explicitly and consistently.
+- Extract shared code when it removes duplicated knowledge or duplicated business rules. Do not abstract code only because the shape looks similar.
+- If code is difficult to test, reconsider its responsibility boundaries and dependencies.
 
 ## Error Handling
 
@@ -63,6 +79,17 @@ These standards define the default coding expectations for this repository. They
 - Internal error details should be logged where appropriate, but must not leak sensitive information to users.
 - Retry behavior must be explicit and limited to safe, retryable operations.
 - File conversion, archive extraction, and search indexing failures should be represented as recoverable job states when appropriate.
+
+## Validation
+
+- Backend services must not trust frontend validation.
+- Validate request bodies, query parameters, path parameters, headers, cookies, uploaded files, archive entries, metadata, and job parameters on the server side.
+- Treat hidden fields, read-only UI fields, select options, client-side ranges, and client-side validation as untrusted because requests can be modified.
+- Validate required fields, lengths, numeric ranges, formats, enum values, dates, pagination values, and sorting values.
+- Authorization-sensitive operations must combine input validation with server-side authorization checks.
+- Normalize and validate file names, archive paths, and extracted paths before file operations.
+- Keep validation error responses consistent and safe.
+- Domain invariants should not rely only on API-level validation. Enforce important invariants in the domain or use case layer as well.
 
 ## Logging
 
@@ -104,6 +131,7 @@ These standards define the default coding expectations for this repository. They
 - Treat date, time, timezone, and duration handling consistently.
 - Use appropriate numeric types for counts, file sizes, image dimensions, durations, and quality settings.
 - Configuration values such as WebP quality should be configurable through application properties.
+- Convert models at architectural boundaries explicitly. API request models should be validated and transformed before use case execution, and persistence entities should not be reused as public API responses or broad domain objects.
 
 ## API Design
 
@@ -145,7 +173,10 @@ These standards define the default coding expectations for this repository. They
 - Review for correctness, readability, responsibility boundaries, security, and test coverage.
 - Do not focus on style issues that should be handled automatically by tools.
 - Check whether names accurately express intent.
+- Check whether code follows clean code principles: small focused functions, clear responsibilities, and readable control flow.
+- Check whether clean architecture dependency direction is preserved.
 - Check whether business rules are placed in the correct layer.
 - Check whether errors, logs, permissions, and invalid inputs are handled safely.
+- Check whether backend validation does not depend on frontend checks.
 - Check whether documentation should be updated together with the code change.
 - Prefer small pull requests with focused intent.
