@@ -38,7 +38,7 @@
 | [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
 | [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Open | 技術スタック初版を作成する |
 | [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
-| [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Open | データモデル初版を作成する |
+| [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Open | ファイル保存設計初版を作成する |
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Open | 画像変換設計初版を作成する |
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Open | 検索設計初版を作成する |
@@ -94,7 +94,7 @@
 - [ ] `doc/04_design/01_ui_flows/` を作成する
 - [ ] `doc/04_design/02_screen_notes/` を作成する
 - [ ] `doc/04_design/03_api_contracts/` を作成する
-- [ ] `doc/04_design/04_data_model/` を作成する
+- [x] `doc/04_design/04_data_model/` を作成する
 - [ ] `doc/04_design/05_search_design/` を作成する
 - [ ] `doc/04_design/06_file_storage_design/` を作成する
 - [ ] `doc/04_design/07_image_conversion_design/` を作成する
@@ -369,7 +369,7 @@
 
 ### 主要設計
 
-- [ ] データモデル初版を作成する
+- [x] データモデル初版を作成する
   - 作成先: `doc/04_design/04_data_model/01_data_model.md`
   - 対象エンティティ:
     - user
