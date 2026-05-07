@@ -35,7 +35,7 @@
 - [x] `doc/00_product/vision/` を作成する
 - [ ] `doc/00_product/roadmap/` を作成する
 - [ ] `doc/00_product/personas/` を作成する
-- [ ] `doc/00_product/user_story_map/` を作成する
+- [x] `doc/00_product/user_story_map/` を作成する
 - [x] `doc/00_product/glossary/` を作成する
 - [ ] `doc/01_backlog/epics/` を作成する
 - [ ] `doc/01_backlog/user_stories/` を作成する
@@ -102,7 +102,7 @@
     - 一般ユーザ
     - 管理ユーザ
     - ロール
-- [ ] ユーザーストーリーマップを作成する
+- [x] ユーザーストーリーマップを作成する
   - 作成先: `doc/00_product/user_story_map/user_story_map.md`
   - 軸:
     - 登録する
