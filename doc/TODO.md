@@ -36,7 +36,7 @@
 - [ ] `doc/00_product/roadmap/` を作成する
 - [ ] `doc/00_product/personas/` を作成する
 - [ ] `doc/00_product/user_story_map/` を作成する
-- [ ] `doc/00_product/glossary/` を作成する
+- [x] `doc/00_product/glossary/` を作成する
 - [ ] `doc/01_backlog/epics/` を作成する
 - [ ] `doc/01_backlog/user_stories/` を作成する
 - [ ] `doc/01_backlog/acceptance_criteria/` を作成する
@@ -88,7 +88,7 @@
     - MVPの範囲
     - MVP外の範囲
     - 成功指標
-- [ ] 用語集を作成する
+- [x] 用語集を作成する
   - 作成先: `doc/00_product/glossary/glossary.md`
   - 記載候補:
     - 自炊本
@@ -281,6 +281,7 @@
     - book_page
     - author
     - series
+    - book_type
     - tag
     - favorite
     - conversion_job
@@ -378,6 +379,7 @@
     - 著者
     - タグ
     - シリーズ
+    - 種別
     - シリーズ概要
     - 巻数または並び順
     - 表紙画像
@@ -501,6 +503,7 @@
     - 著者名
     - タグ
     - シリーズ名
+    - 種別
     - シリーズ概要
 - [ ] あいまい検索仕様を決める
   - 決定事項:
