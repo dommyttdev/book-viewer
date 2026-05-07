@@ -33,7 +33,7 @@
 ### ディレクトリ構成
 
 - [x] `doc/01_product/01_vision/` を作成する
-- [ ] `doc/01_product/02_roadmap/` を作成する
+- [x] `doc/01_product/02_roadmap/` を作成する
 - [ ] `doc/01_product/03_personas/` を作成する
 - [x] `doc/01_product/04_user_story_map/` を作成する
 - [x] `doc/01_product/05_glossary/` を作成する
@@ -133,7 +133,7 @@
     - お気に入り管理する
     - ユーザ管理する
     - 運用する
-- [ ] ロードマップ初版を作成する
+- [x] ロードマップ初版を作成する
   - 作成先: `doc/01_product/02_roadmap/01_product_roadmap.md`
   - 区分:
     - MVP
