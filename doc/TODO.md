@@ -60,7 +60,7 @@
 - [ ] `doc/05_development/02_branch_strategy/` を作成する
 - [ ] `doc/05_development/03_environment_setup/` を作成する
 - [ ] `doc/05_development/04_local_development/` を作成する
-- [ ] `doc/05_development/05_definition_of_done/` を作成する
+- [x] `doc/05_development/05_definition_of_done/` を作成する
 - [ ] `doc/06_testing/01_test_strategy/` を作成する
 - [ ] `doc/06_testing/02_acceptance_tests/` を作成する
 - [ ] `doc/06_testing/03_regression_tests/` を作成する
@@ -140,7 +140,7 @@
     - Beta
     - v1.0
     - 将来対応
-- [ ] Definition of Doneを作成する
+- [x] Definition of Doneを作成する
   - 作成先: `doc/05_development/05_definition_of_done/01_definition_of_done.md`
   - 含める条件:
     - 受入条件を満たす
