@@ -49,7 +49,7 @@
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Closed | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Closed | 検索エピックのユーザーストーリーとインデックス設計を作成する |
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Closed | アカウント管理のユーザーストーリーと認証仕様を作成する |
-| [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
+| [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Closed | 管理機能のユーザーストーリーと権限マトリクスを作成する |
 | [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
 | [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Closed | テスト戦略と主要受入テストを作成する |
 | [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Closed | 運用ドキュメント初版を作成する |
@@ -673,11 +673,11 @@
 
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/06_admin_management.md`
-- [ ] 管理ユーザログインのユーザーストーリーを作成する
+- [x] 管理ユーザログインのユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/11_admin_login_logout.md`
-- [ ] 管理ユーザ管理のユーザーストーリーを作成する
+- [x] 管理ユーザ管理のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/12_admin_user_management.md`
-- [ ] ロール設定のユーザーストーリーを作成する
+- [x] ロール設定のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/13_role_management.md`
 - [x] 管理ロール一覧を定義する
   - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
@@ -686,7 +686,7 @@
     - admin
     - operator
     - viewer
-- [ ] 権限マトリクスを作成する
+- [x] 権限マトリクスを作成する
   - 作成先: `doc/04_design/08_authorization_design/02_permission_matrix.md`
   - 操作候補:
     - 管理ユーザ登録
