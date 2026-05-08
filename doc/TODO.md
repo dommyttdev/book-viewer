@@ -40,7 +40,7 @@
 | [#6](https://github.com/dommyttdev/book-viewer/issues/6) | Closed | 画像変換設計初版を作成する |
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Closed | 権限設計初版を作成する |
-| [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
+| [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Closed | API設計方針とAPI契約を作成する |
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Closed | データフローと品質特性初版を作成する |
@@ -90,7 +90,7 @@
 - [x] `doc/03_architecture/07_quality_attributes/` を作成する
 - [ ] `doc/04_design/01_ui_flows/` を作成する
 - [ ] `doc/04_design/02_screen_notes/` を作成する
-- [ ] `doc/04_design/03_api_contracts/` を作成する
+- [x] `doc/04_design/03_api_contracts/` を作成する
 - [x] `doc/04_design/04_data_model/` を作成する
 - [x] `doc/04_design/05_search_design/` を作成する
 - [x] `doc/04_design/06_file_storage_design/` を作成する
@@ -828,7 +828,7 @@
 
 ## API契約ToDo
 
-- [ ] API設計方針を作成する
+- [x] API設計方針を作成する
   - 作成先: `doc/04_design/03_api_contracts/01_api_design_policy.md`
   - 記載内容:
     - Spring BootバックエンドAPIの前提
@@ -838,7 +838,7 @@
     - ページング
     - エラーレスポンス
     - バリデーションエラー形式
-- [ ] 自炊本管理API契約を作成する
+- [x] 自炊本管理API契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/02_book_api.md`
   - API候補:
     - 本一覧取得
@@ -846,13 +846,13 @@
     - 本アップロード
     - 本メタ情報更新
     - 本削除
-- [ ] 変換ジョブAPI契約を作成する
+- [x] 変換ジョブAPI契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/03_conversion_job_api.md`
   - API候補:
     - ジョブ状態取得
     - ジョブ再実行
     - ジョブキャンセル
-- [ ] 検索API契約を作成する
+- [x] 検索API契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/04_search_api.md`
   - API候補:
     - キーワード検索
@@ -860,13 +860,13 @@
     - 著者検索
     - シリーズ検索
     - サジェスト
-- [ ] 閲覧API契約を作成する
+- [x] 閲覧API契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/05_viewer_api.md`
   - API候補:
     - ページ一覧取得
     - ページ画像取得
     - 閲覧位置保存
-- [ ] アカウントAPI契約を作成する
+- [x] アカウントAPI契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/06_account_api.md`
   - API候補:
     - 会員登録
@@ -875,7 +875,7 @@
     - 会員情報取得
     - 会員情報更新
     - 退会
-- [ ] 管理API契約を作成する
+- [x] 管理API契約を作成する
   - 作成先: `doc/04_design/03_api_contracts/07_admin_api.md`
   - API候補:
     - 管理ユーザ一覧
