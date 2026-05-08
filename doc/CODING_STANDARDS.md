@@ -105,6 +105,10 @@ These standards define the default coding expectations for this repository. They
 
 ## Testing
 
+- Use TDD as the default development approach for behavior changes.
+- Before implementing a new behavior, express the expected behavior as a failing automated test where practical.
+- Follow the red, green, refactor cycle in small increments: add a failing test, implement the minimum code to pass it, then improve structure without changing behavior.
+- When a behavior is difficult to automate at the start, define the acceptance test or manual verification point before implementation and add automated coverage as the design becomes testable.
 - Add or update tests proportional to the affected behavior.
 - Business rules, permission checks, conversion job state transitions, and search indexing behavior should have tests where practical.
 - Include normal cases, boundary cases, and failure cases.

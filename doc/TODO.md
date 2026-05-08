@@ -51,7 +51,7 @@
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
 | [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
-| [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Open | テスト戦略と主要受入テストを作成する |
+| [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Closed | テスト戦略と主要受入テストを作成する |
 | [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Open | 運用ドキュメント初版を作成する |
 | [#22](https://github.com/dommyttdev/book-viewer/issues/22) | Closed | プロダクトビジョンを作成する |
 | [#23](https://github.com/dommyttdev/book-viewer/issues/23) | Closed | 用語集を作成する |
@@ -101,9 +101,9 @@
 - [ ] `doc/05_development/03_environment_setup/` を作成する
 - [ ] `doc/05_development/04_local_development/` を作成する
 - [x] `doc/05_development/05_definition_of_done/` を作成する
-- [ ] `doc/06_testing/01_test_strategy/` を作成する
-- [ ] `doc/06_testing/02_acceptance_tests/` を作成する
-- [ ] `doc/06_testing/03_regression_tests/` を作成する
+- [x] `doc/06_testing/01_test_strategy/` を作成する
+- [x] `doc/06_testing/02_acceptance_tests/` を作成する
+- [x] `doc/06_testing/03_regression_tests/` を作成する
 - [ ] `doc/06_testing/04_exploratory_testing/` を作成する
 - [ ] `doc/06_testing/05_test_data/` を作成する
 - [ ] `doc/07_operations/01_runbook/` を作成する
@@ -757,7 +757,7 @@
 
 ## テスト関連ToDo
 
-- [ ] テスト戦略を作成する
+- [x] テスト戦略を作成する
   - 作成先: `doc/06_testing/01_test_strategy/01_test_strategy.md`
   - 記載内容:
     - テスト範囲
@@ -768,7 +768,7 @@
     - 画像変換ワーカーの負荷テスト方針
     - 手動確認方針
     - 回帰テスト方針
-- [ ] アップロード機能の受入テストを作成する
+- [x] アップロード機能の受入テストを作成する
   - 作成先: `doc/06_testing/02_acceptance_tests/01_book_upload_acceptance_tests.md`
   - 観点:
     - 管理ユーザによる正常アップロード
@@ -777,7 +777,7 @@
     - アップロードサイズ上限なし
     - 破損ファイル
     - 変換ジョブ作成
-- [ ] 画像変換機能の受入テストを作成する
+- [x] 画像変換機能の受入テストを作成する
   - 作成先: `doc/06_testing/02_acceptance_tests/02_image_conversion_acceptance_tests.md`
   - 観点:
     - zip展開
@@ -788,7 +788,7 @@
     - 失敗時のステータス
     - 1ジョブ30分タイムアウト
     - 同時実行数10
-- [ ] 検索機能の受入テストを作成する
+- [x] 検索機能の受入テストを作成する
   - 作成先: `doc/06_testing/02_acceptance_tests/03_search_acceptance_tests.md`
   - 観点:
     - タイトル検索
@@ -799,7 +799,7 @@
     - analysis-kuromojiによる日本語検索
     - Elasticsearch再インデックス
     - 検索結果なし
-- [ ] 閲覧機能の受入テストを作成する
+- [x] 閲覧機能の受入テストを作成する
   - 作成先: `doc/06_testing/02_acceptance_tests/04_viewer_acceptance_tests.md`
   - 観点:
     - ページ表示
@@ -807,7 +807,7 @@
     - 見開き
     - 拡大縮小
     - スマートフォン表示
-- [ ] 権限機能の受入テストを作成する
+- [x] 権限機能の受入テストを作成する
   - 作成先: `doc/06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md`
   - 観点:
     - 未ログインアクセス
@@ -815,7 +815,7 @@
     - 管理ユーザアクセス
     - ロール別アクセス制御
     - 他ユーザデータの操作可否
-- [ ] 回帰テスト一覧を作成する
+- [x] 回帰テスト一覧を作成する
   - 作成先: `doc/06_testing/03_regression_tests/01_regression_tests.md`
   - 対象:
     - ログイン
