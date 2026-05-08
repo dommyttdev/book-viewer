@@ -48,7 +48,7 @@
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Closed | 自炊本管理のユーザーストーリーと受入条件を作成する |
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Closed | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Closed | 検索エピックのユーザーストーリーとインデックス設計を作成する |
-| [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
+| [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Closed | アカウント管理のユーザーストーリーと認証仕様を作成する |
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
 | [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
 | [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Closed | テスト戦略と主要受入テストを作成する |
@@ -643,13 +643,13 @@
 
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/05_account_management.md`
-- [ ] 会員登録のユーザーストーリーを作成する
+- [x] 会員登録のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/07_user_registration.md`
-- [ ] ログイン・ログアウトのユーザーストーリーを作成する
+- [x] ログイン・ログアウトのユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/08_user_login_logout.md`
-- [ ] 会員情報編集のユーザーストーリーを作成する
+- [x] 会員情報編集のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/09_user_profile_edit.md`
-- [ ] 退会のユーザーストーリーを作成する
+- [x] 退会のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/10_user_withdrawal.md`
 - [x] 認証方式を決める
   - 反映先: `doc/04_design/08_authorization_design/01_authorization_design.md`
