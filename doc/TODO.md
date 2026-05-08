@@ -52,7 +52,7 @@
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
 | [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
 | [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Closed | テスト戦略と主要受入テストを作成する |
-| [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Open | 運用ドキュメント初版を作成する |
+| [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Closed | 運用ドキュメント初版を作成する |
 | [#22](https://github.com/dommyttdev/book-viewer/issues/22) | Closed | プロダクトビジョンを作成する |
 | [#23](https://github.com/dommyttdev/book-viewer/issues/23) | Closed | 用語集を作成する |
 | [#24](https://github.com/dommyttdev/book-viewer/issues/24) | Closed | ユーザーストーリーマップを作成する |
@@ -106,11 +106,11 @@
 - [x] `doc/06_testing/03_regression_tests/` を作成する
 - [ ] `doc/06_testing/04_exploratory_testing/` を作成する
 - [ ] `doc/06_testing/05_test_data/` を作成する
-- [ ] `doc/07_operations/01_runbook/` を作成する
-- [ ] `doc/07_operations/02_backup_restore/` を作成する
-- [ ] `doc/07_operations/03_monitoring/` を作成する
-- [ ] `doc/07_operations/04_release_notes/` を作成する
-- [ ] `doc/07_operations/05_incident_log/` を作成する
+- [x] `doc/07_operations/01_runbook/` を作成する
+- [x] `doc/07_operations/02_backup_restore/` を作成する
+- [x] `doc/07_operations/03_monitoring/` を作成する
+- [x] `doc/07_operations/04_release_notes/` を作成する
+- [x] `doc/07_operations/05_incident_log/` を作成する
 - [ ] `doc/90_decisions/01_product_decisions/` を作成する
 - [ ] `doc/90_decisions/02_technical_decisions/` を作成する
 - [ ] `doc/90_decisions/03_tradeoffs/` を作成する
@@ -701,7 +701,7 @@
 
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/07_operations.md`
-- [ ] Runbookを作成する
+- [x] Runbookを作成する
   - 作成先: `doc/07_operations/01_runbook/01_runbook.md`
   - 記載内容:
     - Docker Composeによる単一Linuxホスト運用手順
@@ -714,14 +714,14 @@
     - Elasticsearch再インデックス手順
     - 全件再インデックス手順
     - 書籍単位の再インデックス手順
-- [ ] バックアップなし方針を作成する
+- [x] バックアップなし方針を作成する
   - 作成先: `doc/07_operations/02_backup_restore/01_backup_restore.md`
   - 記載内容:
     - バックアップは行わない
     - PostgreSQL / Elasticsearch / 原本ファイル / 変換済みwebp / サムネイルはバックアップ対象にしない
     - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う
     - バックアップなし運用のリスクと許容範囲
-- [ ] 監視方針を作成する
+- [x] 監視方針を作成する
   - 作成先: `doc/07_operations/03_monitoring/01_monitoring.md`
   - 監視候補:
     - Spring BootバックエンドAPI死活
@@ -736,7 +736,7 @@
     - 7-Zip外部プロセスの失敗数
     - 変換ワーカーの同時実行数
     - 1ジョブ30分タイムアウトの発生数
-- [ ] 障害ログの記録形式を作成する
+- [x] 障害ログの記録形式を作成する
   - 作成先: `doc/07_operations/05_incident_log/01_incident_log_template.md`
   - 項目:
     - 発生日時
@@ -745,7 +745,7 @@
     - 暫定対応
     - 恒久対応
     - 再発防止策
-- [ ] リリースノート形式を作成する
+- [x] リリースノート形式を作成する
   - 作成先: `doc/07_operations/04_release_notes/01_release_note_template.md`
   - 項目:
     - バージョン
