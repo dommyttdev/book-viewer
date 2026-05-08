@@ -41,7 +41,7 @@
 | [#7](https://github.com/dommyttdev/book-viewer/issues/7) | Closed | 検索設計初版を作成する |
 | [#8](https://github.com/dommyttdev/book-viewer/issues/8) | Closed | 権限設計初版を作成する |
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Closed | API設計方針とAPI契約を作成する |
-| [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
+| [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Closed | UIフローと画面メモを作成する |
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Closed | データフローと品質特性初版を作成する |
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
@@ -88,8 +88,8 @@
 - [x] `doc/03_architecture/05_container_diagram/` を作成する
 - [x] `doc/03_architecture/06_data_flow/` を作成する
 - [x] `doc/03_architecture/07_quality_attributes/` を作成する
-- [ ] `doc/04_design/01_ui_flows/` を作成する
-- [ ] `doc/04_design/02_screen_notes/` を作成する
+- [x] `doc/04_design/01_ui_flows/` を作成する
+- [x] `doc/04_design/02_screen_notes/` を作成する
 - [x] `doc/04_design/03_api_contracts/` を作成する
 - [x] `doc/04_design/04_data_model/` を作成する
 - [x] `doc/04_design/05_search_design/` を作成する
@@ -887,7 +887,7 @@
 
 ## UI関連ToDo
 
-- [ ] UIフロー全体図を作成する
+- [x] UIフロー全体図を作成する
   - 作成先: `doc/04_design/01_ui_flows/01_ui_flows.md`
   - 対象:
     - 一般ユーザ登録
@@ -899,7 +899,7 @@
     - 閲覧
     - お気に入り
     - 管理ユーザ管理
-- [ ] 画面メモを作成する
+- [x] 画面メモを作成する
   - 作成先: `doc/04_design/02_screen_notes/01_screen_notes.md`
   - 画面候補:
     - ログイン画面

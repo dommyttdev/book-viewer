@@ -56,6 +56,7 @@ Key planning items are tracked in `doc/TODO.md`.
 
 - Keep commits small, focused, and logically grouped.
 - Do not mix unrelated changes in a single commit.
+- Use MCP for GitHub operations such as reading or updating issues and pull requests.
 - Write commit messages in Japanese.
 - Use the Conventional Commits-like format: `<type>: <Japanese summary>`.
 - Allowed types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `style`, `perf`, `security`, `build`, `ci`, `revert`.
