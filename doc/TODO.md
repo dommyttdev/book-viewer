@@ -45,7 +45,7 @@
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Closed | データフローと品質特性初版を作成する |
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
-| [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Open | 自炊本管理のユーザーストーリーと受入条件を作成する |
+| [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Closed | 自炊本管理のユーザーストーリーと受入条件を作成する |
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Open | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Open | 検索エピックのユーザーストーリーとインデックス設計を作成する |
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
@@ -78,8 +78,8 @@
 - [x] `doc/01_product/04_user_story_map/` を作成する
 - [x] `doc/01_product/05_glossary/` を作成する
 - [x] `doc/02_backlog/01_epics/` を作成する
-- [ ] `doc/02_backlog/02_user_stories/` を作成する
-- [ ] `doc/02_backlog/03_acceptance_criteria/` を作成する
+- [x] `doc/02_backlog/02_user_stories/` を作成する
+- [x] `doc/02_backlog/03_acceptance_criteria/` を作成する
 - [ ] `doc/02_backlog/04_story_templates/` を作成する
 - [x] `doc/03_architecture/01_overview/` を作成する
 - [x] `doc/03_architecture/02_technology_stack/` を作成する
@@ -453,11 +453,11 @@
   - 作成先: `doc/02_backlog/01_epics/01_book_management.md`
   - 目的:
     - 自炊した本をアップロードし、メタ情報を管理できるようにする
-- [ ] 本アップロードのユーザーストーリーを作成する
+- [x] 本アップロードのユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/01_book_upload.md`
   - 例:
     - 管理ユーザとして、自炊本のアーカイブファイルをアップロードしたい。なぜなら一般ユーザがWeb上で本を読めるようにしたいから。
-- [ ] 本アップロードの受入条件を作成する
+- [x] 本アップロードの受入条件を作成する
   - 作成先: `doc/02_backlog/03_acceptance_criteria/01_book_upload.md`
   - 条件候補:
     - 管理ユーザのみアップロードできる
@@ -469,8 +469,9 @@
     - 1冊あたりのアップロード上限サイズは設けない
     - アップロード後に変換ジョブが作成される
     - 変換状態を画面で確認できる
-- [ ] 本メタ情報編集のユーザーストーリーを作成する
+- [x] 本メタ情報編集のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/02_book_metadata_edit.md`
+  - 受入条件: `doc/02_backlog/03_acceptance_criteria/02_book_metadata_edit.md`
   - 対象項目:
     - タイトル
     - 著者
@@ -480,7 +481,9 @@
     - シリーズ概要
     - 巻数または並び順
     - 表紙画像
-- [ ] 本削除の仕様を決める
+- [x] 本削除の仕様を決める
+  - ユーザーストーリー: `doc/02_backlog/02_user_stories/03_book_delete.md`
+  - 受入条件: `doc/02_backlog/03_acceptance_criteria/03_book_delete.md`
   - 反映先:
     - `doc/04_design/06_file_storage_design/01_file_storage_design.md`
     - `doc/04_design/04_data_model/01_data_model.md`
