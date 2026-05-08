@@ -32,7 +32,7 @@
 
 | Issue | 状態 | 対応する主なTODO |
 | --- | --- | --- |
-| [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
+| [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Closed | エピック定義を整備する |
 | [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Closed | 技術スタック初版を作成する |
 | [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
@@ -77,7 +77,7 @@
 - [ ] `doc/01_product/03_personas/` を作成する
 - [x] `doc/01_product/04_user_story_map/` を作成する
 - [x] `doc/01_product/05_glossary/` を作成する
-- [ ] `doc/02_backlog/01_epics/` を作成する
+- [x] `doc/02_backlog/01_epics/` を作成する
 - [ ] `doc/02_backlog/02_user_stories/` を作成する
 - [ ] `doc/02_backlog/03_acceptance_criteria/` を作成する
 - [ ] `doc/02_backlog/04_story_templates/` を作成する
@@ -449,7 +449,7 @@
 
 ### エピック: 自炊本管理
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/01_book_management.md`
   - 目的:
     - 自炊した本をアップロードし、メタ情報を管理できるようにする
@@ -493,7 +493,7 @@
 
 ### エピック: 画像変換
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/02_image_conversion.md`
 - [x] アーカイブ展開の仕様を決める
   - 反映先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
@@ -550,7 +550,7 @@
 
 ### エピック: 本の閲覧
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/03_book_viewer.md`
 - [ ] 本一覧表示のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/03_book_list.md`
@@ -589,7 +589,7 @@
 
 ### エピック: 検索
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/04_search.md`
 - [ ] 検索ユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/06_book_search.md`
@@ -638,7 +638,7 @@
 
 ### エピック: アカウント管理
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/05_account_management.md`
 - [ ] 会員登録のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/07_user_registration.md`
@@ -668,7 +668,7 @@
 
 ### エピック: 管理機能
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/06_admin_management.md`
 - [ ] 管理ユーザログインのユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/11_admin_login_logout.md`
@@ -699,7 +699,7 @@
 
 ### エピック: 運用
 
-- [ ] エピック定義を作成する
+- [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/07_operations.md`
 - [ ] Runbookを作成する
   - 作成先: `doc/07_operations/01_runbook/01_runbook.md`
