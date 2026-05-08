@@ -46,7 +46,7 @@
 | [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Closed | データフローと品質特性初版を作成する |
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Closed | 自炊本管理のユーザーストーリーと受入条件を作成する |
-| [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Open | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
+| [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Closed | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Open | 検索エピックのユーザーストーリーとインデックス設計を作成する |
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
@@ -555,11 +555,11 @@
 
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/03_book_viewer.md`
-- [ ] 本一覧表示のユーザーストーリーを作成する
+- [x] 本一覧表示のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/03_book_list.md`
-- [ ] ビューア表示のユーザーストーリーを作成する
+- [x] ビューア表示のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/04_book_viewing.md`
-- [ ] ビューア操作仕様を決める
+- [x] ビューア操作仕様を決める
   - 反映先: `doc/04_design/01_ui_flows/01_ui_flows.md`
   - 検討事項:
     - 1ページ表示
@@ -572,7 +572,7 @@
     - 拡大縮小
     - キーボード操作
     - スマートフォン操作
-- [ ] 閲覧履歴仕様を決める
+- [x] 閲覧履歴仕様を決める
   - 決定事項:
     - 閲覧履歴は保存する
   - 検討事項:
@@ -580,9 +580,9 @@
     - 最終閲覧日時
     - ユーザ単位で持つか
     - 端末単位で持つか
-- [ ] お気に入り登録のユーザーストーリーを作成する
+- [x] お気に入り登録のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/05_favorite.md`
-- [ ] お気に入りの受入条件を作成する
+- [x] お気に入りの受入条件を作成する
   - 作成先: `doc/02_backlog/03_acceptance_criteria/02_favorite.md`
   - 条件候補:
     - 本をお気に入り登録できる
