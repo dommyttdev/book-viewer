@@ -50,7 +50,7 @@
 | [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Closed | 検索エピックのユーザーストーリーとインデックス設計を作成する |
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Closed | アカウント管理のユーザーストーリーと認証仕様を作成する |
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Closed | 管理機能のユーザーストーリーと権限マトリクスを作成する |
-| [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
+| [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Closed | 環境構築手順とローカル開発手順を作成する |
 | [#20](https://github.com/dommyttdev/book-viewer/issues/20) | Closed | テスト戦略と主要受入テストを作成する |
 | [#21](https://github.com/dommyttdev/book-viewer/issues/21) | Closed | 運用ドキュメント初版を作成する |
 | [#22](https://github.com/dommyttdev/book-viewer/issues/22) | Closed | プロダクトビジョンを作成する |
@@ -98,8 +98,8 @@
 - [x] `doc/04_design/08_authorization_design/` を作成する
 - [x] `doc/05_development/01_coding_rules/` を作成する
 - [x] `doc/05_development/02_branch_strategy/` を作成する
-- [ ] `doc/05_development/03_environment_setup/` を作成する
-- [ ] `doc/05_development/04_local_development/` を作成する
+- [x] `doc/05_development/03_environment_setup/` を作成する
+- [x] `doc/05_development/04_local_development/` を作成する
 - [x] `doc/05_development/05_definition_of_done/` を作成する
 - [x] `doc/06_testing/01_test_strategy/` を作成する
 - [x] `doc/06_testing/02_acceptance_tests/` を作成する
@@ -202,14 +202,14 @@
     - ブランチ命名規則
     - 作業単位とコミット粒度
     - プルリクエスト運用
-- [ ] 環境構築手順を作成する
+- [x] 環境構築手順を作成する
   - 作成先: `doc/05_development/03_environment_setup/01_environment_setup.md`
   - 記載内容:
     - 必要なツールとバージョン
     - Java 25、Node.js、Docker、PostgreSQL、Elasticsearchの準備
     - 7-Zip for Linux コンソール版の扱い
     - 環境変数とシークレット管理方針
-- [ ] ローカル開発手順を作成する
+- [x] ローカル開発手順を作成する
   - 作成先: `doc/05_development/04_local_development/01_local_development.md`
   - 記載内容:
     - Next.jsフロントエンドの起動方法
