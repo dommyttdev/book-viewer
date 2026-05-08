@@ -47,7 +47,7 @@
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Closed | 自炊本管理のユーザーストーリーと受入条件を作成する |
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Closed | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
-| [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Open | 検索エピックのユーザーストーリーとインデックス設計を作成する |
+| [#16](https://github.com/dommyttdev/book-viewer/issues/16) | Closed | 検索エピックのユーザーストーリーとインデックス設計を作成する |
 | [#17](https://github.com/dommyttdev/book-viewer/issues/17) | Open | アカウント管理のユーザーストーリーと認証仕様を作成する |
 | [#18](https://github.com/dommyttdev/book-viewer/issues/18) | Open | 管理機能のユーザーストーリーと権限マトリクスを作成する |
 | [#19](https://github.com/dommyttdev/book-viewer/issues/19) | Open | 環境構築手順とローカル開発手順を作成する |
@@ -594,7 +594,7 @@
 
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/04_search.md`
-- [ ] 検索ユーザーストーリーを作成する
+- [x] 検索ユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/06_book_search.md`
 - [x] 検索対象項目を確定する
   - 反映先: `doc/04_design/05_search_design/01_search_design.md`
@@ -614,7 +614,7 @@
   - 検討事項:
     - typo許容
     - ひらがなカタカナ
-- [ ] Elasticsearchインデックス設計を作成する
+- [x] Elasticsearchインデックス設計を作成する
   - 作成先: `doc/04_design/05_search_design/02_search_index_design.md`
   - 記載内容:
     - index name
