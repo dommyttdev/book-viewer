@@ -36,7 +36,7 @@
 | Issue | 状態 | 対応する主なTODO |
 | --- | --- | --- |
 | [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
-| [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Open | 技術スタック初版を作成する |
+| [#2](https://github.com/dommyttdev/book-viewer/issues/2) | Closed | 技術スタック初版を作成する |
 | [#3](https://github.com/dommyttdev/book-viewer/issues/3) | Closed | 非同期変換ジョブ方式ADRを作成する |
 | [#4](https://github.com/dommyttdev/book-viewer/issues/4) | Closed | データモデル初版を作成する |
 | [#5](https://github.com/dommyttdev/book-viewer/issues/5) | Closed | ファイル保存設計初版を作成する |
@@ -46,7 +46,7 @@
 | [#9](https://github.com/dommyttdev/book-viewer/issues/9) | Open | API設計方針とAPI契約を作成する |
 | [#10](https://github.com/dommyttdev/book-viewer/issues/10) | Open | UIフローと画面メモを作成する |
 | [#11](https://github.com/dommyttdev/book-viewer/issues/11) | Closed | システムコンテキストとコンテナ図を作成する |
-| [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Open | データフローと品質特性初版を作成する |
+| [#12](https://github.com/dommyttdev/book-viewer/issues/12) | Closed | データフローと品質特性初版を作成する |
 | [#13](https://github.com/dommyttdev/book-viewer/issues/13) | Closed | ADRテンプレートと主要ADRを作成する |
 | [#14](https://github.com/dommyttdev/book-viewer/issues/14) | Open | 自炊本管理のユーザーストーリーと受入条件を作成する |
 | [#15](https://github.com/dommyttdev/book-viewer/issues/15) | Open | 本の閲覧エピックのユーザーストーリーと仕様を作成する |
