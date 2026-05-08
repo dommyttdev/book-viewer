@@ -74,13 +74,11 @@
 
 - [x] `doc/01_product/01_vision/` を作成する
 - [x] `doc/01_product/02_roadmap/` を作成する
-- [ ] `doc/01_product/03_personas/` を作成する
 - [x] `doc/01_product/04_user_story_map/` を作成する
 - [x] `doc/01_product/05_glossary/` を作成する
 - [x] `doc/02_backlog/01_epics/` を作成する
 - [x] `doc/02_backlog/02_user_stories/` を作成する
 - [x] `doc/02_backlog/03_acceptance_criteria/` を作成する
-- [ ] `doc/02_backlog/04_story_templates/` を作成する
 - [x] `doc/03_architecture/01_overview/` を作成する
 - [x] `doc/03_architecture/02_technology_stack/` を作成する
 - [x] `doc/03_architecture/03_adr/` を作成する
@@ -104,22 +102,15 @@
 - [x] `doc/06_testing/01_test_strategy/` を作成する
 - [x] `doc/06_testing/02_acceptance_tests/` を作成する
 - [x] `doc/06_testing/03_regression_tests/` を作成する
-- [ ] `doc/06_testing/04_exploratory_testing/` を作成する
-- [ ] `doc/06_testing/05_test_data/` を作成する
 - [x] `doc/07_operations/01_runbook/` を作成する
 - [x] `doc/07_operations/02_backup_restore/` を作成する
 - [x] `doc/07_operations/03_monitoring/` を作成する
 - [x] `doc/07_operations/04_release_notes/` を作成する
 - [x] `doc/07_operations/05_incident_log/` を作成する
-- [ ] `doc/90_decisions/01_product_decisions/` を作成する
-- [ ] `doc/90_decisions/02_technical_decisions/` を作成する
-- [ ] `doc/90_decisions/03_tradeoffs/` を作成する
-- [ ] `doc/99_archive/01_old_versions/` を作成する
-- [ ] `doc/99_archive/02_obsolete/` を作成する
 
 補足:
 
-- 以下のディレクトリは、現時点では個別ドキュメント作成ToDoがなくても問題ないものとして扱う
+- 以下のディレクトリは、現時点では初期作成対象に含めない。必要になった段階で個別の作成ToDoとして追加する
   - `doc/01_product/03_personas/`
     - 一般ユーザ、管理ユーザという利用者種別は既存のプロダクトビジョンと用語集で扱っており、詳細なペルソナはUI設計や利用者理解が必要になった段階で作成する
   - `doc/02_backlog/04_story_templates/`
@@ -128,12 +119,10 @@
     - 探索的テストはMVPの主要画面や機能が具体化してから計画する方が実効性が高いため、初期作成対象から外す
   - `doc/06_testing/05_test_data/`
     - テストデータはデータモデル、受入テスト、回帰テストの内容が固まってから作成する方が重複や手戻りを避けやすいため、初期作成対象から外す
-  - `doc/90_decisions/01_product_decisions/`
-  - `doc/90_decisions/02_technical_decisions/`
-  - `doc/90_decisions/03_tradeoffs/`
+  - `doc/90_decisions/`
     - 当面の設計判断はADRまたは各設計ドキュメントに記録し、横断的な決定ログが必要になった段階で整理する
-  - `doc/99_archive/01_old_versions/`
-  - `doc/99_archive/02_obsolete/`
+    - ADRや設計ドキュメントと判断記録が二重管理にならないよう、初期段階では作成しない
+  - `doc/99_archive/`
     - アーカイブ対象となる旧版文書や廃止文書が発生してから利用する置き場であり、初期ドキュメントとして作成する必要はない
 
 ### 初期ドキュメント
