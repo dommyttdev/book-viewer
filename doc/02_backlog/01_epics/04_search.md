@@ -48,7 +48,7 @@
 - `doc/04_design/05_search_design/01_search_design.md` への必要な反映
 - `doc/04_design/03_api_contracts/04_search_api.md`
 - `doc/06_testing/02_acceptance_tests/03_search_acceptance_tests.md`
-- `doc/07_operations/01_runbook/01_runbook.md` への再インデックス手順の反映
+- `doc/07_operations/01_runbook.md` への再インデックス手順の反映
 
 ## 完了の目安
 
@@ -60,7 +60,7 @@
 ## 関連ドキュメント
 
 - `doc/04_design/05_search_design/01_search_design.md`
-- `doc/04_design/04_data_model/01_data_model.md`
+- `doc/04_design/04_data_model.md`
 - `doc/03_architecture/03_adr/05_ADR-0004-use-elasticsearch.md`
-- `doc/03_architecture/06_data_flow/01_data_flow.md`
+- `doc/03_architecture/06_data_flow.md`
 

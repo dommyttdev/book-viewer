@@ -27,8 +27,8 @@
 
 本削除の仕様判断は、次の設計ドキュメントに反映済みとする。
 
-- `doc/04_design/06_file_storage_design/01_file_storage_design.md`
-- `doc/04_design/04_data_model/01_data_model.md`
+- `doc/04_design/06_file_storage_design.md`
+- `doc/04_design/04_data_model.md`
 - `doc/04_design/03_api_contracts/02_book_api.md`
 
 ## 未決事項

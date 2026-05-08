@@ -40,13 +40,13 @@
 
 ## 主な成果物
 
-- `doc/07_operations/01_runbook/01_runbook.md`
-- `doc/07_operations/02_backup_restore/01_backup_restore.md`
-- `doc/07_operations/03_monitoring/01_monitoring.md`
-- `doc/07_operations/05_incident_log/01_incident_log_template.md`
-- `doc/07_operations/04_release_notes/01_release_note_template.md`
-- `doc/05_development/03_environment_setup/01_environment_setup.md`
-- `doc/05_development/04_local_development/01_local_development.md`
+- `doc/07_operations/01_runbook.md`
+- `doc/07_operations/02_backup_restore.md`
+- `doc/07_operations/03_monitoring.md`
+- `doc/07_operations/05_incident_log_template.md`
+- `doc/07_operations/04_release_note_template.md`
+- `doc/05_development/03_environment_setup.md`
+- `doc/05_development/04_local_development.md`
 
 ## 完了の目安
 
@@ -57,8 +57,8 @@
 
 ## 関連ドキュメント
 
-- `doc/03_architecture/01_overview/01_system_overview.md`
-- `doc/03_architecture/05_container_diagram/01_container_diagram.md`
-- `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
-- `doc/01_product/02_roadmap/01_product_roadmap.md`
+- `doc/03_architecture/01_system_overview.md`
+- `doc/03_architecture/05_container_diagram.md`
+- `doc/03_architecture/07_quality_attributes.md`
+- `doc/01_product/02_product_roadmap.md`
 

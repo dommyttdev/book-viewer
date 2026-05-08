@@ -56,7 +56,7 @@
 ## 関連ドキュメント
 
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/04_design/04_data_model/01_data_model.md`
-- `doc/01_product/04_user_story_map/01_user_story_map.md`
+- `doc/04_design/04_data_model.md`
+- `doc/01_product/04_user_story_map.md`
 - `rules/SECURITY.md`
 

@@ -80,11 +80,11 @@
 - `doc/02_backlog/01_epics/`
 - `doc/02_backlog/02_user_stories/`
 - `doc/02_backlog/03_acceptance_criteria/`
-- `doc/04_design/01_ui_flows/01_ui_flows.md`
+- `doc/04_design/01_ui_flows.md`
 - `doc/04_design/03_api_contracts/`
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
 - `doc/04_design/05_search_design/01_search_design.md`
-- `doc/07_operations/01_runbook/01_runbook.md`
+- `doc/07_operations/01_runbook.md`
 
 ## 更新方針
 

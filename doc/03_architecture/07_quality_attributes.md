@@ -214,7 +214,7 @@
 - 変換ジョブ状態、失敗理由、検索インデックス更新状態をPostgreSQLへ記録する。
 - キューの配送状態だけを業務上の正本にしない。
 
-整合性回復の詳細な流れは `doc/03_architecture/06_data_flow/01_data_flow.md` で扱う。
+整合性回復の詳細な流れは `doc/03_architecture/06_data_flow.md` で扱う。
 
 ## セキュリティ
 

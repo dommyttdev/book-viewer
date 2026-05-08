@@ -50,7 +50,7 @@
 ## 関連ドキュメント
 
 - `doc/02_backlog/01_epics/03_book_viewer.md`
-- `doc/04_design/01_ui_flows/01_ui_flows.md`
-- `doc/04_design/02_screen_notes/01_screen_notes.md`
+- `doc/04_design/01_ui_flows.md`
+- `doc/04_design/02_screen_notes.md`
 - `doc/04_design/03_api_contracts/02_book_api.md`
 - `doc/04_design/03_api_contracts/05_viewer_api.md`

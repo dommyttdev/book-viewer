@@ -72,41 +72,20 @@
 
 ### ディレクトリ構成
 
-- [x] `doc/01_product/01_vision/` を作成する
-- [x] `doc/01_product/02_roadmap/` を作成する
-- [x] `doc/01_product/04_user_story_map/` を作成する
-- [x] `doc/01_product/05_glossary/` を作成する
+- [x] `doc/01_product/` を作成する
 - [x] `doc/02_backlog/01_epics/` を作成する
 - [x] `doc/02_backlog/02_user_stories/` を作成する
 - [x] `doc/02_backlog/03_acceptance_criteria/` を作成する
-- [x] `doc/03_architecture/01_overview/` を作成する
-- [x] `doc/03_architecture/02_technology_stack/` を作成する
+- [x] `doc/03_architecture/` を作成する
 - [x] `doc/03_architecture/03_adr/` を作成する
-- [x] `doc/03_architecture/04_system_context/` を作成する
-- [x] `doc/03_architecture/05_container_diagram/` を作成する
-- [x] `doc/03_architecture/06_data_flow/` を作成する
-- [x] `doc/03_architecture/07_quality_attributes/` を作成する
-- [x] `doc/04_design/01_ui_flows/` を作成する
-- [x] `doc/04_design/02_screen_notes/` を作成する
+- [x] `doc/04_design/` を作成する
 - [x] `doc/04_design/03_api_contracts/` を作成する
-- [x] `doc/04_design/04_data_model/` を作成する
 - [x] `doc/04_design/05_search_design/` を作成する
-- [x] `doc/04_design/06_file_storage_design/` を作成する
-- [x] `doc/04_design/07_image_conversion_design/` を作成する
 - [x] `doc/04_design/08_authorization_design/` を作成する
-- [x] `doc/05_development/01_coding_rules/` を作成する
-- [x] `doc/05_development/02_branch_strategy/` を作成する
-- [x] `doc/05_development/03_environment_setup/` を作成する
-- [x] `doc/05_development/04_local_development/` を作成する
-- [x] `doc/05_development/05_definition_of_done/` を作成する
-- [x] `doc/06_testing/01_test_strategy/` を作成する
+- [x] `doc/05_development/` を作成する
+- [x] `doc/06_testing/` を作成する
 - [x] `doc/06_testing/02_acceptance_tests/` を作成する
-- [x] `doc/06_testing/03_regression_tests/` を作成する
-- [x] `doc/07_operations/01_runbook/` を作成する
-- [x] `doc/07_operations/02_backup_restore/` を作成する
-- [x] `doc/07_operations/03_monitoring/` を作成する
-- [x] `doc/07_operations/04_release_notes/` を作成する
-- [x] `doc/07_operations/05_incident_log/` を作成する
+- [x] `doc/07_operations/` を作成する
 
 補足:
 
@@ -128,7 +107,7 @@
 ### 初期ドキュメント
 
 - [x] プロダクトビジョンを作成する
-  - 作成先: `doc/01_product/01_vision/01_product_vision.md`
+  - 作成先: `doc/01_product/01_product_vision.md`
   - 記載内容:
     - このアプリで解決したい課題
     - 対象ユーザ
@@ -137,7 +116,7 @@
     - MVP外の範囲
     - 成功指標
 - [x] 用語集を作成する
-  - 作成先: `doc/01_product/05_glossary/01_glossary.md`
+  - 作成先: `doc/01_product/05_glossary.md`
   - 記載候補:
     - 自炊本
     - 原本ファイル
@@ -151,7 +130,7 @@
     - 管理ユーザ
     - ロール
 - [x] ユーザーストーリーマップを作成する
-  - 作成先: `doc/01_product/04_user_story_map/01_user_story_map.md`
+  - 作成先: `doc/01_product/04_user_story_map.md`
   - 軸:
     - 登録する
     - アップロードする
@@ -163,14 +142,14 @@
     - ユーザ管理する
     - 運用する
 - [x] ロードマップ初版を作成する
-  - 作成先: `doc/01_product/02_roadmap/01_product_roadmap.md`
+  - 作成先: `doc/01_product/02_product_roadmap.md`
   - 区分:
     - MVP
     - Beta
     - v1.0
     - 将来対応
 - [x] Definition of Doneを作成する
-  - 作成先: `doc/05_development/05_definition_of_done/01_definition_of_done.md`
+  - 作成先: `doc/05_development/05_definition_of_done.md`
   - 含める条件:
     - 受入条件を満たす
     - 単体テストが通る
@@ -178,28 +157,28 @@
     - 関連ドキュメントが更新済み
     - ログ、エラー処理、権限確認が実装済み
 - [x] コーディングルールを作成する
-  - 作成先: `doc/05_development/01_coding_rules/01_coding_rules.md`
+  - 作成先: `doc/05_development/01_coding_rules.md`
   - 記載内容:
     - `rules/CODING_STANDARDS.md` との関係
     - 命名、責務分離、例外処理、ログ、テストの基本方針
     - APIモデル、永続化エンティティ、ドメインモデルの分離方針
     - セキュリティ上の注意点
 - [x] ブランチ戦略を作成する
-  - 作成先: `doc/05_development/02_branch_strategy/01_branch_strategy.md`
+  - 作成先: `doc/05_development/02_branch_strategy.md`
   - 記載内容:
     - `rules/CONTRIBUTING.md` との関係
     - ブランチ命名規則
     - 作業単位とコミット粒度
     - プルリクエスト運用
 - [x] 環境構築手順を作成する
-  - 作成先: `doc/05_development/03_environment_setup/01_environment_setup.md`
+  - 作成先: `doc/05_development/03_environment_setup.md`
   - 記載内容:
     - 必要なツールとバージョン
     - Java 25、Node.js、Docker、PostgreSQL、Elasticsearchの準備
     - 7-Zip for Linux コンソール版の扱い
     - 環境変数とシークレット管理方針
 - [x] ローカル開発手順を作成する
-  - 作成先: `doc/05_development/04_local_development/01_local_development.md`
+  - 作成先: `doc/05_development/04_local_development.md`
   - 記載内容:
     - Next.jsフロントエンドの起動方法
     - Spring BootバックエンドAPIの起動方法
@@ -212,7 +191,7 @@
 ### システム概要
 
 - [x] システム概要を作成する
-  - 作成先: `doc/03_architecture/01_overview/01_system_overview.md`
+  - 作成先: `doc/03_architecture/01_system_overview.md`
   - 記載内容:
     - システム目的
     - 主要機能
@@ -224,7 +203,7 @@
     - ファイル処理の大まかな流れ
     - 検索処理の大まかな流れ
 - [x] 技術スタック初版を作成する
-  - 作成先: `doc/03_architecture/02_technology_stack/01_technology_stack.md`
+  - 作成先: `doc/03_architecture/02_technology_stack.md`
   - 記載内容:
     - フロントエンド技術: Next.js
     - バックエンド技術: Spring Boot 4.0.6
@@ -238,7 +217,7 @@
     - ローカル開発環境 / 本番運用環境: Docker Compose
     - パフォーマンス上の選定理由
 - [x] システムコンテキストを作成する
-  - 作成先: `doc/03_architecture/04_system_context/01_system_context.md`
+  - 作成先: `doc/03_architecture/04_system_context.md`
   - 記載内容:
     - 一般ユーザ
     - 管理ユーザ
@@ -251,7 +230,7 @@
     - 専用キューによる非同期画像変換処理
     - 7-Zip for Linux コンソール版
 - [x] コンテナ図を作成する
-  - 作成先: `doc/03_architecture/05_container_diagram/01_container_diagram.md`
+  - 作成先: `doc/03_architecture/05_container_diagram.md`
   - 記載内容:
     - Next.jsフロントエンドWebアプリケーション
     - Spring BootバックエンドAPI
@@ -264,7 +243,7 @@
     - APIと変換ワーカーの責務分離
     - 単一Linuxホスト上のDocker Compose構成
 - [x] データフローを作成する
-  - 作成先: `doc/03_architecture/06_data_flow/01_data_flow.md`
+  - 作成先: `doc/03_architecture/06_data_flow.md`
   - 記載内容:
     - 書籍アップロードから原本保存までの流れ
     - 変換ジョブ投入、取得、実行、状態更新の流れ
@@ -273,7 +252,7 @@
     - 閲覧時の画像配信と検索時のデータ参照の流れ
     - 失敗時の再試行、再構築、整合性回復の流れ
 - [x] 品質特性初版を作成する
-  - 作成先: `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
+  - 作成先: `doc/03_architecture/07_quality_attributes.md`
   - 記載内容:
     - レスポンス時間の目標
     - アップロード後の変換待ち時間の考え方
@@ -356,7 +335,7 @@
 ### 主要設計
 
 - [x] データモデル初版を作成する
-  - 作成先: `doc/04_design/04_data_model/01_data_model.md`
+  - 作成先: `doc/04_design/04_data_model.md`
   - 対象エンティティ:
     - user
     - admin_user
@@ -398,7 +377,7 @@
     - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
     - 更新失敗時は再試行キューに積む
 - [x] ファイル保存設計初版を作成する
-  - 作成先: `doc/04_design/06_file_storage_design/01_file_storage_design.md`
+  - 作成先: `doc/04_design/06_file_storage_design.md`
   - 記載内容:
     - 原本ファイルの保存有無: 保存し続ける
     - 変換後webpの保存場所
@@ -408,7 +387,7 @@
     - 削除時の扱い
     - バックアップ対象: バックアップは行わない
 - [x] 画像変換設計初版を作成する
-  - 作成先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
+  - 作成先: `doc/04_design/07_image_conversion_design.md`
   - 記載内容:
     - Spring Boot変換ワーカーの責務
     - 非同期ジョブの投入、取得、実行方式: 専用キュー
@@ -474,8 +453,8 @@
   - ユーザーストーリー: `doc/02_backlog/02_user_stories/03_book_delete.md`
   - 受入条件: `doc/02_backlog/03_acceptance_criteria/03_book_delete.md`
   - 反映先:
-    - `doc/04_design/06_file_storage_design/01_file_storage_design.md`
-    - `doc/04_design/04_data_model/01_data_model.md`
+    - `doc/04_design/06_file_storage_design.md`
+    - `doc/04_design/04_data_model.md`
   - 決定事項:
     - 管理ユーザのみ書籍を削除できる
     - 一般ユーザは書籍を保持しない
@@ -488,7 +467,7 @@
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/02_image_conversion.md`
 - [x] アーカイブ展開の仕様を決める
-  - 反映先: `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
+  - 反映先: `doc/04_design/07_image_conversion_design.md`
   - 決定事項:
     - rar / 7zipは7-Zip for Linux コンソール版で展開する
     - 7-Zipは変換ワーカーコンテナ内で利用する
@@ -531,8 +510,8 @@
     - failed
     - canceled
   - 反映先:
-    - `doc/04_design/04_data_model/01_data_model.md`
-    - `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
+    - `doc/04_design/04_data_model.md`
+    - `doc/04_design/07_image_conversion_design.md`
 - [x] 再変換仕様を決める
   - 検討事項:
     - 手動再実行できるか
@@ -549,7 +528,7 @@
 - [x] ビューア表示のユーザーストーリーを作成する
   - 作成先: `doc/02_backlog/02_user_stories/04_book_viewing.md`
 - [x] ビューア操作仕様を決める
-  - 反映先: `doc/04_design/01_ui_flows/01_ui_flows.md`
+  - 反映先: `doc/04_design/01_ui_flows.md`
   - 検討事項:
     - 1ページ表示
     - 見開き表示
@@ -694,7 +673,7 @@
 - [x] エピック定義を作成する
   - 作成先: `doc/02_backlog/01_epics/07_operations.md`
 - [x] Runbookを作成する
-  - 作成先: `doc/07_operations/01_runbook/01_runbook.md`
+  - 作成先: `doc/07_operations/01_runbook.md`
   - 記載内容:
     - Docker Composeによる単一Linuxホスト運用手順
     - Spring BootバックエンドAPIの起動手順
@@ -707,14 +686,14 @@
     - 全件再インデックス手順
     - 書籍単位の再インデックス手順
 - [x] バックアップなし方針を作成する
-  - 作成先: `doc/07_operations/02_backup_restore/01_backup_restore.md`
+  - 作成先: `doc/07_operations/02_backup_restore.md`
   - 記載内容:
     - バックアップは行わない
     - PostgreSQL / Elasticsearch / 原本ファイル / 変換済みwebp / サムネイルはバックアップ対象にしない
     - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う
     - バックアップなし運用のリスクと許容範囲
 - [x] 監視方針を作成する
-  - 作成先: `doc/07_operations/03_monitoring/01_monitoring.md`
+  - 作成先: `doc/07_operations/03_monitoring.md`
   - 監視候補:
     - Spring BootバックエンドAPI死活
     - Spring Boot変換ワーカー死活
@@ -729,7 +708,7 @@
     - 変換ワーカーの同時実行数
     - 1ジョブ30分タイムアウトの発生数
 - [x] 障害ログの記録形式を作成する
-  - 作成先: `doc/07_operations/05_incident_log/01_incident_log_template.md`
+  - 作成先: `doc/07_operations/05_incident_log_template.md`
   - 項目:
     - 発生日時
     - 影響範囲
@@ -738,7 +717,7 @@
     - 恒久対応
     - 再発防止策
 - [x] リリースノート形式を作成する
-  - 作成先: `doc/07_operations/04_release_notes/01_release_note_template.md`
+  - 作成先: `doc/07_operations/04_release_note_template.md`
   - 項目:
     - バージョン
     - リリース日
@@ -750,7 +729,7 @@
 ## テスト関連ToDo
 
 - [x] テスト戦略を作成する
-  - 作成先: `doc/06_testing/01_test_strategy/01_test_strategy.md`
+  - 作成先: `doc/06_testing/01_test_strategy.md`
   - 記載内容:
     - テスト範囲
     - 単体テスト方針
@@ -808,7 +787,7 @@
     - ロール別アクセス制御
     - 他ユーザデータの操作可否
 - [x] 回帰テスト一覧を作成する
-  - 作成先: `doc/06_testing/03_regression_tests/01_regression_tests.md`
+  - 作成先: `doc/06_testing/03_regression_tests.md`
   - 対象:
     - ログイン
     - アップロード
@@ -880,7 +859,7 @@
 ## UI関連ToDo
 
 - [x] UIフロー全体図を作成する
-  - 作成先: `doc/04_design/01_ui_flows/01_ui_flows.md`
+  - 作成先: `doc/04_design/01_ui_flows.md`
   - 対象:
     - 一般ユーザ登録
     - ログイン
@@ -892,7 +871,7 @@
     - お気に入り
     - 管理ユーザ管理
 - [x] 画面メモを作成する
-  - 作成先: `doc/04_design/02_screen_notes/01_screen_notes.md`
+  - 作成先: `doc/04_design/02_screen_notes.md`
   - 画面候補:
     - ログイン画面
     - 会員登録画面

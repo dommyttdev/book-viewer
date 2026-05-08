@@ -364,19 +364,19 @@ flowchart TB
 
 ## 今後詳細化するドキュメント
 
-- `doc/03_architecture/02_technology_stack/01_technology_stack.md`
+- `doc/03_architecture/02_technology_stack.md`
 - `doc/03_architecture/03_adr/`
-- `doc/03_architecture/04_system_context/01_system_context.md`
-- `doc/03_architecture/05_container_diagram/01_container_diagram.md`
-- `doc/03_architecture/06_data_flow/01_data_flow.md`
-- `doc/03_architecture/07_quality_attributes/01_quality_attributes.md`
+- `doc/03_architecture/04_system_context.md`
+- `doc/03_architecture/05_container_diagram.md`
+- `doc/03_architecture/06_data_flow.md`
+- `doc/03_architecture/07_quality_attributes.md`
 - `doc/04_design/03_api_contracts/`
-- `doc/04_design/04_data_model/01_data_model.md`
+- `doc/04_design/04_data_model.md`
 - `doc/04_design/05_search_design/01_search_design.md`
-- `doc/04_design/06_file_storage_design/01_file_storage_design.md`
-- `doc/04_design/07_image_conversion_design/01_image_conversion_design.md`
+- `doc/04_design/06_file_storage_design.md`
+- `doc/04_design/07_image_conversion_design.md`
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/07_operations/01_runbook/01_runbook.md`
+- `doc/07_operations/01_runbook.md`
 
 ## 更新方針
 

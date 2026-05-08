@@ -50,6 +50,6 @@
 
 - `doc/02_backlog/03_acceptance_criteria/02_favorite.md`
 - `doc/02_backlog/01_epics/03_book_viewer.md`
-- `doc/04_design/01_ui_flows/01_ui_flows.md`
+- `doc/04_design/01_ui_flows.md`
 - `doc/04_design/03_api_contracts/05_viewer_api.md`
-- `doc/04_design/04_data_model/01_data_model.md`
+- `doc/04_design/04_data_model.md`

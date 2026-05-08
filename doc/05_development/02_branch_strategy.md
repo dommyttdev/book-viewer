@@ -9,8 +9,8 @@
 ## 前提
 
 - コミット、ブランチ、プルリクエスト、検証結果の共通ルールは `rules/CONTRIBUTING.md` に従う。
-- 完了条件は `doc/05_development/05_definition_of_done/01_definition_of_done.md` に従う。
-- 実装ルールは `rules/CODING_STANDARDS.md` と `doc/05_development/01_coding_rules/01_coding_rules.md` に従う。
+- 完了条件は `doc/05_development/05_definition_of_done.md` に従う。
+- 実装ルールは `rules/CODING_STANDARDS.md` と `doc/05_development/01_coding_rules.md` に従う。
 - 作業開始前に `doc/TODO.md` を確認し、関連するTODO、設計文書、受入条件を把握する。
 - 仕様やアーキテクチャ上の重要な判断は、TODOやプルリクエスト説明だけでなくADRまたは設計ドキュメントへ記録する。
 

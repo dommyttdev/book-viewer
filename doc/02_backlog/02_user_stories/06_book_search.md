@@ -102,4 +102,4 @@
 - `doc/04_design/05_search_design/02_search_index_design.md`
 - `doc/04_design/03_api_contracts/04_search_api.md`
 - `doc/06_testing/02_acceptance_tests/03_search_acceptance_tests.md`
-- `doc/07_operations/01_runbook/01_runbook.md`
+- `doc/07_operations/01_runbook.md`

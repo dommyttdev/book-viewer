@@ -12,7 +12,7 @@ This document defines contribution, commit, branch, pull request, and verificati
 4. Run tests or checks proportional to the affected area.
 5. Use clear Japanese commit messages with the required prefix.
 6. Keep pull requests focused and reviewable.
-7. Follow the branch strategy in `doc/05_development/02_branch_strategy/01_branch_strategy.md`.
+7. Follow the branch strategy in `doc/05_development/02_branch_strategy.md`.
 
 ## Branch Rules
 

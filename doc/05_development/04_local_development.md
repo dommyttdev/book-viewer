@@ -8,8 +8,8 @@
 
 ## 前提
 
-- 環境構築は `doc/05_development/03_environment_setup/01_environment_setup.md` に従う。
-- コーディングルールは `doc/05_development/01_coding_rules/01_coding_rules.md` に従う。
+- 環境構築は `doc/05_development/03_environment_setup.md` に従う。
+- コーディングルールは `doc/05_development/01_coding_rules.md` に従う。
 - PostgreSQLを正本、Elasticsearchを再構築可能な派生データとして扱う。
 - アーカイブ展開は変換ワーカーから7-Zip for Linuxコンソール版を呼び出す。
 - WebP品質値の既定値は80、変換ワーカー同時実行数の既定値は10、1ジョブのタイムアウトは30分を基本とする。

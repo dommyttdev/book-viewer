@@ -43,7 +43,7 @@
 - `doc/02_backlog/02_user_stories/13_role_management.md`
 - `doc/04_design/08_authorization_design/02_permission_matrix.md`
 - `doc/04_design/03_api_contracts/07_admin_api.md`
-- `doc/04_design/02_screen_notes/01_screen_notes.md` への管理画面メモの反映
+- `doc/04_design/02_screen_notes.md` への管理画面メモの反映
 
 ## 完了の目安
 
@@ -55,7 +55,7 @@
 ## 関連ドキュメント
 
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/04_design/04_data_model/01_data_model.md`
-- `doc/01_product/04_user_story_map/01_user_story_map.md`
+- `doc/04_design/04_data_model.md`
+- `doc/01_product/04_user_story_map.md`
 - `rules/SECURITY.md`
 
