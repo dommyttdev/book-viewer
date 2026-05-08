@@ -30,9 +30,6 @@
 
 ## GitHub Issue対応表
 
-`doc/issues.json` から GitHub Issue を起票済み。
-完了済みタスクの Issue は、対応コミットをコメントしたうえで close 済み。
-
 | Issue | 状態 | 対応する主なTODO |
 | --- | --- | --- |
 | [#1](https://github.com/dommyttdev/book-viewer/issues/1) | Open | エピック定義を整備する |
