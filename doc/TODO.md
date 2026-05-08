@@ -191,14 +191,14 @@
 - [x] コーディングルールを作成する
   - 作成先: `doc/05_development/01_coding_rules/01_coding_rules.md`
   - 記載内容:
-    - `doc/CODING_STANDARDS.md` との関係
+    - `rules/CODING_STANDARDS.md` との関係
     - 命名、責務分離、例外処理、ログ、テストの基本方針
     - APIモデル、永続化エンティティ、ドメインモデルの分離方針
     - セキュリティ上の注意点
 - [x] ブランチ戦略を作成する
   - 作成先: `doc/05_development/02_branch_strategy/01_branch_strategy.md`
   - 記載内容:
-    - `doc/CONTRIBUTING.md` との関係
+    - `rules/CONTRIBUTING.md` との関係
     - ブランチ命名規則
     - 作業単位とコミット粒度
     - プルリクエスト運用

@@ -42,7 +42,7 @@ Key planning items are tracked in `doc/TODO.md`.
 
 ## Development Rules
 
-- Follow `doc/CODING_STANDARDS.md`.
+- Follow `rules/CODING_STANDARDS.md`.
 - Follow DRY, KISS, YAGNI, single responsibility, and least astonishment.
 - Use clear domain-oriented names.
 - Keep functions, classes, and modules focused.
@@ -63,7 +63,7 @@ Key planning items are tracked in `doc/TODO.md`.
 - Update related documentation and TODO status in the same change when behavior, architecture, or specifications change.
 - Before committing code changes, run tests or checks proportional to the affected area.
 - Do not commit secrets, credentials, generated large files, local environment files, or temporary artifacts.
-- See `doc/CONTRIBUTING.md` for detailed commit, branch, and pull request rules.
+- See `rules/CONTRIBUTING.md` for detailed commit, branch, and pull request rules.
 
 ## MCP Tools
 
@@ -78,7 +78,7 @@ Key planning items are tracked in `doc/TODO.md`.
 
 ## Detailed References
 
-- Coding standards: `doc/CODING_STANDARDS.md`
-- Architecture rules: `doc/ARCHITECTURE.md`
-- Security rules: `doc/SECURITY.md`
-- Contribution rules: `doc/CONTRIBUTING.md`
+- Coding standards: `rules/CODING_STANDARDS.md`
+- Architecture rules: `rules/ARCHITECTURE.md`
+- Security rules: `rules/SECURITY.md`
+- Contribution rules: `rules/CONTRIBUTING.md`

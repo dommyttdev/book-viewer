@@ -71,4 +71,4 @@
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
 - `doc/04_design/03_api_contracts/06_account_api.md`
 - `doc/06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md`
-- `doc/SECURITY.md`
+- `rules/SECURITY.md`

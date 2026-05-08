@@ -8,9 +8,9 @@
 
 ## 前提
 
-- コミット、ブランチ、プルリクエスト、検証結果の共通ルールは `doc/CONTRIBUTING.md` に従う。
+- コミット、ブランチ、プルリクエスト、検証結果の共通ルールは `rules/CONTRIBUTING.md` に従う。
 - 完了条件は `doc/05_development/05_definition_of_done/01_definition_of_done.md` に従う。
-- 実装ルールは `doc/CODING_STANDARDS.md` と `doc/05_development/01_coding_rules/01_coding_rules.md` に従う。
+- 実装ルールは `rules/CODING_STANDARDS.md` と `doc/05_development/01_coding_rules/01_coding_rules.md` に従う。
 - 作業開始前に `doc/TODO.md` を確認し、関連するTODO、設計文書、受入条件を把握する。
 - 仕様やアーキテクチャ上の重要な判断は、TODOやプルリクエスト説明だけでなくADRまたは設計ドキュメントへ記録する。
 
@@ -176,7 +176,7 @@ hotfix/login-failure
 
 ## ブランチ命名規則
 
-ブランチ名は、`doc/CONTRIBUTING.md` の形式に従う。
+ブランチ名は、`rules/CONTRIBUTING.md` の形式に従う。
 
 ```text
 <type>/<short-description>
@@ -234,7 +234,7 @@ hotfix/login-failure
 
 ## コミット粒度
 
-コミットは小さく、論理的にまとまった単位にする。形式は `doc/CONTRIBUTING.md` に従い、日本語で次の形式を使う。
+コミットは小さく、論理的にまとまった単位にする。形式は `rules/CONTRIBUTING.md` に従い、日本語で次の形式を使う。
 
 ```text
 <type>: <Japanese summary>

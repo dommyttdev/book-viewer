@@ -176,9 +176,9 @@ CI未整備の間も、実行したコマンド、手動確認、未実行理由
 
 ## 関連ドキュメント
 
-- `doc/CODING_STANDARDS.md`
-- `doc/SECURITY.md`
-- `doc/CONTRIBUTING.md`
+- `rules/CODING_STANDARDS.md`
+- `rules/SECURITY.md`
+- `rules/CONTRIBUTING.md`
 - `doc/05_development/01_coding_rules/01_coding_rules.md`
 - `doc/05_development/05_definition_of_done/01_definition_of_done.md`
 - `doc/06_testing/02_acceptance_tests/`

@@ -64,4 +64,4 @@
 - `doc/04_design/08_authorization_design/01_authorization_design.md`
 - `doc/04_design/03_api_contracts/06_account_api.md`
 - `doc/04_design/04_data_model/01_data_model.md`
-- `doc/SECURITY.md`
+- `rules/SECURITY.md`

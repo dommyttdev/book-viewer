@@ -76,4 +76,4 @@
 - `doc/04_design/08_authorization_design/02_permission_matrix.md`
 - `doc/04_design/03_api_contracts/07_admin_api.md`
 - `doc/04_design/04_data_model/01_data_model.md`
-- `doc/SECURITY.md`
+- `rules/SECURITY.md`
