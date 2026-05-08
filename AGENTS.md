@@ -65,6 +65,10 @@ Key planning items are tracked in `doc/TODO.md`.
 - Do not commit secrets, credentials, generated large files, local environment files, or temporary artifacts.
 - See `doc/CONTRIBUTING.md` for detailed commit, branch, and pull request rules.
 
+## MCP Tools
+
+- Use MCP tools for GitHub operations, including reading issues, updating issues, reading pull requests, and updating pull requests.
+
 ## Verification
 
 - For documentation-only changes, review rendered Markdown structure and check that links and paths match `doc/TODO.md`.
