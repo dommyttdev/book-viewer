@@ -12,7 +12,7 @@
 - コーディングルールは [doc/05_development/01_coding_rules.md](01_coding_rules.md) に従う。
 - PostgreSQLを正本、Elasticsearchを再構築可能な派生データとして扱う。
 - アーカイブ展開は変換ワーカーから7-Zip for Linuxコンソール版を呼び出す。
-- WebP品質値の既定値は80、変換ワーカー同時実行数の既定値は10、1ジョブのタイムアウトは30分を基本とする。
+- WebP品質値、変換ワーカー同時実行数、1ジョブのタイムアウト、安全上限は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とする。
 
 ## 基本の開発フロー
 

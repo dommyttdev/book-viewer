@@ -177,7 +177,7 @@ flowchart TB
 
 - アーカイブ展開、画像変換、サムネイル生成は同期HTTPリクエスト内で実行しない
 - 変換処理はRabbitMQと変換ワーカーで非同期実行する
-- 変換ワーカーの同時実行数は既定で10とし、application.propertiesで設定可能にする
+- 変換ワーカーの同時実行数は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とし、application.propertiesで設定可能にする
 - 1ジョブのタイムアウトは30分を基本とする
 - WebP品質値は既定で80とし、application.propertiesで設定可能にする
 - 本一覧、検索結果、ページ一覧など大量データを扱うAPIではページングまたは分割取得を前提とする

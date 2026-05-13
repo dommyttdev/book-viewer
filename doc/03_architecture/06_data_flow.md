@@ -17,7 +17,7 @@
 - アーカイブ展開、WebP変換、サムネイル生成はHTTPリクエスト内では実行せず、RabbitMQと変換ワーカーで非同期に処理する。
 - zip / rar / 7zip の展開には、変換ワーカーコンテナ内の7-Zip for Linux コンソール版を外部プロセスとして使用する。
 - WebP品質値の既定値は80とし、application.propertiesで変更可能にする。
-- 変換ワーカーの同時実行数の既定値は10、1ジョブのタイムアウトは30分とし、application.propertiesで変更可能にする。
+- 変換ワーカーの同時実行数、1ジョブのタイムアウト、安全上限は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とする。これらはapplication.propertiesで変更可能にする。
 
 ## データ種別と責務
 

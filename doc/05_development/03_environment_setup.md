@@ -193,9 +193,17 @@ docker compose exec rabbitmq rabbitmqctl list_queues name messages messages_unac
 | `THUMBNAIL_STORAGE_ROOT` | サムネイル保存先 | いいえ |
 | `WORKER_WORK_DIR` | 変換ワーカー作業ディレクトリ | いいえ |
 | `SEVEN_ZIP_PATH` | 7-Zip実行ファイルパス | いいえ |
-| `WEBP_QUALITY` | WebP品質値。既定値80 | いいえ |
-| `WORKER_CONCURRENCY` | 変換ワーカー同時実行数。既定値10 | いいえ |
-| `CONVERSION_JOB_TIMEOUT` | 1ジョブのタイムアウト。既定値30分 | いいえ |
+| `WEBP_QUALITY` | WebP品質値。既定値は画像変換設計を参照する | いいえ |
+| `UPLOAD_MAX_FILE_SIZE` | アップロード1ファイルの安全上限。既定値は画像変換設計を参照する | いいえ |
+| `UPLOAD_MAX_CONCURRENT_UPLOADS` | 同時アップロード数。既定値は画像変換設計を参照する | いいえ |
+| `WORKER_CONCURRENCY` | 変換ワーカー同時実行数。既定値は画像変換設計を参照する | いいえ |
+| `WORKER_MAX_CONCURRENCY` | 変換ワーカー同時実行数の安全上の最大値。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_JOB_TIMEOUT` | 1ジョブのタイムアウト。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_MAX_EXTRACTED_SIZE` | 展開後総量の安全上限。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_MAX_EXTRACTED_SIZE_RATIO` | 展開後総量のアップロードサイズ比。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_MAX_ENTRY_COUNT` | アーカイブエントリ数の安全上限。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_MAX_IMAGE_PIXELS` | 1画像の最大ピクセル数。既定値は画像変換設計を参照する | いいえ |
+| `CONVERSION_MAX_TEMP_DISK_USAGE` | 1ジョブ一時領域の安全上限。既定値は画像変換設計を参照する | いいえ |
 | `MAIL_HOST` | メール送信ホスト | いいえ |
 | `MAIL_USERNAME` | メールユーザ | はい |
 | `MAIL_PASSWORD` | メールパスワード | はい |
@@ -243,7 +251,7 @@ docker compose exec rabbitmq rabbitmqctl list_queues name messages messages_unac
 - [ ] 変換ワーカーコンテナ内で7-Zip for Linuxコンソール版を実行できる。
 - [ ] `.env` などのローカル設定がGit管理外になっている。
 - [ ] 原本、WebP、サムネイル、作業ディレクトリの保存先を分けている。
-- [ ] WebP品質値80、ワーカー同時実行数10、1ジョブ30分タイムアウトを設定で変更できる方針を確認している。
+- [ ] WebP品質値、ワーカー同時実行数、1ジョブタイムアウト、変換リソースの安全上限を設定で変更できる方針を確認している。具体値は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とする。
 
 ## 更新方針
 

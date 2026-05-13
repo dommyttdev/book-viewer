@@ -142,7 +142,7 @@ Spring Boot変換ワーカーは、変換ジョブを非同期に処理する。
 - ページ情報、変換結果、失敗理由をPostgreSQLへ記録する
 - 必要に応じてElasticsearchインデックスを更新する
 
-変換ワーカーの同時実行数は既定で10、1ジョブのタイムアウトは30分とし、application.propertiesで変更可能にする。
+変換ワーカーの同時実行数、1ジョブのタイムアウト、安全上限は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とし、application.propertiesで変更可能にする。
 
 ### PostgreSQL
 
