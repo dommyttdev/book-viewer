@@ -46,10 +46,10 @@
 
 ## 関連ドキュメント
 
-- `doc/02_backlog/03_acceptance_criteria/01_book_upload.md`
-- `doc/02_backlog/01_epics/01_book_management.md`
-- `doc/04_design/03_api_contracts/02_book_api.md`
-- `doc/04_design/06_file_storage_design.md`
-- `doc/04_design/07_image_conversion_design.md`
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
+- [doc/02_backlog/03_acceptance_criteria/01_book_upload.md](../03_acceptance_criteria/01_book_upload.md)
+- [doc/02_backlog/01_epics/01_book_management.md](../01_epics/01_book_management.md)
+- [doc/04_design/03_api_contracts/02_book_api.md](../../04_design/03_api_contracts/02_book_api.md)
+- [doc/04_design/06_file_storage_design.md](../../04_design/06_file_storage_design.md)
+- [doc/04_design/07_image_conversion_design.md](../../04_design/07_image_conversion_design.md)
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
 

@@ -16,11 +16,11 @@ Planned stack:
 
 PostgreSQL is the source of truth. Elasticsearch is derived and rebuildable.
 
-Key planning items are tracked in `doc/TODO.md`.
+Key planning items are tracked in [doc/TODO.md](doc/TODO.md).
 
 ## Documentation Workflow
 
-- Treat `doc/TODO.md` as the current planning source until more documents are created.
+- Treat [doc/TODO.md](doc/TODO.md) as the current planning source until more documents are created.
 - Keep documentation in Japanese unless the surrounding file is already English.
 - Read and write Markdown files as UTF-8.
 - When completing a TODO, update the related document and then update the TODO status:
@@ -42,7 +42,7 @@ Key planning items are tracked in `doc/TODO.md`.
 
 ## Development Rules
 
-- Follow `rules/CODING_STANDARDS.md`.
+- Follow [rules/CODING_STANDARDS.md](rules/CODING_STANDARDS.md).
 - Follow DRY, KISS, YAGNI, single responsibility, and least astonishment.
 - Use clear domain-oriented names.
 - Keep functions, classes, and modules focused.
@@ -63,7 +63,7 @@ Key planning items are tracked in `doc/TODO.md`.
 - Update related documentation and TODO status in the same change when behavior, architecture, or specifications change.
 - Before committing code changes, run tests or checks proportional to the affected area.
 - Do not commit secrets, credentials, generated large files, local environment files, or temporary artifacts.
-- See `rules/CONTRIBUTING.md` for detailed commit, branch, and pull request rules.
+- See [rules/CONTRIBUTING.md](rules/CONTRIBUTING.md) for detailed commit, branch, and pull request rules.
 
 ## MCP Tools
 
@@ -71,14 +71,14 @@ Key planning items are tracked in `doc/TODO.md`.
 
 ## Verification
 
-- For documentation-only changes, review rendered Markdown structure and check that links and paths match `doc/TODO.md`.
+- For documentation-only changes, review rendered Markdown structure and check that links and paths match [doc/TODO.md](doc/TODO.md).
 - For code changes, add or run tests proportional to the affected behavior.
 - Update related documentation as part of the definition of done.
 - Check naming, responsibility boundaries, error handling, logging, security, and tests before considering work complete.
 
 ## Detailed References
 
-- Coding standards: `rules/CODING_STANDARDS.md`
-- Architecture rules: `rules/ARCHITECTURE.md`
-- Security rules: `rules/SECURITY.md`
-- Contribution rules: `rules/CONTRIBUTING.md`
+- Coding standards: [rules/CODING_STANDARDS.md](rules/CODING_STANDARDS.md)
+- Architecture rules: [rules/ARCHITECTURE.md](rules/ARCHITECTURE.md)
+- Security rules: [rules/SECURITY.md](rules/SECURITY.md)
+- Contribution rules: [rules/CONTRIBUTING.md](rules/CONTRIBUTING.md)

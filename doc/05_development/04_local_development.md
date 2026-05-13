@@ -8,15 +8,15 @@
 
 ## 前提
 
-- 環境構築は `doc/05_development/03_environment_setup.md` に従う。
-- コーディングルールは `doc/05_development/01_coding_rules.md` に従う。
+- 環境構築は [doc/05_development/03_environment_setup.md](03_environment_setup.md) に従う。
+- コーディングルールは [doc/05_development/01_coding_rules.md](01_coding_rules.md) に従う。
 - PostgreSQLを正本、Elasticsearchを再構築可能な派生データとして扱う。
 - アーカイブ展開は変換ワーカーから7-Zip for Linuxコンソール版を呼び出す。
 - WebP品質値の既定値は80、変換ワーカー同時実行数の既定値は10、1ジョブのタイムアウトは30分を基本とする。
 
 ## 基本の開発フロー
 
-1. `doc/TODO.md` と関連Issueを確認する。
+1. [doc/TODO.md](../TODO.md) と関連Issueを確認する。
 2. 必要な環境変数を `.env` などのGit管理外ファイルへ設定する。
 3. Docker ComposeでPostgreSQL、Elasticsearch、専用キューを起動する。
 4. DBマイグレーションまたは初期化処理を実行する。
@@ -25,7 +25,7 @@
 7. Next.jsフロントエンドを起動する。
 8. 画面、API、ログ、ジョブ状態を確認しながら開発する。
 9. 変更範囲に応じたテストまたは手動確認を実行する。
-10. 関連ドキュメントと `doc/TODO.md` を更新する。
+10. 関連ドキュメントと [doc/TODO.md](../TODO.md) を更新する。
 
 ## ミドルウェア起動
 

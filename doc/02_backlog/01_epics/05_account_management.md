@@ -38,13 +38,13 @@
 
 ## 主な成果物
 
-- `doc/02_backlog/02_user_stories/07_user_registration.md`
-- `doc/02_backlog/02_user_stories/08_user_login_logout.md`
-- `doc/02_backlog/02_user_stories/09_user_profile_edit.md`
-- `doc/02_backlog/02_user_stories/10_user_withdrawal.md`
-- `doc/04_design/08_authorization_design/01_authorization_design.md` への必要な反映
-- `doc/04_design/03_api_contracts/06_account_api.md`
-- `doc/06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md`
+- [doc/02_backlog/02_user_stories/07_user_registration.md](../02_user_stories/07_user_registration.md)
+- [doc/02_backlog/02_user_stories/08_user_login_logout.md](../02_user_stories/08_user_login_logout.md)
+- [doc/02_backlog/02_user_stories/09_user_profile_edit.md](../02_user_stories/09_user_profile_edit.md)
+- [doc/02_backlog/02_user_stories/10_user_withdrawal.md](../02_user_stories/10_user_withdrawal.md)
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md) への必要な反映
+- [doc/04_design/03_api_contracts/06_account_api.md](../../04_design/03_api_contracts/06_account_api.md)
+- [doc/06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md](../../06_testing/02_acceptance_tests/05_authorization_acceptance_tests.md)
 
 ## 完了の目安
 
@@ -55,8 +55,8 @@
 
 ## 関連ドキュメント
 
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/04_design/04_data_model.md`
-- `doc/01_product/04_user_story_map.md`
-- `rules/SECURITY.md`
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md)
+- [doc/01_product/04_user_story_map.md](../../01_product/04_user_story_map.md)
+- [rules/SECURITY.md](../../../rules/SECURITY.md)
 

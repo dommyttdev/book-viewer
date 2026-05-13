@@ -41,12 +41,12 @@
 
 ## 主な成果物
 
-- `doc/02_backlog/02_user_stories/01_book_upload.md`
-- `doc/02_backlog/03_acceptance_criteria/01_book_upload.md`
-- `doc/02_backlog/02_user_stories/02_book_metadata_edit.md`
-- `doc/04_design/06_file_storage_design.md` への書籍削除仕様の反映
-- `doc/04_design/04_data_model.md` への書籍削除仕様の反映
-- `doc/04_design/03_api_contracts/02_book_api.md`
+- [doc/02_backlog/02_user_stories/01_book_upload.md](../02_user_stories/01_book_upload.md)
+- [doc/02_backlog/03_acceptance_criteria/01_book_upload.md](../03_acceptance_criteria/01_book_upload.md)
+- [doc/02_backlog/02_user_stories/02_book_metadata_edit.md](../02_user_stories/02_book_metadata_edit.md)
+- [doc/04_design/06_file_storage_design.md](../../04_design/06_file_storage_design.md) への書籍削除仕様の反映
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md) への書籍削除仕様の反映
+- [doc/04_design/03_api_contracts/02_book_api.md](../../04_design/03_api_contracts/02_book_api.md)
 
 ## 完了の目安
 
@@ -58,9 +58,9 @@
 
 ## 関連ドキュメント
 
-- `doc/01_product/01_product_vision.md`
-- `doc/01_product/04_user_story_map.md`
-- `doc/04_design/04_data_model.md`
-- `doc/04_design/06_file_storage_design.md`
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
+- [doc/01_product/01_product_vision.md](../../01_product/01_product_vision.md)
+- [doc/01_product/04_user_story_map.md](../../01_product/04_user_story_map.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md)
+- [doc/04_design/06_file_storage_design.md](../../04_design/06_file_storage_design.md)
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
 

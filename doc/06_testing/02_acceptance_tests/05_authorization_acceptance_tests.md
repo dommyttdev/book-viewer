@@ -44,4 +44,4 @@
 
 ## 注意事項
 
-権限マトリクスは `doc/04_design/08_authorization_design/02_permission_matrix.md` を正とし、ロールや権限コードを変更した場合はこの受入テストへ反映する。
+権限マトリクスは [doc/04_design/08_authorization_design/02_permission_matrix.md](../../04_design/08_authorization_design/02_permission_matrix.md) を正とし、ロールや権限コードを変更した場合はこの受入テストへ反映する。

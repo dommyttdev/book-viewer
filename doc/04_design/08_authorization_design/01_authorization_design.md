@@ -111,7 +111,7 @@
 | お気に入り管理 | 不可 | 不可 | 不可 | 不可 | 可 |
 | 閲覧履歴保存 | 不可 | 不可 | 不可 | 不可 | 可 |
 
-この表は初版の権限設計であり、実装時は`permission`のコードとして操作単位を定義し、ロールとの関連をPostgreSQLで管理する。詳細な権限コード、初期ロール権限、API権限確認単位は`doc/04_design/08_authorization_design/02_permission_matrix.md`で管理する。
+この表は初版の権限設計であり、実装時は`permission`のコードとして操作単位を定義し、ロールとの関連をPostgreSQLで管理する。詳細な権限コード、初期ロール権限、API権限確認単位は[doc/04_design/08_authorization_design/02_permission_matrix.md](02_permission_matrix.md)で管理する。
 
 ## サーバ側権限確認
 

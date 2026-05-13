@@ -132,4 +132,4 @@
 
 ## 更新方針
 
-ロール、権限コード、操作可否、API権限確認単位が変わった場合は、このドキュメント、`doc/04_design/08_authorization_design/01_authorization_design.md`、`doc/04_design/03_api_contracts/07_admin_api.md`、権限機能の受入テストを合わせて更新する。
+ロール、権限コード、操作可否、API権限確認単位が変わった場合は、このドキュメント、[doc/04_design/08_authorization_design/01_authorization_design.md](01_authorization_design.md)、[doc/04_design/03_api_contracts/07_admin_api.md](../03_api_contracts/07_admin_api.md)、権限機能の受入テストを合わせて更新する。

@@ -45,11 +45,11 @@
 
 ## 主な成果物
 
-- `doc/04_design/07_image_conversion_design.md`
-- `doc/04_design/04_data_model.md` への変換ジョブ状態の反映
-- `doc/04_design/03_api_contracts/03_conversion_job_api.md`
-- `doc/06_testing/02_acceptance_tests/02_image_conversion_acceptance_tests.md`
-- `doc/07_operations/01_runbook.md` への変換ジョブ失敗時確認手順の反映
+- [doc/04_design/07_image_conversion_design.md](../../04_design/07_image_conversion_design.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md) への変換ジョブ状態の反映
+- [doc/04_design/03_api_contracts/03_conversion_job_api.md](../../04_design/03_api_contracts/03_conversion_job_api.md)
+- [doc/06_testing/02_acceptance_tests/02_image_conversion_acceptance_tests.md](../../06_testing/02_acceptance_tests/02_image_conversion_acceptance_tests.md)
+- [doc/07_operations/01_runbook.md](../../07_operations/01_runbook.md) への変換ジョブ失敗時確認手順の反映
 
 ## 完了の目安
 
@@ -60,9 +60,9 @@
 
 ## 関連ドキュメント
 
-- `doc/03_architecture/03_adr/07_ADR-0006-extract-archive-files.md`
-- `doc/03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md`
-- `doc/04_design/07_image_conversion_design.md`
-- `doc/04_design/06_file_storage_design.md`
-- `doc/03_architecture/06_data_flow.md`
+- [doc/03_architecture/03_adr/07_ADR-0006-extract-archive-files.md](../../03_architecture/03_adr/07_ADR-0006-extract-archive-files.md)
+- [doc/03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md](../../03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md)
+- [doc/04_design/07_image_conversion_design.md](../../04_design/07_image_conversion_design.md)
+- [doc/04_design/06_file_storage_design.md](../../04_design/06_file_storage_design.md)
+- [doc/03_architecture/06_data_flow.md](../../03_architecture/06_data_flow.md)
 

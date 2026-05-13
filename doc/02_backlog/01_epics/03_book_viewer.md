@@ -43,13 +43,13 @@
 
 ## 主な成果物
 
-- `doc/02_backlog/02_user_stories/03_book_list.md`
-- `doc/02_backlog/02_user_stories/04_book_viewing.md`
-- `doc/02_backlog/02_user_stories/05_favorite.md`
-- `doc/02_backlog/03_acceptance_criteria/02_favorite.md`
-- `doc/04_design/01_ui_flows.md` へのビューア操作仕様の反映
-- `doc/04_design/03_api_contracts/05_viewer_api.md`
-- `doc/06_testing/02_acceptance_tests/04_viewer_acceptance_tests.md`
+- [doc/02_backlog/02_user_stories/03_book_list.md](../02_user_stories/03_book_list.md)
+- [doc/02_backlog/02_user_stories/04_book_viewing.md](../02_user_stories/04_book_viewing.md)
+- [doc/02_backlog/02_user_stories/05_favorite.md](../02_user_stories/05_favorite.md)
+- [doc/02_backlog/03_acceptance_criteria/02_favorite.md](../03_acceptance_criteria/02_favorite.md)
+- [doc/04_design/01_ui_flows.md](../../04_design/01_ui_flows.md) へのビューア操作仕様の反映
+- [doc/04_design/03_api_contracts/05_viewer_api.md](../../04_design/03_api_contracts/05_viewer_api.md)
+- [doc/06_testing/02_acceptance_tests/04_viewer_acceptance_tests.md](../../06_testing/02_acceptance_tests/04_viewer_acceptance_tests.md)
 
 ## 完了の目安
 
@@ -60,8 +60,8 @@
 
 ## 関連ドキュメント
 
-- `doc/01_product/04_user_story_map.md`
-- `doc/01_product/02_product_roadmap.md`
-- `doc/04_design/04_data_model.md`
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
+- [doc/01_product/04_user_story_map.md](../../01_product/04_user_story_map.md)
+- [doc/01_product/02_product_roadmap.md](../../01_product/02_product_roadmap.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md)
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
 

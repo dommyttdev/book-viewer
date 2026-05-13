@@ -6,13 +6,13 @@ This document defines contribution, commit, branch, pull request, and verificati
 
 ## General Workflow
 
-1. Check `doc/TODO.md` before starting work.
+1. Check [doc/TODO.md](../doc/TODO.md) before starting work.
 2. Keep changes small and focused.
 3. Update related documentation when behavior, architecture, or specifications change.
 4. Run tests or checks proportional to the affected area.
 5. Use clear Japanese commit messages with the required prefix.
 6. Keep pull requests focused and reviewable.
-7. Follow the branch strategy in `doc/05_development/02_branch_strategy.md`.
+7. Follow the branch strategy in [doc/05_development/02_branch_strategy.md](../doc/05_development/02_branch_strategy.md).
 
 ## Branch Rules
 
@@ -182,7 +182,7 @@ Important decisions should be recorded in ADRs or design documents, not only in 
 
 ## TODO Status Updates
 
-Use these statuses in `doc/TODO.md`:
+Use these statuses in [doc/TODO.md](../doc/TODO.md):
 
 - `[ ]` not started
 - `[~]` in progress

@@ -38,12 +38,12 @@
 
 ## 主な成果物
 
-- `doc/02_backlog/02_user_stories/11_admin_login_logout.md`
-- `doc/02_backlog/02_user_stories/12_admin_user_management.md`
-- `doc/02_backlog/02_user_stories/13_role_management.md`
-- `doc/04_design/08_authorization_design/02_permission_matrix.md`
-- `doc/04_design/03_api_contracts/07_admin_api.md`
-- `doc/04_design/02_screen_notes.md` への管理画面メモの反映
+- [doc/02_backlog/02_user_stories/11_admin_login_logout.md](../02_user_stories/11_admin_login_logout.md)
+- [doc/02_backlog/02_user_stories/12_admin_user_management.md](../02_user_stories/12_admin_user_management.md)
+- [doc/02_backlog/02_user_stories/13_role_management.md](../02_user_stories/13_role_management.md)
+- [doc/04_design/08_authorization_design/02_permission_matrix.md](../../04_design/08_authorization_design/02_permission_matrix.md)
+- [doc/04_design/03_api_contracts/07_admin_api.md](../../04_design/03_api_contracts/07_admin_api.md)
+- [doc/04_design/02_screen_notes.md](../../04_design/02_screen_notes.md) への管理画面メモの反映
 
 ## 完了の目安
 
@@ -54,8 +54,8 @@
 
 ## 関連ドキュメント
 
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/04_design/04_data_model.md`
-- `doc/01_product/04_user_story_map.md`
-- `rules/SECURITY.md`
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md)
+- [doc/01_product/04_user_story_map.md](../../01_product/04_user_story_map.md)
+- [rules/SECURITY.md](../../../rules/SECURITY.md)
 

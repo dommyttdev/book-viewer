@@ -8,10 +8,10 @@
 
 ## 前提
 
-- コミット、ブランチ、プルリクエスト、検証結果の共通ルールは `rules/CONTRIBUTING.md` に従う。
-- 完了条件は `doc/05_development/05_definition_of_done.md` に従う。
-- 実装ルールは `rules/CODING_STANDARDS.md` と `doc/05_development/01_coding_rules.md` に従う。
-- 作業開始前に `doc/TODO.md` を確認し、関連するTODO、設計文書、受入条件を把握する。
+- コミット、ブランチ、プルリクエスト、検証結果の共通ルールは [rules/CONTRIBUTING.md](../../rules/CONTRIBUTING.md) に従う。
+- 完了条件は [doc/05_development/05_definition_of_done.md](05_definition_of_done.md) に従う。
+- 実装ルールは [rules/CODING_STANDARDS.md](../../rules/CODING_STANDARDS.md) と [doc/05_development/01_coding_rules.md](01_coding_rules.md) に従う。
+- 作業開始前に [doc/TODO.md](../TODO.md) を確認し、関連するTODO、設計文書、受入条件を把握する。
 - 仕様やアーキテクチャ上の重要な判断は、TODOやプルリクエスト説明だけでなくADRまたは設計ドキュメントへ記録する。
 
 ## 基本方針
@@ -176,7 +176,7 @@ hotfix/login-failure
 
 ## ブランチ命名規則
 
-ブランチ名は、`rules/CONTRIBUTING.md` の形式に従う。
+ブランチ名は、[rules/CONTRIBUTING.md](../../rules/CONTRIBUTING.md) の形式に従う。
 
 ```text
 <type>/<short-description>
@@ -230,11 +230,11 @@ hotfix/login-failure
 - ドキュメント整備と実装変更の関係が薄い。
 - レビューで変更意図を追うのが難しい。
 
-仕様、設計、運用手順に影響する変更では、関連ドキュメントと `doc/TODO.md` の更新を同じ作業単位に含める。
+仕様、設計、運用手順に影響する変更では、関連ドキュメントと [doc/TODO.md](../TODO.md) の更新を同じ作業単位に含める。
 
 ## コミット粒度
 
-コミットは小さく、論理的にまとまった単位にする。形式は `rules/CONTRIBUTING.md` に従い、日本語で次の形式を使う。
+コミットは小さく、論理的にまとまった単位にする。形式は [rules/CONTRIBUTING.md](../../rules/CONTRIBUTING.md) に従い、日本語で次の形式を使う。
 
 ```text
 <type>: <Japanese summary>
@@ -277,7 +277,7 @@ security: アーカイブ展開時のパス検証を強化
 - 作業ブランチが最新の `develop` または適切な作成元に追従している。
 - 変更範囲がプルリクエストの目的と一致している。
 - Definition of Doneの該当項目を満たしている。
-- 関連ドキュメントと `doc/TODO.md` が更新されている。
+- 関連ドキュメントと [doc/TODO.md](../TODO.md) が更新されている。
 - テストや手動確認の結果が説明できる。
 - 秘密情報や不要な個人情報が含まれていない。
 
@@ -334,7 +334,7 @@ v1.0.1
 
 - Markdownの見出し構造が読みやすい。
 - リンク先やファイルパスが実在する、または今後作成予定であることがTODOから分かる。
-- `doc/TODO.md` のステータスが実態と一致している。
+- [doc/TODO.md](../TODO.md) のステータスが実態と一致している。
 - 仕様判断が文書内に閉じすぎていない。重要な判断はADRまたは設計文書に記録する。
 - 周辺文書の参照と矛盾していない。
 

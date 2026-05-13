@@ -4,7 +4,7 @@
 
 このドキュメントは、自炊本閲覧Webアプリケーションを構成する主要コンテナ、責務、通信関係、配置方針を整理する。
 
-システム外部の利用者や外部システムとの関係は `doc/03_architecture/04_system_context.md` で扱う。各ユースケースの詳細な処理順序は `doc/03_architecture/06_data_flow.md` で扱う。
+システム外部の利用者や外部システムとの関係は [doc/03_architecture/04_system_context.md](04_system_context.md) で扱う。各ユースケースの詳細な処理順序は [doc/03_architecture/06_data_flow.md](06_data_flow.md) で扱う。
 
 ## 前提
 

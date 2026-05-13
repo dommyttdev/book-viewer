@@ -180,8 +180,4 @@ What are the positive and negative consequences?
 What alternatives were considered?
 ```
 
-The full repository template is maintained at:
-
-```text
-doc/03_architecture/03_adr/01_ADR-template.md
-```
+The full repository template is maintained at [doc/03_architecture/03_adr/01_ADR-template.md](../doc/03_architecture/03_adr/01_ADR-template.md).

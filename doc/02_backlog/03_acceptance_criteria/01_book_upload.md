@@ -28,7 +28,7 @@
 
 ## 受入テストとの関係
 
-詳細なテスト観点は `doc/06_testing/02_acceptance_tests/01_book_upload_acceptance_tests.md` を参照する。この文書はストーリー単位の受入条件を定義し、受入テスト文書はテストケース単位の確認観点を定義する。
+詳細なテスト観点は [doc/06_testing/02_acceptance_tests/01_book_upload_acceptance_tests.md](../../06_testing/02_acceptance_tests/01_book_upload_acceptance_tests.md) を参照する。この文書はストーリー単位の受入条件を定義し、受入テスト文書はテストケース単位の確認観点を定義する。
 
 ## 未決事項
 

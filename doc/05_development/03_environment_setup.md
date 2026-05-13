@@ -58,7 +58,7 @@ node --version
 npm --version
 ```
 
-パッケージマネージャとしてnpm以外を採用する場合は、`doc/05_development/04_local_development.md` の起動手順とこの文書を更新する。
+パッケージマネージャとしてnpm以外を採用する場合は、[doc/05_development/04_local_development.md](04_local_development.md) の起動手順とこの文書を更新する。
 
 ## DockerとDocker Compose
 

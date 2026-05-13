@@ -71,9 +71,9 @@
 
 ## 関連ドキュメント
 
-- `doc/02_backlog/01_epics/06_admin_management.md`
-- `doc/04_design/08_authorization_design/01_authorization_design.md`
-- `doc/04_design/08_authorization_design/02_permission_matrix.md`
-- `doc/04_design/03_api_contracts/07_admin_api.md`
-- `doc/04_design/04_data_model.md`
-- `rules/SECURITY.md`
+- [doc/02_backlog/01_epics/06_admin_management.md](../01_epics/06_admin_management.md)
+- [doc/04_design/08_authorization_design/01_authorization_design.md](../../04_design/08_authorization_design/01_authorization_design.md)
+- [doc/04_design/08_authorization_design/02_permission_matrix.md](../../04_design/08_authorization_design/02_permission_matrix.md)
+- [doc/04_design/03_api_contracts/07_admin_api.md](../../04_design/03_api_contracts/07_admin_api.md)
+- [doc/04_design/04_data_model.md](../../04_design/04_data_model.md)
+- [rules/SECURITY.md](../../../rules/SECURITY.md)
