@@ -14,7 +14,7 @@
   - PostgreSQL: メタ情報、ユーザ、権限、ジョブ状態の正本
   - Elasticsearch: タイトル、著者、タグ、シリーズの検索用インデックス
   - 書籍ファイル保存領域: 原本ファイル、変換済みwebp、サムネイルを保存
-  - 専用キューによるzip / rar / 7zip 展開処理
+  - RabbitMQによるzip / rar / 7zip 展開処理のジョブ配送
   - 非同期ジョブによるwebp変換処理
   - 一般ユーザ向け機能
   - 管理ユーザ向け機能
@@ -213,7 +213,7 @@
     - ファイル保存方式: 原本ファイル、変換済みwebp、サムネイルを保存
     - 画像変換方式: webp品質値80、サムネイル生成あり
     - アーカイブ展開方式: 7-Zip for Linux コンソール版を外部プロセスで呼び出す
-    - 非同期ジョブ実行方式: 専用キュー
+    - 非同期ジョブ実行方式: RabbitMQ
     - ローカル開発環境 / 本番運用環境: Docker Compose
     - パフォーマンス上の選定理由
 - [x] システムコンテキストを作成する
@@ -227,7 +227,7 @@
     - PostgreSQL
     - Elasticsearch + analysis-kuromoji
     - 書籍ファイル保存領域
-    - 専用キューによる非同期画像変換処理
+    - RabbitMQによる非同期画像変換処理
     - 7-Zip for Linux コンソール版
 - [x] コンテナ図を作成する
   - 作成先: [doc/03_architecture/05_container_diagram.md](03_architecture/05_container_diagram.md)
@@ -238,7 +238,7 @@
     - PostgreSQL
     - Elasticsearch + analysis-kuromoji
     - 書籍ファイル保存領域
-    - 専用ジョブキュー
+    - RabbitMQ
     - 7-Zip for Linux コンソール版
     - APIと変換ワーカーの責務分離
     - 単一Linuxホスト上のDocker Compose構成
@@ -327,8 +327,8 @@
     - バックエンドAPIと変換ワーカーの責務分離
     - 失敗時の再実行
     - ジョブ状態管理
-    - 専用キューを使用する
-    - DB依存を排除する
+    - RabbitMQを使用する
+    - DBをジョブ配送キューとして使わず、RabbitMQで配送する
     - 変換ワーカーの同時実行数: 10
     - 将来的なスケール
 
@@ -360,7 +360,7 @@
     - 書籍とタグの多対多
     - シリーズ順序の持ち方
     - 論理削除の有無
-    - 変換ジョブ実行は専用キュー、ジョブ状態管理はDBに保持するか
+    - 変換ジョブ実行はRabbitMQで配送し、ジョブ状態管理はDBに保持するか
 - [x] 検索設計初版を作成する
   - 作成先: [doc/04_design/05_search_design/01_search_design.md](04_design/05_search_design/01_search_design.md)
   - 記載内容:
@@ -390,7 +390,7 @@
   - 作成先: [doc/04_design/07_image_conversion_design.md](04_design/07_image_conversion_design.md)
   - 記載内容:
     - Spring Boot変換ワーカーの責務
-    - 非同期ジョブの投入、取得、実行方式: 専用キュー
+    - 非同期ジョブの投入、取得、実行方式: RabbitMQ
     - 対応アーカイブ形式: zip / rar / 7zip
     - rar / 7zip展開方式: 7-Zip for Linux コンソール版を外部プロセスとして呼び出す
     - 対応画像形式
@@ -897,7 +897,11 @@
 - [x] 原本ファイル: 保存し続ける
 - [x] 1冊あたりのアップロード上限サイズ: なし
 - [x] 1ユーザあたりの保存容量上限: なし
-- [x] 非同期ジョブの実装方式: DB依存を排除するため専用キューとする
+- [x] 非同期ジョブの実装方式: DBをジョブ配送キューとして使わず、RabbitMQを採用する
+  - Spring AMQPでAPIと変換ワーカーを接続する
+  - PostgreSQLの`conversion_job`を業務状態の正本とする
+  - 配送保証はat-least-onceとし、重複配送はPostgreSQLの状態確認で冪等に扱う
+  - 再試行上限後はdead letter queueへ送る
 - [x] 変換ワーカーの同時実行数: 10
   - application.propertiesで設定可能にする
 - [x] サムネイル: 生成する
@@ -945,7 +949,7 @@
   - 漫画や小説の本文・セリフの可読性を確保しつつ、過度な高品質設定にはしない
   - application.propertiesで設定可能にする
 - [x] 本番運用環境: 単一Linuxホスト上のDocker Compose構成とする
-  - Spring Boot API / Worker、Next.js、PostgreSQL、Elasticsearch、専用キューを同一ホストに配置する
+  - Spring Boot API / Worker、Next.js、PostgreSQL、Elasticsearch、RabbitMQを同一ホストに配置する
   - 7-Zip for Linux コンソール版を変換ワーカーコンテナ内で利用する
   - 将来的にAPI / Worker / ミドルウェアを別ホストへ分離可能な構成にする
 

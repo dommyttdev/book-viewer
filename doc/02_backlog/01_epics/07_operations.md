@@ -17,7 +17,7 @@
 
 ### MVP
 
-- Docker ComposeでNext.js、Spring Boot API、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、専用キューを起動できる。
+- Docker ComposeでNext.js、Spring Boot API、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、RabbitMQを起動できる。
 - システムの停止、再起動、ログ確認ができる。
 - 変換ジョブ失敗時の確認手順を用意する。
 - ElasticsearchをPostgreSQLから全件再インデックスする方針を用意する。

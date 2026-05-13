@@ -15,7 +15,7 @@
 - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う。
 - Elasticsearchでは日本語検索用にanalysis-kuromojiを使用する。
 - rar / 7zip形式の展開には、変換ワーカーから7-Zip for Linuxコンソール版を外部プロセスとして呼び出す。
-- ローカル開発では、PostgreSQL、Elasticsearch、専用キューなどのミドルウェアをDocker Composeで起動する。
+- ローカル開発では、PostgreSQL、Elasticsearch、RabbitMQなどのミドルウェアをDocker Composeで起動する。
 
 ## 必要なツール
 
@@ -25,7 +25,7 @@
 | Java | Spring Boot API / Workerの実行とテスト | Java 25を使用する。 |
 | Node.js | Next.jsフロントエンドの実行とテスト | Next.jsがサポートするLTS系を使用し、具体バージョンはフロントエンド作成時に固定する。 |
 | Docker | ローカルミドルウェア実行 | Docker Compose v2を使用できる状態にする。 |
-| Docker Compose | PostgreSQL、Elasticsearch、専用キューなどの起動 | `docker compose` コマンドを使用する。 |
+| Docker Compose | PostgreSQL、Elasticsearch、RabbitMQなどの起動 | `docker compose` コマンドを使用する。 |
 | 7-Zip for Linuxコンソール版 | rar / 7zipを含むアーカイブ展開 | 変換ワーカーコンテナ内で実行できるようにする。 |
 | IDE / エディタ | 実装とMarkdown編集 | UTF-8を扱えるものを使用する。 |
 
@@ -62,7 +62,7 @@ npm --version
 
 ## DockerとDocker Compose
 
-ローカル開発では、PostgreSQL、Elasticsearch、専用キューをDocker Composeで起動する。アプリケーションもDocker Composeで起動できる構成にしてよいが、開発中はフロントエンド、API、Workerをホスト上で起動してもよい。
+ローカル開発では、PostgreSQL、Elasticsearch、RabbitMQをDocker Composeで起動する。アプリケーションもDocker Composeで起動できる構成にしてよいが、開発中はフロントエンド、API、Workerをホスト上で起動してもよい。
 
 確認コマンド:
 
@@ -143,6 +143,29 @@ docker compose exec worker 7zz
 
 サービス名と実行ファイル名は、実装時のDockerfileとCompose定義に合わせて更新する。
 
+## RabbitMQ
+
+RabbitMQは、バックエンドAPIと変換ワーカーを非同期に接続する専用キューとして使用する。
+
+ローカルではDocker Composeサービスとして起動することを基本とする。管理UIを利用できる構成にする場合は、開発用ポートと認証情報を`.env`などGit管理外の設定で管理する。
+
+確認観点:
+
+- APIからRabbitMQへ接続できる。
+- WorkerがRabbitMQからメッセージを取得できる。
+- 変換ジョブキュー、dead letter queueが作成される。
+- メッセージのack、再配送、dead letterをローカルで確認できる。
+- RabbitMQの管理ユーザ、パスワードをGitへコミットしない。
+
+確認コマンド例:
+
+```bash
+docker compose exec rabbitmq rabbitmqctl status
+docker compose exec rabbitmq rabbitmqctl list_queues name messages messages_unacknowledged
+```
+
+サービス名、キュー名、exchange名は、実装時のDocker Compose定義に合わせて更新する。
+
 ## 環境変数
 
 環境変数は、環境差分、接続情報、秘密情報、変更可能な設定値をアプリケーションへ渡すために使用する。
@@ -160,9 +183,11 @@ docker compose exec worker 7zz
 | `ELASTICSEARCH_USERNAME` | Elasticsearchユーザ | はい |
 | `ELASTICSEARCH_PASSWORD` | Elasticsearchパスワード | はい |
 | `ELASTICSEARCH_INDEX_PREFIX` | 開発用インデックス接頭辞 | いいえ |
-| `QUEUE_URL` | 専用キュー接続先 | 環境による |
-| `QUEUE_USERNAME` | 専用キューユーザ | はい |
-| `QUEUE_PASSWORD` | 専用キューパスワード | はい |
+| `RABBITMQ_HOST` | RabbitMQ接続先ホスト | いいえ |
+| `RABBITMQ_PORT` | RabbitMQ接続先ポート | いいえ |
+| `RABBITMQ_USERNAME` | RabbitMQユーザ | はい |
+| `RABBITMQ_PASSWORD` | RabbitMQパスワード | はい |
+| `RABBITMQ_VHOST` | RabbitMQ virtual host | 環境による |
 | `BOOK_STORAGE_ROOT` | 原本ファイル保存先 | いいえ |
 | `CONVERTED_IMAGE_STORAGE_ROOT` | 変換済みWebP保存先 | いいえ |
 | `THUMBNAIL_STORAGE_ROOT` | サムネイル保存先 | いいえ |
@@ -213,7 +238,8 @@ docker compose exec worker 7zz
 - [ ] PostgreSQLコンテナを起動できる。
 - [ ] Elasticsearchコンテナを起動できる。
 - [ ] analysis-kuromojiを利用できる。
-- [ ] 専用キューを起動できる。
+- [ ] RabbitMQを起動できる。
+- [ ] RabbitMQの変換ジョブキューとdead letter queueを確認できる。
 - [ ] 変換ワーカーコンテナ内で7-Zip for Linuxコンソール版を実行できる。
 - [ ] `.env` などのローカル設定がGit管理外になっている。
 - [ ] 原本、WebP、サムネイル、作業ディレクトリの保存先を分けている。
@@ -221,4 +247,4 @@ docker compose exec worker 7zz
 
 ## 更新方針
 
-実装により、Node.jsバージョン、パッケージマネージャ、ビルドツール、Docker Composeサービス名、環境変数名、7-Zipの配置、専用キュー製品、保存領域の構成が確定または変更された場合は、このドキュメントを更新する。
+実装により、Node.jsバージョン、パッケージマネージャ、ビルドツール、Docker Composeサービス名、環境変数名、7-Zipの配置、RabbitMQ設定、保存領域の構成が確定または変更された場合は、このドキュメントを更新する。

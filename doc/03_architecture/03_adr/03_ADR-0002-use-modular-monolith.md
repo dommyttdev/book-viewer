@@ -10,7 +10,7 @@ Accepted
 
 主な責務には、書籍カタログ、ファイル取込、アーカイブ展開、画像変換、変換ジョブ管理、検索インデックス、閲覧、お気に入り、ユーザ、認証、権限、管理機能がある。
 
-初期運用は単一Linuxホスト上のDocker Compose構成とする。一方で、画像変換、検索、APIは負荷特性が異なるため、将来的にAPI、Worker、PostgreSQL、Elasticsearch、専用キューを分離できる余地を残す必要がある。
+初期運用は単一Linuxホスト上のDocker Compose構成とする。一方で、画像変換、検索、APIは負荷特性が異なるため、将来的にAPI、Worker、PostgreSQL、Elasticsearch、RabbitMQを分離できる余地を残す必要がある。
 
 ## Decision
 

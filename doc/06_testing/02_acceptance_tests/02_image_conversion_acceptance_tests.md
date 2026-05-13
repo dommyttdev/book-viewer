@@ -7,7 +7,7 @@
 ## 対象範囲
 
 - 変換ワーカー
-- 専用キュー
+- RabbitMQ
 - zip / rar / 7zip 展開
 - 7-Zip for Linux コンソール版の外部プロセス実行
 - WebP変換

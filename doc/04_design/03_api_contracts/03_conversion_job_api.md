@@ -9,7 +9,7 @@
 ## 前提
 
 - 変換ジョブの業務状態はPostgreSQLを正本とする。
-- 変換処理はSpring Boot変換ワーカーが専用キューから取得して非同期に実行する。
+- 変換処理はSpring Boot変換ワーカーがRabbitMQから取得して非同期に実行する。
 - 一般ユーザは変換ジョブを直接操作しない。
 - 失敗理由には秘密情報、内部物理パス、不要な個人情報を含めない。
 
@@ -95,6 +95,8 @@ POST /api/v1/admin/conversion-jobs/{conversionJobId}/retry
 
 再実行時は、既存の閲覧可能なWebPとサムネイルを壊さないことを優先する。新しい生成物は一時出力先に作成し、PostgreSQL更新が成功してから差し替える。
 
+APIは新しい`conversion_job`をPostgreSQLへ作成した後、RabbitMQへ`conversionJobId`を含む変換要求メッセージを投入する。RabbitMQ投入に失敗した場合は、PostgreSQL上のジョブ状態を基準に再投入または失敗状態への遷移を判断する。
+
 ## ジョブキャンセル
 
 ```http
@@ -133,5 +135,5 @@ POST /api/v1/admin/conversion-jobs/{conversionJobId}/cancel
 
 - 中断中ジョブのキャンセル方式。
 - 失敗コード一覧。
-- キュー製品、ack、重複配送時の冪等性。
+- RabbitMQのexchange、queue、routing key、retry、dead letter exchangeの具体値。
 - 運用者向け再インデックスや残存作業ディレクトリ確認との連携。

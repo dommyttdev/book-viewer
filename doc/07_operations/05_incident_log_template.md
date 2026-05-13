@@ -7,7 +7,7 @@
 ## 記録対象
 
 - サービス停止または大きな機能停止。
-- PostgreSQL、Elasticsearch、専用キュー、書籍ファイル保存領域の障害。
+- PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域の障害。
 - 原本ファイル、変換済みWebP、サムネイルの消失または不整合。
 - 変換ジョブ失敗の大量発生。
 - Elasticsearch全件再インデックスを必要とした不整合。

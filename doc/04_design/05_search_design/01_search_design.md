@@ -26,7 +26,7 @@
 | Spring BootバックエンドAPI | 認証、入力検証、検索条件の正規化、Elasticsearch検索、必要に応じたPostgreSQL正本確認、APIレスポンス生成を行う。 |
 | PostgreSQL | 書籍メタ情報、表示状態、論理削除状態、関連、検索インデックス更新状態の正本を保持する。 |
 | Elasticsearch | 検索用ドキュメントを保持し、日本語検索、補完、部分一致、ソート、ページングを担う。 |
-| 専用キュー / 再試行キュー | Elasticsearch更新失敗時の再試行要求を配送する。 |
+| RabbitMQ / 再試行キュー | Elasticsearch更新失敗時の再試行要求を配送する。 |
 
 Elasticsearchの検索結果だけを業務上の正本として扱わない。検索結果に表示する内容や表示可否が重要な場合は、PostgreSQLの正本データで確認する。
 
@@ -261,7 +261,7 @@ Elasticsearchの具体的な設計は、[doc/04_design/05_search_design/02_searc
 
 検索API契約、リクエスト、レスポンス、エラー形式は [doc/04_design/03_api_contracts/04_search_api.md](../03_api_contracts/04_search_api.md) で扱う。
 
-再試行キューの製品、メッセージ形式、リトライ回数、デッドレター扱いは、実装方式を決める段階で関連設計またはRunbookへ追記する。
+再試行キューをRabbitMQで共用するか専用キューとして分けるか、メッセージ形式、リトライ回数、dead letter扱いは、実装方式を決める段階で関連設計またはRunbookへ追記する。
 
 ## 更新方針
 

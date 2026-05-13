@@ -9,7 +9,7 @@
 ## 前提
 
 - 本番運用環境は単一Linuxホスト上のDocker Compose構成とする。
-- Next.jsフロントエンド、Spring BootバックエンドAPI、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、専用キューを同一ホストに配置する。
+- Next.jsフロントエンド、Spring BootバックエンドAPI、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、RabbitMQを同一ホストに配置する。
 - PostgreSQLをメタ情報、ユーザ、権限、ジョブ状態、検索インデックス更新状態の正本とする。
 - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う。
 - 原本ファイルは通常運用では保存し続ける。
@@ -21,11 +21,11 @@
 | コンポーネント | 役割 | 主な確認観点 |
 | --- | --- | --- |
 | Next.jsフロントエンド | 一般ユーザ画面、管理ユーザ画面を提供する | HTTP応答、API接続 |
-| Spring BootバックエンドAPI | 認証、書籍管理、検索、閲覧、管理操作を提供する | HTTP応答、DB接続、Elasticsearch接続、キュー接続 |
-| Spring Boot変換ワーカー | アーカイブ展開、WebP変換、サムネイル生成を実行する | キュー取得、ジョブ状態、7-Zip実行、保存領域アクセス |
+| Spring BootバックエンドAPI | 認証、書籍管理、検索、閲覧、管理操作を提供する | HTTP応答、DB接続、Elasticsearch接続、RabbitMQ接続 |
+| Spring Boot変換ワーカー | アーカイブ展開、WebP変換、サムネイル生成を実行する | RabbitMQ取得、ジョブ状態、7-Zip実行、保存領域アクセス |
 | PostgreSQL | 正本データを保持する | 接続、容量、ジョブ状態、検索更新状態 |
 | Elasticsearch | 検索用派生インデックスを保持する | 接続、インデックス状態、検索応答 |
-| 専用キュー | APIと変換ワーカーを非同期に接続する | 滞留、失敗、再試行 |
+| RabbitMQ | APIと変換ワーカーを非同期に接続する | キュー滞留、未ack、dead letter、再配送 |
 | 書籍ファイル保存領域 | 原本、WebP、サムネイルを保存する | 容量、権限、欠落、未参照ファイル |
 
 ## 事前確認
@@ -56,8 +56,8 @@ docker compose ps
 ```
 
 6. バックエンドAPIのヘルスチェックを確認する。
-7. 変換ワーカーが専用キューへ接続できていることをログで確認する。
-8. PostgreSQL、Elasticsearch、専用キューへの接続エラーが出ていないことを確認する。
+7. 変換ワーカーがRabbitMQへ接続できていることをログで確認する。
+8. PostgreSQL、Elasticsearch、RabbitMQへの接続エラーが出ていないことを確認する。
 9. 管理画面にログインできることを確認する。
 
 ヘルスチェックURL、管理コマンド、サービス名は実装時のDocker Compose定義に合わせてこのRunbookへ追記する。
@@ -107,6 +107,7 @@ docker compose logs --tail=200 worker
 docker compose logs --tail=200 frontend
 docker compose logs --tail=200 postgres
 docker compose logs --tail=200 elasticsearch
+docker compose logs --tail=200 rabbitmq
 ```
 
 継続監視する場合は次を使用する。
@@ -124,9 +125,10 @@ docker compose logs -f worker
 1. 管理画面または管理コマンドで対象ジョブを特定する。
 2. `conversion_job.status`、`failure_phase`、`failure_code`、`failure_message`、`external_exit_code`、`timed_out`を確認する。
 3. ワーカーログで同じジョブIDの処理を確認する。
-4. 原本ファイル管理情報と物理ファイルの存在を確認する。
-5. ジョブ専用作業ディレクトリが残っている場合は、保存領域外のファイルを参照していないことを確認する。
-6. 失敗原因を分類する。
+4. RabbitMQのキュー滞留、未ack、dead letter queueを確認する。
+5. 原本ファイル管理情報と物理ファイルの存在を確認する。
+6. ジョブ専用作業ディレクトリが残っている場合は、保存領域外のファイルを参照していないことを確認する。
+7. 失敗原因を分類する。
 
 | 失敗分類 | 確認観点 | 初期対応 |
 | --- | --- | --- |
@@ -139,6 +141,8 @@ docker compose logs -f worker
 | PostgreSQL更新失敗 | DB接続、制約違反、トランザクション失敗 | PostgreSQLを正として生成物の残存を確認する |
 
 再変換は既存ジョブを直接戻さず、新しい変換ジョブを作成する方式を原則とする。途中生成物が残っている場合は、PostgreSQLへ登録されている生成物だけを閲覧対象とし、未登録生成物はクリーンアップ候補にする。
+
+RabbitMQのメッセージがdead letter queueへ送られている場合は、PostgreSQL上の`conversion_job`を確認し、必要に応じて管理操作から新しい再実行ジョブを作成する。dead letter queueのメッセージを直接再投入する場合も、PostgreSQLの状態と対象ジョブIDを確認してから行う。
 
 ## Elasticsearch再インデックス手順
 
