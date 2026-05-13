@@ -42,6 +42,10 @@ Rules:
 - Check access before returning book metadata, images, thumbnails, search results, or job details.
 - Avoid leaking whether private resources exist when the user is not authorized to access them.
 - Use consistent handling for authentication failures and authorization failures.
+- Do not store plaintext authentication tokens, one-time codes, or session identifiers.
+- Store only purpose-specific hashes for email verification tokens, login challenge codes, password reset tokens, and session identifiers.
+- Track expiration, used, revoked, attempt count, and resend count fields for authentication tokens where applicable.
+- Revoke sessions and unused authentication tokens when users withdraw, accounts are suspended, passwords change, emails change, or logout is performed.
 
 ## File Upload and Archive Extraction
 
@@ -109,6 +113,8 @@ Do not log:
 - Passwords
 - Tokens
 - Session identifiers
+- One-time authentication codes
+- Token hashes or session identifier hashes
 - Private keys
 - Full private file contents
 - Unnecessary personal data

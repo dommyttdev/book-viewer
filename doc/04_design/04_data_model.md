@@ -22,7 +22,7 @@
 
 | 境界 | 主なエンティティ | 責務 |
 | --- | --- | --- |
-| ユーザ / 認証 / 権限 | `user`, `admin_user`, `role`, `permission`, `admin_user_role`, `role_permission` | 一般ユーザ、管理ユーザ、ロール、操作権限を管理する。 |
+| ユーザ / 認証 / 権限 | `user`, `admin_user`, `email_verification_token`, `login_challenge`, `password_reset_token`, `session`, `role`, `permission`, `admin_user_role`, `role_permission` | 一般ユーザ、管理ユーザ、認証トークン、セッション、ロール、操作権限を管理する。 |
 | 書籍カタログ | `book`, `author`, `series`, `book_type`, `tag`, `book_author`, `book_tag` | 書籍メタ情報、著者、タグ、シリーズ、種別を管理する。 |
 | ファイル取込 / 保存管理 | `book_file` | 原本ファイル、変換済み生成物、サムネイルの管理情報を保持する。 |
 | 変換ジョブ管理 | `conversion_job` | 変換ジョブの業務状態、失敗理由、再実行に必要な情報を保持する。 |
@@ -41,7 +41,7 @@
 - 管理ユーザにはロール、権限、管理操作の監査対象という別の属性が必要になりやすい。
 - 一般ユーザは書籍を保持しないため、書籍との所有関係を持たせない。
 
-共通のログイン、メール認証、パスワードリセットの詳細は、後続の権限設計とAPI契約で定義する。実装時に認証基盤の都合で共通の認証主体テーブルを追加する場合でも、このドキュメント上の業務概念としては一般ユーザと管理ユーザを分けて扱う。
+共通のログイン、メール認証、パスワードリセット、セッションの正本データは、このデータモデルで定義する認証トークン系テーブルに保存する。実装時に認証基盤の都合で共通の認証主体テーブルを追加する場合でも、このドキュメント上の業務概念としては一般ユーザと管理ユーザを分けて扱う。
 
 ### 書籍アップロード権限
 
@@ -108,6 +108,76 @@
 | 制約 | `email`は有効な管理ユーザ内で一意にする。 |
 
 `status`は`active`, `suspended`, `deleted`を初期候補とする。
+
+### 認証トークンとセッションの共通方針
+
+認証トークン、ワンタイムコード、セッションIDはセキュリティ境界であるため、PostgreSQLを正本とし、平文値は保存しない。ブラウザ、メール、APIリクエストで扱う値は利用者へ一度だけ提示または送信し、DBにはハッシュ値と状態管理情報だけを保存する。
+
+| 項目 | 方針 |
+| --- | --- |
+| 平文保存 | `token`, `code`, `session_id`相当の平文値は保存しない。 |
+| ハッシュ保存 | ランダム値やワンタイムコードは、用途別のハッシュ値として保存する。ハッシュ方式、pepper、鍵管理は実装時にセキュリティ設定で具体化する。 |
+| 有効期限 | すべての認証トークン、チャレンジ、セッションに`expires_at`を持たせる。 |
+| 使い捨て | メール確認、ログインチャレンジ、パスワードリセットは`used_at`で使用済みを表し、再利用できない。 |
+| 失効 | 管理操作、退会、停止、パスワード変更、メール変更、ログアウトなどにより`revoked_at`を設定する。 |
+| 試行回数 | ワンタイムコード確認には`attempt_count`と`max_attempts`を持たせ、上限超過時に失効または拒否する。 |
+| 再送回数 | メール確認とログインチャレンジには`send_count`を持たせ、過剰な再送を制限する。 |
+| 所有者 | 一般ユーザ向けは`user_id`、管理ユーザ向けは`admin_user_id`のどちらか一方に関連付ける。 |
+| ログ出力 | 平文トークン、ワンタイムコード、セッションID、ハッシュ値はログ、エラーレスポンス、監査メモに出力しない。 |
+
+`user_id`と`admin_user_id`の両方を持つテーブルでは、どちらか一方だけが設定される制約を設ける。実装時は用途別の一意制約、期限切れデータの削除方針、IPアドレスやUser-Agentを保存する場合の個人情報扱いをマイグレーションとセキュリティ設計で具体化する。
+
+### email_verification_token
+
+会員登録またはメールアドレス変更時のメール確認トークンを表す。
+
+| 項目 | 内容 |
+| --- | --- |
+| 主キー | `id` |
+| 主な属性 | `user_id`, `token_hash`, `purpose`, `email`, `expires_at`, `attempt_count`, `max_attempts`, `used_at`, `revoked_at`, `send_count`, `created_at`, `updated_at` |
+| 主な関連 | `user` |
+| 制約 | 平文トークンは保存しない。未使用かつ未失効で期限内のトークンだけを有効とする。 |
+
+`purpose`は`registration`, `email_change`を初期候補とする。メール変更時は確認対象のメールアドレスを`email`に保持し、確認完了後に`user.email`へ反映する。確認失敗時は`attempt_count`を増やし、`max_attempts`到達後は拒否または失効扱いにする。再送時は既存の有効トークンを失効するか、`send_count`を更新して同一目的の有効トークンを一件に絞る。
+
+### login_challenge
+
+パスワード認証成功後のメール2段階認証チャレンジを表す。
+
+| 項目 | 内容 |
+| --- | --- |
+| 主キー | `id` |
+| 主な属性 | `user_id`, `admin_user_id`, `challenge_id`, `code_hash`, `delivery_method`, `expires_at`, `attempt_count`, `max_attempts`, `send_count`, `used_at`, `revoked_at`, `created_at`, `updated_at` |
+| 主な関連 | `user`, `admin_user` |
+| 制約 | `challenge_id`は推測困難な公開識別子とし、`code_hash`に平文コードを保存しない。 |
+
+`challenge_id`はAPIの`challengeId`として返す照合用IDであり、ワンタイムコードそのものではない。確認時は`challenge_id`で候補を特定し、入力されたコードをハッシュ化して`code_hash`と照合する。`attempt_count`が`max_attempts`に達した場合、または期限切れ、使用済み、失効済みの場合は認証を拒否する。
+
+### password_reset_token
+
+パスワードリセット用トークンを表す。
+
+| 項目 | 内容 |
+| --- | --- |
+| 主キー | `id` |
+| 主な属性 | `user_id`, `admin_user_id`, `token_hash`, `expires_at`, `attempt_count`, `max_attempts`, `send_count`, `used_at`, `revoked_at`, `created_at`, `updated_at` |
+| 主な関連 | `user`, `admin_user` |
+| 制約 | 平文トークンは保存しない。未使用かつ未失効で期限内のトークンだけを有効とする。 |
+
+パスワードリセット確認の失敗時は`attempt_count`を増やし、`max_attempts`到達後は拒否または失効扱いにする。再要求は`send_count`とレート制限で制御する。パスワード変更完了時は、同一主体の未使用パスワードリセットトークンと既存セッションを失効する。要求APIの応答は、メールアドレスの登録有無を推測されにくい形にする。
+
+### session
+
+ログイン済み状態を表すサーバ側セッションを管理する。
+
+| 項目 | 内容 |
+| --- | --- |
+| 主キー | `id` |
+| 主な属性 | `user_id`, `admin_user_id`, `session_token_hash`, `session_type`, `expires_at`, `revoked_at`, `last_seen_at`, `created_at`, `updated_at` |
+| 主な関連 | `user`, `admin_user` |
+| 制約 | Cookieに入れるセッションIDの平文値は保存しない。失効済み、期限切れ、停止済み主体のセッションは認証済みとして扱わない。 |
+
+`session_type`は`user`, `admin`を初期候補とし、一般ユーザ用セッションと管理ユーザ用セッションを分離する。ログアウト時は現在のセッションの`revoked_at`を設定する。退会、停止、管理ユーザ削除、パスワード変更、メール変更、重要なロール変更時は、対象主体の既存セッションを失効する。
 
 ### role
 
@@ -309,8 +379,15 @@
 erDiagram
   user ||--o{ favorite : has
   user ||--o{ reading_history : has
+  user ||--o{ email_verification_token : verifies
+  user ||--o{ login_challenge : challenges
+  user ||--o{ password_reset_token : resets
+  user ||--o{ session : signs_in
 
   admin_user ||--o{ admin_user_role : has
+  admin_user ||--o{ login_challenge : challenges
+  admin_user ||--o{ password_reset_token : resets
+  admin_user ||--o{ session : signs_in
   role ||--o{ admin_user_role : assigned
   role ||--o{ role_permission : has
   permission ||--o{ role_permission : granted
@@ -345,10 +422,11 @@ erDiagram
 | 検索対象 | `book`, `author`, `series`, `tag`, `book_type`の正本からElasticsearchへ派生インデックスを作る。 |
 | ページング | 一覧、検索、ジョブ一覧、ユーザ一覧は大量データを想定し、APIでページングする。 |
 | 内部パス | `storage_key`は内部参照用とし、物理パスやコンテナパスをAPIレスポンスへ直接出さない。 |
+| 認証秘密情報 | 認証トークン、ワンタイムコード、セッションIDは平文保存せず、用途別のハッシュ値だけを保存する。 |
 
 ## 後続設計で詳細化する事項
 
-- 認証方式、メール認証、2段階認証、パスワードリセット用トークンのデータモデル。
+- 認証トークン、ワンタイムコード、セッションIDのハッシュ方式、pepper、鍵管理、期限切れレコード削除方針。
 - 管理ロール一覧、権限マトリクス、一般ユーザ停止の詳細。
 - ファイル保存先、命名規則、原本、WebP、サムネイルの削除タイミング。
 - 画像判定、ページ順序、再変換時の既存生成物の扱い。

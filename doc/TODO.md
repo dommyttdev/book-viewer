@@ -68,6 +68,7 @@
 | [#34](https://github.com/dommyttdev/book-viewer/issues/34) | Closed | Elasticsearchと検索に関する基本決定事項を記録する |
 | [#35](https://github.com/dommyttdev/book-viewer/issues/35) | Closed | バックアップなし運用の基本決定事項を記録する |
 | [#36](https://github.com/dommyttdev/book-viewer/issues/36) | Open | 変換リソースの技術的安全上限を設計に反映する |
+| [#37](https://github.com/dommyttdev/book-viewer/issues/37) | Open | 認証トークンとセッションの正本データモデルを定義する |
 
 ## Sprint 0: ドキュメント基盤整備
 
@@ -362,6 +363,17 @@
     - シリーズ順序の持ち方
     - 論理削除の有無
     - 変換ジョブ実行はRabbitMQで配送し、ジョブ状態管理はDBに保持するか
+- [x] 認証トークンとセッションの正本データモデルを定義する
+  - 反映先: [doc/04_design/04_data_model.md](04_design/04_data_model.md)
+  - 関連:
+    - [doc/04_design/08_authorization_design/01_authorization_design.md](04_design/08_authorization_design/01_authorization_design.md)
+    - [doc/04_design/03_api_contracts/06_account_api.md](04_design/03_api_contracts/06_account_api.md)
+    - [rules/SECURITY.md](../rules/SECURITY.md)
+  - 決定事項:
+    - `email_verification_token`、`login_challenge`、`password_reset_token`、`session`をPostgreSQLの正本テーブルとする
+    - 平文トークン、ワンタイムコード、セッションIDは保存せず、用途別のハッシュ値を保存する
+    - メール確認、ログイン2段階認証、パスワードリセットで有効期限、使用済み日時、失効日時、試行回数、再送回数を用途に応じて保持する
+    - 退会、停止、パスワード変更、メール変更、ログアウト時の失効条件を定義する
 - [x] 検索設計初版を作成する
   - 作成先: [doc/04_design/05_search_design/01_search_design.md](04_design/05_search_design/01_search_design.md)
   - 記載内容:
@@ -923,6 +935,10 @@
 - [x] メール認証: 行う
   - 登録時だけでなく、ログイン時の2段階認証にもメールを活用する
 - [x] パスワードリセット: 提供する
+- [x] 認証トークンとセッションの正本データモデル
+  - `email_verification_token`、`login_challenge`、`password_reset_token`、`session`をPostgreSQLの正本とする
+  - 平文トークン、ワンタイムコード、セッションIDは保存せず、用途別ハッシュ、有効期限、使用済み日時、失効日時、試行回数、再送回数で管理する
+  - 退会、停止、パスワード変更、メール変更、ログアウト時は関連する未使用トークン、未使用チャレンジ、既存セッションを失効する
 - [x] バックアップ: 行わない
 - [x] デプロイ方式: Spring Boot APIと変換ワーカーを同一ホストに配置する
   - 今後の規模拡大を想定し、別ホストへ分離可能な構成にする
