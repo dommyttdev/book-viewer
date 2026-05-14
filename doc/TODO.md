@@ -684,6 +684,9 @@
     - Elasticsearch再インデックス手順
     - 全件再インデックス手順
     - 書籍単位の再インデックス手順
+    - `docker compose down -v`、Docker volume削除、保存領域削除の通常運用禁止
+    - 削除系管理コマンドのdry-run、対象件数表示、二段階確認
+    - 障害時の利用者向け説明方針
 - [x] バックアップなし方針を作成する
   - 作成先: [doc/07_operations/02_backup_restore.md](07_operations/02_backup_restore.md)
   - 記載内容:
@@ -691,6 +694,8 @@
     - PostgreSQL / Elasticsearch / 原本ファイル / 変換済みwebp / サムネイルはバックアップ対象にしない
     - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う
     - バックアップなし運用のリスクと許容範囲
+    - RPO / RTOと復旧不能リスク
+    - バックアップ方針見直しトリガー
 - [x] 監視方針を作成する
   - 作成先: [doc/07_operations/03_monitoring.md](07_operations/03_monitoring.md)
   - 監視候補:
@@ -715,6 +720,8 @@
     - 暫定対応
     - 恒久対応
     - 再発防止策
+    - バックアップなし運用に関するRPO / RTO判断
+    - 復旧不能範囲と利用者向け説明
 - [x] リリースノート形式を作成する
   - 作成先: [doc/07_operations/04_release_note_template.md](07_operations/04_release_note_template.md)
   - 項目:
@@ -926,6 +933,8 @@
   - 平文トークン、ワンタイムコード、セッションIDは保存せず、用途別ハッシュ、有効期限、使用済み日時、失効日時、試行回数、再送回数で管理する
   - 退会、停止、パスワード変更、メール変更、ログアウト時は関連する未使用トークン、未使用チャレンジ、既存セッションを失効する
 - [x] バックアップ: 行わない
+  - 詳細なRPO / RTO、復旧不能リスク、禁止操作、削除系操作の安全柵は [doc/07_operations/02_backup_restore.md](07_operations/02_backup_restore.md) を正本とする
+  - 具体的な運用手順は [doc/07_operations/01_runbook.md](07_operations/01_runbook.md) を正本とする
 - [x] デプロイ方式: Spring Boot APIと変換ワーカーを同一ホストに配置する
   - 今後の規模拡大を想定し、別ホストへ分離可能な構成にする
 - [x] rar / 7zip の解凍方式: 外部アプリケーションの 7-Zip for Linux コンソール版を使用する
