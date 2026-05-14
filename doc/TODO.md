@@ -69,6 +69,7 @@
 | [#35](https://github.com/dommyttdev/book-viewer/issues/35) | Closed | バックアップなし運用の基本決定事項を記録する |
 | [#36](https://github.com/dommyttdev/book-viewer/issues/36) | Open | 変換リソースの技術的安全上限を設計に反映する |
 | [#37](https://github.com/dommyttdev/book-viewer/issues/37) | Open | 認証トークンとセッションの正本データモデルを定義する |
+| [#38](https://github.com/dommyttdev/book-viewer/issues/38) | Open | Elasticsearch必須プラグイン前提を統一する |
 
 ## Sprint 0: ドキュメント基盤整備
 
@@ -211,7 +212,7 @@
     - バックエンド技術: Spring Boot 4.0.6
     - Javaバージョン: 25
     - PostgreSQL
-    - Elasticsearch: analysis-kuromojiを使用
+    - Elasticsearch: 必須プラグインは技術スタックを正本とする
     - ファイル保存方式: 原本ファイル、変換済みwebp、サムネイルを保存
     - 画像変換方式: webp品質値80、サムネイル生成あり
     - アーカイブ展開方式: 7-Zip for Linux コンソール版を外部プロセスで呼び出す
@@ -227,7 +228,7 @@
     - Spring Boot 4.0.6バックエンドAPI
     - Spring Boot 4.0.6変換ワーカー
     - PostgreSQL
-    - Elasticsearch + analysis-kuromoji
+    - Elasticsearch
     - 書籍ファイル保存領域
     - RabbitMQによる非同期画像変換処理
     - 7-Zip for Linux コンソール版
@@ -238,7 +239,7 @@
     - Spring BootバックエンドAPI
     - Spring Boot変換ワーカー
     - PostgreSQL
-    - Elasticsearch + analysis-kuromoji
+    - Elasticsearch
     - 書籍ファイル保存領域
     - RabbitMQ
     - 7-Zip for Linux コンソール版
@@ -299,8 +300,9 @@
   - 作成先: [doc/03_architecture/03_adr/05_ADR-0004-use-elasticsearch.md](03_architecture/03_adr/05_ADR-0004-use-elasticsearch.md)
   - 判断観点:
     - タイトル、著者、タグ、シリーズのあいまい検索
-    - 日本語検索: analysis-kuromojiを使用
-    - 表記揺れ対策: ICU normalizerの利用を検討
+    - 日本語検索と表記揺れ正規化
+    - 必須プラグインは技術スタックを正本とする
+    - 必須プラグイン確認: 起動時またはインデックス作成前に確認
     - 補完 / 部分一致: 必要な項目にedge n-gram系フィールドを追加
     - 将来的なスコアリング調整
     - PostgreSQLから再構築可能な派生インデックスとして扱う方針
@@ -385,7 +387,8 @@
     - 複合検索
     - ソート条件
     - ページング
-    - 日本語検索の方針: analysis-kuromojiを使用
+    - 日本語検索と表記揺れ正規化の方針
+    - Elasticsearch必須プラグインは技術スタックを正本とする
     - インデックス更新タイミング
     - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
     - 更新失敗時は再試行キューに積む
@@ -588,9 +591,9 @@
     - シリーズ概要
 - [x] あいまい検索仕様を決める
   - 決定事項:
-    - 日本語の形態素解析: analysis-kuromojiを使用
-    - タイトル / 著者 / タグ検索にはkuromojiベースのカスタムアナライザを使用する
-    - 全角 / 半角などの表記揺れ対策としてICU normalizerの利用を検討する
+    - 日本語検索用のカスタムアナライザを使用する
+    - 全角 / 半角などの表記揺れ対策としてnormalizerを利用する
+    - Elasticsearch必須プラグインは技術スタックを正本とする
     - 補完 / 部分一致が必要な項目にはedge n-gram系フィールドを追加する
   - 検討事項:
     - typo許容
@@ -600,8 +603,9 @@
   - 記載内容:
     - index name
     - mapping
-    - analyzer: analysis-kuromojiベースのカスタムアナライザ
-    - ICU normalizer
+    - analyzer
+    - normalizer
+    - 必須プラグイン確認
     - edge n-gram系フィールド
     - searchable fields
     - sortable fields
@@ -781,7 +785,7 @@
     - タグ検索
     - シリーズ検索
     - 表記揺れ
-    - analysis-kuromojiによる日本語検索
+    - 日本語検索と表記揺れ正規化
     - Elasticsearch再インデックス
     - 検索結果なし
 - [x] 閲覧機能の受入テストを作成する
@@ -958,9 +962,12 @@
   - Elasticsearchインデックスは破棄してPostgreSQLから再構築可能とする
   - 更新失敗時は再試行キューに積む
   - 全件再インデックス手順をRunbookに記載する
-- [x] Elasticsearchの日本語アナライザ: analysis-kuromojiを使用する
-  - 日本語のタイトル / 著者 / タグ検索にはkuromojiベースのカスタムアナライザを使用する
-  - 全角 / 半角などの表記揺れ対策としてICU normalizerの利用を検討する
+- [x] Elasticsearchの日本語アナライザと正規化方針
+  - 日本語のタイトル / 著者 / タグ検索にはカスタムアナライザを使用する
+  - 全角 / 半角などの表記揺れ対策としてnormalizerを利用する
+  - Elasticsearch必須プラグインは [doc/03_architecture/02_technology_stack.md](03_architecture/02_technology_stack.md) を正本とする
+  - Docker Compose、ローカル開発環境、本番運用環境では技術スタックで定義された必須プラグインを導入する
+  - API起動時またはインデックス作成前に必須プラグインを確認し、未導入の場合はインデックス作成を失敗させる
   - 補完 / 部分一致が必要な項目には別途edge n-gram系フィールドを追加する
 - [x] webpの品質値: 80
   - スマートフォンでの閲覧を想定する

@@ -86,7 +86,7 @@ flowchart LR
     worker["Spring Boot<br>変換ワーカー"]
     queue["RabbitMQ<br>変換ジョブキュー"]
     db[("PostgreSQL<br>正本データ")]
-    search[("Elasticsearch<br>analysis-kuromoji")]
+    search[("Elasticsearch<br>検索用派生インデックス")]
     storage[("書籍ファイル保存領域<br>原本 / WebP / サムネイル")]
     sevenZip["7-Zip for Linux<br>コンソール版"]
   end
@@ -202,7 +202,7 @@ flowchart TB
 | コンポーネント | 用途 | 方針 |
 | --- | --- | --- |
 | PostgreSQL | 正本データ保存 | メタ情報、ユーザ、権限、ジョブ状態を保持する。 |
-| Elasticsearch + analysis-kuromoji | 日本語検索 | PostgreSQLから再構築可能な派生インデックスとして扱う。 |
+| Elasticsearch | 日本語検索、表記揺れ正規化 | PostgreSQLから再構築可能な派生インデックスとして扱う。必須プラグインは技術スタックを正本とする。 |
 | RabbitMQ | 非同期ジョブ配送 | DBをジョブ配送キューとして使わず、APIと変換ワーカーを疎結合にする。 |
 | 7-Zip for Linux コンソール版 | アーカイブ展開 | 変換ワーカーコンテナ内で外部プロセスとして利用する。 |
 | 書籍ファイル保存領域 | ファイル保存 | 原本ファイル、変換済みWebP、サムネイルを保存する。 |
@@ -331,7 +331,7 @@ flowchart TB
 
   subgraph derived["再構築可能な派生データ"]
     esDocs["Elasticsearch検索ドキュメント"]
-    esAnalyzer["analysis-kuromoji<br>検索アナライザ"]
+    esAnalyzer["検索アナライザ / 正規化"]
   end
 
   subgraph assets["ファイル保存領域"]

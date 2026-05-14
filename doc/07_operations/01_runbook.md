@@ -12,6 +12,7 @@
 - Next.jsフロントエンド、Spring BootバックエンドAPI、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、RabbitMQを同一ホストに配置する。
 - PostgreSQLをメタ情報、ユーザ、権限、ジョブ状態、検索インデックス更新状態の正本とする。
 - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う。
+- Elasticsearch必須プラグインは [技術スタック](../03_architecture/02_technology_stack.md#elasticsearch必須プラグイン) を正本とする。
 - 原本ファイルは通常運用では保存し続ける。
 - 変換済みWebPとサムネイルは、原本ファイルと変換条件から再生成可能な派生ファイルとして扱う。
 - バックアップは行わない。
@@ -36,6 +37,7 @@
 - 作業者がDocker Compose、アプリケーション設定、ログ、保存領域を確認できる権限を持つこと。
 - `.env`などの環境別設定が配置済みで、秘密情報がGit管理されていないこと。
 - 書籍ファイル保存領域、変換ワーカー作業領域、PostgreSQL、Elasticsearchのデータ領域がDocker Composeから参照できること。
+- Elasticsearchイメージまたはコンテナに技術スタックで定義された必須プラグインが導入されていること。
 - 7-Zip for Linuxコンソール版が変換ワーカーコンテナ内から実行できること。
 
 ## 起動手順
@@ -58,7 +60,8 @@ docker compose ps
 6. バックエンドAPIのヘルスチェックを確認する。
 7. 変換ワーカーがRabbitMQへ接続できていることをログで確認する。
 8. PostgreSQL、Elasticsearch、RabbitMQへの接続エラーが出ていないことを確認する。
-9. 管理画面にログインできることを確認する。
+9. API起動時またはインデックス作成前のElasticsearch必須プラグイン確認が成功していることを確認する。
+10. 管理画面にログインできることを確認する。
 
 ヘルスチェックURL、管理コマンド、サービス名は実装時のDocker Compose定義に合わせてこのRunbookへ追記する。
 
@@ -154,7 +157,25 @@ Elasticsearchは派生データであり、PostgreSQLから再構築できるも
 - PostgreSQLが利用可能であること。
 - 対象書籍、著者、タグ、シリーズ、種別の正本データがPostgreSQL上で期待どおりであること。
 - Elasticsearchへの接続が可能であること。
+- 技術スタックで定義されたElasticsearch必須プラグインが導入済みであること。
 - 実行中に検索結果が一時的に古くなる、または揺れる可能性があることを関係者へ共有していること。
+
+### 必須プラグイン確認と復旧
+
+Elasticsearchインデックス作成前、API起動時、または再インデックス前に、[技術スタックで定義された必須プラグイン](../03_architecture/02_technology_stack.md#elasticsearch必須プラグイン) を確認する。
+
+```bash
+docker compose exec elasticsearch bin/elasticsearch-plugin list
+docker compose exec elasticsearch curl -s http://localhost:9200/_cat/plugins
+```
+
+必須プラグインに不足がある場合、インデックス作成は失敗させる。復旧は次の方針で行う。
+
+1. Docker Compose定義またはElasticsearch用Dockerfileで、技術スタックで定義された必須プラグインを導入する。
+2. Elasticsearchコンテナを再作成する。既存インデックス定義とプラグイン状態が不一致の場合は、PostgreSQLを正として再インデックスする。
+3. `_cat/plugins`で必須プラグインが表示されることを確認する。
+4. API起動時またはインデックス作成前の必須プラグイン確認を再実行する。
+5. 必要に応じて書籍単位または全件再インデックスを実行する。
 
 ### 書籍単位再インデックス
 

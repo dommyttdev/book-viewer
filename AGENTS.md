@@ -11,7 +11,7 @@ Planned stack:
 - Conversion worker: Spring Boot 4.0.6
 - Java: 25
 - Database: PostgreSQL
-- Search: Elasticsearch with analysis-kuromoji
+- Search: Elasticsearch. Required Elasticsearch plugins are defined in [doc/03_architecture/02_technology_stack.md](doc/03_architecture/02_technology_stack.md).
 - Deployment: Docker Compose on a single Linux host
 
 PostgreSQL is the source of truth. Elasticsearch is derived and rebuildable.

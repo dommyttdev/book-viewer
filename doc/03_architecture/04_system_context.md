@@ -30,7 +30,7 @@
 - Spring Boot 4.0.6バックエンドAPI
 - Spring Boot 4.0.6変換ワーカー
 - PostgreSQL
-- Elasticsearch + analysis-kuromoji
+- Elasticsearch
 - RabbitMQ
 - 書籍ファイル保存領域
 
@@ -59,7 +59,7 @@ flowchart LR
     worker["Spring Boot 4.0.6<br>変換ワーカー"]
     queue["RabbitMQ<br>変換ジョブキュー"]
     db[("PostgreSQL<br>正本データ")]
-    search[("Elasticsearch<br>analysis-kuromoji")]
+    search[("Elasticsearch<br>検索用派生インデックス")]
     storage[("書籍ファイル保存領域<br>原本 / WebP / サムネイル")]
   end
 
@@ -111,7 +111,9 @@ Elasticsearch、変換済みWebP、サムネイル、ジョブ配送状態に不
 
 ### バックエンドAPIとElasticsearch
 
-Elasticsearchは検索用の派生データを保持する。タイトル、著者、タグ、シリーズなどの日本語検索にはanalysis-kuromojiを使用する。
+Elasticsearchは検索用の派生データを保持する。タイトル、著者、タグ、シリーズなどの日本語検索と表記揺れ正規化に利用する。
+
+Elasticsearch必須プラグインは技術スタックを正本とする。Docker Compose、ローカル開発環境、本番運用環境では同じ必須プラグインを導入し、バックエンドAPIの起動時またはインデックス作成前に存在確認を行う。
 
 検索結果の権限や表示可否が重要な場合は、必要に応じてPostgreSQLの正本データで確認する。ElasticsearchインデックスはPostgreSQLから再構築可能なものとして扱う。
 

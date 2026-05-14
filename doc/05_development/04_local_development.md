@@ -11,6 +11,7 @@
 - 環境構築は [doc/05_development/03_environment_setup.md](03_environment_setup.md) に従う。
 - コーディングルールは [doc/05_development/01_coding_rules.md](01_coding_rules.md) に従う。
 - PostgreSQLを正本、Elasticsearchを再構築可能な派生データとして扱う。
+- Elasticsearch必須プラグインは [技術スタック](../03_architecture/02_technology_stack.md#elasticsearch必須プラグイン) を正本とし、起動時またはインデックス作成前の確認に通る状態にする。
 - アーカイブ展開は変換ワーカーから7-Zip for Linuxコンソール版を呼び出す。
 - WebP品質値、変換ワーカー同時実行数、1ジョブのタイムアウト、安全上限は [画像変換設計のリソース制限と設定](../04_design/07_image_conversion_design.md#リソース制限と設定) を正本とする。
 
@@ -68,6 +69,7 @@ docker compose down
 - Java 25を使用している。
 - PostgreSQLへ接続できる。
 - Elasticsearchへ接続できる。
+- Elasticsearch必須プラグイン確認が成功する。
 - RabbitMQへ接続できる。
 - 原本ファイル保存領域、変換済みWebP保存領域、サムネイル保存領域を参照できる。
 - 必要な環境変数が設定されている。
@@ -283,6 +285,7 @@ docker compose logs -f worker
 | Workerがジョブを取得しない | RabbitMQ接続、キュー名、Worker起動プロファイル、同時実行数を確認する。 |
 | 7-Zip実行に失敗する | `SEVEN_ZIP_PATH`、実行権限、コンテナ内配置、対象アーカイブ形式を確認する。 |
 | 検索結果が古い | PostgreSQLを正として、Elasticsearch再インデックス対象か確認する。 |
+| Elasticsearchインデックス作成に失敗する | `_cat/plugins`で技術スタック上の必須プラグインが導入済みか確認し、不足している場合はElasticsearchイメージまたはコンテナを修正して再起動する。 |
 | 画像が表示されない | PostgreSQLのページ情報、WebP保存領域、APIの画像配信、ファイル権限を確認する。 |
 | フロントエンドからAPIへ接続できない | API起動状態、CORS、API URL環境変数、ブラウザコンソールを確認する。 |
 | ローカルデータを初期化したい | 対象が開発環境であること、削除対象ボリュームと保存領域を確認する。 |

@@ -12,7 +12,7 @@ The system consists of:
 - Backend API: Spring Boot 4.0.6
 - Conversion worker: Spring Boot 4.0.6
 - Database: PostgreSQL
-- Search: Elasticsearch with analysis-kuromoji
+- Search: Elasticsearch. Required plugins are defined in the technology stack document.
 - Deployment: Docker Compose on a single Linux host
 
 The initial deployment target is a single Linux host, but the architecture should keep future separation of API, worker, PostgreSQL, Elasticsearch, and other middleware possible.
@@ -117,7 +117,9 @@ Elasticsearch must be rebuildable from PostgreSQL and stored metadata.
 
 ## Search Architecture
 
-- Use Elasticsearch with analysis-kuromoji for Japanese search.
+- Define required Elasticsearch plugins in the technology stack document and avoid duplicating the plugin list across documents.
+- Docker Compose, local development, and production environments must install the required Elasticsearch plugins defined by the technology stack.
+- API startup or index creation must verify required Elasticsearch plugins before creating indexes, and index creation must fail fast when either plugin is missing.
 - Keep search documents derived from PostgreSQL records.
 - Search index updates should be triggered by explicit state changes or indexing jobs.
 - Index rebuilds should be possible without losing authoritative data.

@@ -16,7 +16,7 @@
 - Spring Boot 4.0.6バックエンドAPI
 - Spring Boot 4.0.6変換ワーカー
 - PostgreSQL
-- Elasticsearch + analysis-kuromoji
+- Elasticsearch
 - RabbitMQ
 - 書籍ファイル保存領域
 - 7-Zip for Linux コンソール版
@@ -31,7 +31,7 @@
 | Spring BootバックエンドAPI | Spring Boot 4.0.6 / Java 25 | HTTP API、認証、認可、入力検証、書籍管理、検索、閲覧、管理操作、ジョブ投入を担当する。 |
 | Spring Boot変換ワーカー | Spring Boot 4.0.6 / Java 25 | RabbitMQからジョブを取得し、アーカイブ展開、WebP変換、サムネイル生成、ジョブ状態更新を担当する。 |
 | PostgreSQL | PostgreSQL | メタ情報、ユーザ、権限、ジョブ状態、閲覧履歴、お気に入りなどの正本を保持する。 |
-| Elasticsearch | Elasticsearch + analysis-kuromoji | タイトル、著者、タグ、シリーズなどの日本語検索用インデックスを保持する。 |
+| Elasticsearch | Elasticsearch | タイトル、著者、タグ、シリーズなどの日本語検索用インデックスを保持する。必須プラグインは技術スタックを正本とする。 |
 | RabbitMQ | RabbitMQ | バックエンドAPIと変換ワーカーを非同期に接続し、変換ジョブを配送する。 |
 | 書籍ファイル保存領域 | ホストボリュームまたはコンテナから参照可能な永続領域 | 原本ファイル、変換済みWebP画像、サムネイルを保存する。 |
 | 7-Zip for Linux コンソール版 | 外部実行ファイル | 変換ワーカーコンテナ内で外部プロセスとして呼び出され、zip / rar / 7zip アーカイブを展開する。 |
@@ -51,7 +51,7 @@ flowchart LR
     worker["Spring Boot 4.0.6<br>変換ワーカー"]
     queue["RabbitMQ<br>変換ジョブキュー"]
     db[("PostgreSQL<br>正本データ")]
-    search[("Elasticsearch<br>analysis-kuromoji")]
+    search[("Elasticsearch<br>検索用派生インデックス")]
     storage[("書籍ファイル保存領域<br>原本 / WebP / サムネイル")]
 
     subgraph workerContainer["変換ワーカーコンテナ内"]
@@ -162,17 +162,19 @@ PostgreSQLは本システムの正本データを保持する。
 
 Elasticsearchやファイル保存領域との不整合が発生した場合は、PostgreSQLを基準に確認、再実行、再インデックスを行う。
 
-### Elasticsearch + analysis-kuromoji
+### Elasticsearch
 
 Elasticsearchは、検索性能と日本語検索のための派生インデックスを保持する。
 
 主な責務は次のとおり。
 
 - タイトル、著者、タグ、シリーズを検索可能にする
-- analysis-kuromojiによる日本語検索を提供する
+- 日本語検索と表記揺れ正規化を提供する
 - 必要に応じて補完、部分一致、表記揺れ対策用フィールドを持つ
 
 Elasticsearchだけに業務上の正本データを持たせない。インデックスはPostgreSQLから再構築可能なものとして扱う。
+
+Elasticsearch必須プラグインは技術スタックを正本とする。Docker Compose、ローカル開発環境、本番運用環境では同じ前提で導入する。バックエンドAPIの起動時またはインデックス作成前に必須プラグインの存在を確認し、未導入の場合はインデックス作成を失敗させる。
 
 ### RabbitMQ
 

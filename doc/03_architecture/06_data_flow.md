@@ -263,7 +263,7 @@ sequenceDiagram
 処理方針は次のとおり。
 
 1. バックエンドAPIは検索条件を検証し、Elasticsearchへ検索要求を送る。
-2. Elasticsearchではanalysis-kuromojiを利用した日本語検索を行う。
+2. Elasticsearchでは日本語検索と表記揺れ正規化を行う。必須プラグインは技術スタックを正本とする。
 3. 検索結果の権限や表示可否が重要な場合、APIはPostgreSQLで正本情報を確認する。
 4. Elasticsearchに存在しない重要な業務データを検索結果の唯一の根拠にしない。
 5. インデックス遅延がある場合でも、PostgreSQLを正として再インデックスや書籍単位の更新で回復できるようにする。
