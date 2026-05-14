@@ -24,6 +24,10 @@ Docker Compose、ローカル開発環境、本番運用環境では、Elasticse
 
 ElasticsearchはPostgreSQLから再構築可能な派生インデックスとして扱い、正本データを持たせない。
 
+PostgreSQL更新後の検索インデックス更新は「同期更新 + 失敗時Outbox」を採用する。APIまたは変換ワーカーは、検索対象の正本更新と同じユースケース内でPostgreSQLに`search_index_outbox`を記録し、コミット後にElasticsearch更新を即時試行する。成功時はOutboxを完了状態にし、失敗時は再試行待ちとして記録する。
+
+再試行通知の配送にはRabbitMQを使う。ただし、RabbitMQは検索更新状態の正本ではなく、Outbox IDを再試行ワーカーへ通知、配送する手段として扱う。再試行ワーカーはPostgreSQLの最新正本を読み直してElasticsearchドキュメントを再生成し、重複配送時も冪等に処理する。
+
 ## Consequences
 
 - 日本語のタイトル、著者、タグ、シリーズ検索を高速化しやすい。
@@ -32,7 +36,9 @@ ElasticsearchはPostgreSQLから再構築可能な派生インデックスとし
 - 必須プラグインが増えるため、環境構築、Docker Compose、本番運用、起動時チェック、Runbookで導入と復旧手順を明確にする必要がある。
 - インデックス設計、アナライザ、スコアリング、補完用フィールドを検索要件に合わせて調整できる。
 - PostgreSQLを正本とするため、Elasticsearchの破損や不整合が起きても再インデックスで回復できる。
-- PostgreSQLとElasticsearchの二重更新が発生するため、更新失敗時の再試行、インデックス更新状態、全件再インデックス手順が必要になる。
+- PostgreSQLとElasticsearchの二重更新が発生するため、Outboxによる更新失敗記録、再試行ワーカー、全件再インデックス手順が必要になる。
+- RabbitMQ障害時でも検索更新状態はPostgreSQLに残るため、再通知や手動再インデックスで回復しやすい。
+- Outboxテーブルと再試行ワーカーの実装が必要になり、検索対象更新のユースケースではOutbox記録と状態遷移のテストが必要になる。
 - 検索結果の権限や表示可否が重要な場合は、必要に応じてPostgreSQLで確認する。
 
 ## Alternatives

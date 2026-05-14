@@ -4,14 +4,15 @@
 
 このRunbookは、自炊本閲覧Webアプリケーションを単一Linuxホスト上のDocker Compose構成で運用するための初期手順を整理する。
 
-対象は、起動、停止、再起動、ログ確認、変換ジョブ失敗時の確認、Elasticsearch再インデックスである。
+対象は、起動、停止、再起動、ログ確認、変換ジョブ失敗時の確認、検索更新Outbox確認、Elasticsearch再インデックスである。
 
 ## 前提
 
 - 本番運用環境は単一Linuxホスト上のDocker Compose構成とする。
 - Next.jsフロントエンド、Spring BootバックエンドAPI、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、RabbitMQを同一ホストに配置する。
-- PostgreSQLをメタ情報、ユーザ、権限、ジョブ状態、検索インデックス更新状態の正本とする。
+- PostgreSQLをメタ情報、ユーザ、権限、ジョブ状態、検索更新Outboxの正本とする。
 - ElasticsearchはPostgreSQLから再構築可能な派生データとして扱う。
+- 検索更新状態はPostgreSQLの`search_index_outbox`を正本とし、RabbitMQは再試行通知、配送手段として扱う。
 - Elasticsearch必須プラグインは [技術スタック](../03_architecture/02_technology_stack.md#elasticsearch必須プラグイン) を正本とする。
 - 原本ファイルは通常運用では保存し続ける。
 - 変換済みWebPとサムネイルは、原本ファイルと変換条件から再生成可能な派生ファイルとして扱う。
@@ -175,6 +176,27 @@ Elasticsearchは派生データであり、PostgreSQLから再構築できるも
 - Elasticsearchへの接続が可能であること。
 - 技術スタックで定義されたElasticsearch必須プラグインが導入済みであること。
 - 実行中に検索結果が一時的に古くなる、または揺れる可能性があることを関係者へ共有していること。
+
+### 検索更新Outbox確認
+
+検索対象のメタ情報更新や変換完了後に検索結果が反映されない場合は、PostgreSQLの`search_index_outbox`を正として確認する。
+
+1. 管理画面または管理コマンドで対象書籍IDを特定する。
+2. `search_index_outbox.status`、`target_type`、`target_id`、`book_id`、`operation`、`attempt_count`、`next_attempt_at`、`last_error_code`、`last_error_message`を確認する。
+3. API、変換ワーカー、再試行ワーカーのログで同じOutbox IDまたは書籍IDの処理を確認する。
+4. RabbitMQの検索更新再試行通知キューの滞留、未ack、dead letterを確認する。
+5. Elasticsearch接続、必須プラグイン、対象インデックスの状態を確認する。
+6. PostgreSQLの最新正本から書籍単位再インデックスできるか判断する。
+
+| Outbox状態 | 初期対応 |
+| --- | --- |
+| `pending` | 即時更新が未完了の可能性がある。APIまたはWorkerログを確認し、必要に応じて再試行通知を送る。 |
+| `processing` | 処理中または中断の可能性がある。更新時刻とワーカー死活を確認する。長時間残る場合は再試行待ちへ整理する。 |
+| `retry_waiting` | `next_attempt_at`とRabbitMQ通知を確認する。通知が失われている場合はOutbox IDを再通知する。 |
+| `dead_letter` | 自動再試行上限に達している。失敗理由を確認し、原因解消後に書籍単位再インデックスまたは手動再試行を行う。 |
+| `completed` | 検索結果が古い場合は、別の未完了Outbox、alias、インデックス定義、検索条件を確認する。 |
+
+RabbitMQのメッセージだけを根拠に検索更新を完了扱いにしない。再試行ワーカーはOutbox IDからPostgreSQLを読み直し、最新正本からElasticsearchドキュメントを再生成する。
 
 ### 必須プラグイン確認と復旧
 

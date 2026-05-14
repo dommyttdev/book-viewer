@@ -26,6 +26,7 @@
 | 書籍カタログ | `book`, `author`, `series`, `book_type`, `tag`, `book_author`, `book_tag` | 書籍メタ情報、著者、タグ、シリーズ、種別を管理する。 |
 | ファイル取込 / 保存管理 | `book_file` | 原本ファイル、変換済み生成物、サムネイルの管理情報を保持する。 |
 | 変換ジョブ管理 | `conversion_job` | 変換ジョブの業務状態、失敗理由、再実行に必要な情報を保持する。 |
+| 検索インデックス更新 | `search_index_outbox` | Elasticsearch更新の未完了、失敗、再試行、手動確認状態を管理する。 |
 | 閲覧 | `book_page`, `reading_history` | ページ順、閲覧画像、読みかけ位置を管理する。 |
 | お気に入り | `favorite` | 一般ユーザと書籍のお気に入り関連を管理する。 |
 
@@ -80,6 +81,14 @@
 | `canceled` | 管理操作またはシステム判断で取り消された。 |
 
 再実行は、既存ジョブを`queued`へ戻す方式または新しいジョブ行を作成する方式がある。初版では履歴性を優先し、再実行時は新しい`conversion_job`を作成し、`retry_of_conversion_job_id`で元ジョブを参照する方針とする。
+
+### 検索更新Outbox
+
+Elasticsearchは派生データであり、検索更新の正本状態はPostgreSQLの`search_index_outbox`に保存する。
+
+検索対象項目を更新するAPIまたは変換ワーカーは、PostgreSQLの正本更新と同じユースケース内でOutboxを作成する。コミット後に即時Elasticsearch更新を試み、成功時は`completed`、失敗時は`retry_waiting`へ更新する。RabbitMQはOutbox IDを再試行ワーカーへ通知、配送するために使い、RabbitMQメッセージを検索更新状態の正本として扱わない。
+
+再試行ワーカーや管理コマンドは、Outboxに記録された対象IDを起点にPostgreSQLの最新正本を読み直し、Elasticsearchドキュメントを再生成する。失敗時点の差分をそのまま再適用しないことで、重複配送や再試行待ち中の複数更新を冪等に扱う。
 
 ## エンティティ一覧
 
@@ -320,6 +329,23 @@
 
 失敗理由は運用診断に必要な範囲に限定し、パスワード、トークン、内部パス、過度な個人情報を記録しない。
 
+### search_index_outbox
+
+Elasticsearch更新の状態を表す。
+
+| 項目 | 内容 |
+| --- | --- |
+| 主キー | `id` |
+| 主な属性 | `target_type`, `target_id`, `book_id`, `operation`, `status`, `attempt_count`, `next_attempt_at`, `last_error_code`, `last_error_message`, `created_at`, `updated_at`, `completed_at` |
+| 主な関連 | `book`、および`target_type`と`target_id`で示す検索対象の正本 |
+| 制約 | 検索更新状態の正本はPostgreSQLに置き、RabbitMQメッセージを正本として扱わない。 |
+
+`target_type`は`book`, `author`, `tag`, `series`, `book_type`を初期候補とする。`operation`は`upsert`, `delete`, `reindex`を初期候補とする。
+
+`status`は`pending`, `processing`, `completed`, `retry_waiting`, `dead_letter`を初期候補とする。再試行ワーカーは`retry_waiting`のレコードを対象にPostgreSQLの最新正本を読み直し、Elasticsearchを更新する。再試行上限に達した場合は`dead_letter`として運用確認対象にする。
+
+`last_error_message`には、秘密情報、内部物理パス、不要な個人情報を保存しない。
+
 ### reading_history
 
 一般ユーザの読みかけ位置を表す。
@@ -398,6 +424,7 @@ erDiagram
   book ||--o{ book_file : has
   book ||--o{ book_page : has
   book ||--o{ conversion_job : has
+  book ||--o{ search_index_outbox : indexes
   book ||--o{ favorite : marked
   book ||--o{ reading_history : read
 
@@ -419,7 +446,7 @@ erDiagram
 | ID | 実装時は推測困難性とURL露出方針を踏まえ、UUIDまたは代替公開IDを検討する。 |
 | 日時 | `created_at`, `updated_at`, `deleted_at`を基本とし、タイムゾーンを一貫して扱う。 |
 | 楽観ロック | 書籍メタ情報、変換ジョブ、ユーザ、管理ユーザは同時更新に備えて実装時に`version`列を検討する。 |
-| 検索対象 | `book`, `author`, `series`, `tag`, `book_type`の正本からElasticsearchへ派生インデックスを作る。 |
+| 検索対象 | `book`, `author`, `series`, `tag`, `book_type`の正本からElasticsearchへ派生インデックスを作る。更新状態は`search_index_outbox`で管理する。 |
 | ページング | 一覧、検索、ジョブ一覧、ユーザ一覧は大量データを想定し、APIでページングする。 |
 | 内部パス | `storage_key`は内部参照用とし、物理パスやコンテナパスをAPIレスポンスへ直接出さない。 |
 | 認証秘密情報 | 認証トークン、ワンタイムコード、セッションIDは平文保存せず、用途別のハッシュ値だけを保存する。 |
@@ -430,7 +457,7 @@ erDiagram
 - 管理ロール一覧、権限マトリクス、一般ユーザ停止の詳細。
 - ファイル保存先、命名規則、原本、WebP、サムネイルの削除タイミング。
 - 画像判定、ページ順序、再変換時の既存生成物の扱い。
-- Elasticsearchのインデックス名、mapping、analyzer、再インデックス状態管理。
+- Elasticsearchのインデックス名、mapping、analyzer、再インデックス運用手順。
 - 監査ログ、操作履歴、障害ログの保持範囲。
 
 ## 更新方針

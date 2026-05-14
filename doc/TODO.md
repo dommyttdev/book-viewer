@@ -373,7 +373,7 @@
     - Elasticsearch必須プラグインは技術スタックを正本とする
     - インデックス更新タイミング
     - PostgreSQLを正とし、Elasticsearchは再構築可能な派生データとして扱う
-    - 更新失敗時は再試行キューに積む
+    - 更新失敗時はPostgreSQLの検索更新Outboxを再試行待ちにし、RabbitMQで再試行を通知する
 - [x] ファイル保存設計初版を作成する
   - 作成先: [doc/04_design/06_file_storage_design.md](04_design/06_file_storage_design.md)
   - 記載内容:
@@ -952,7 +952,9 @@
   - 書籍単位でElasticsearchへ再インデックスできる管理コマンドを用意する
   - 全件再インデックスできる管理コマンドを用意する
   - Elasticsearchインデックスは破棄してPostgreSQLから再構築可能とする
-  - 更新失敗時は再試行キューに積む
+  - 検索更新は「同期更新 + 失敗時Outbox」とし、PostgreSQLの`search_index_outbox`を正本にする
+  - 更新失敗時はOutboxを再試行待ちにし、RabbitMQはOutbox IDの通知、配送手段として扱う
+  - 再試行ワーカーはPostgreSQLの最新正本から検索ドキュメントを再生成し、重複配送を冪等に扱う
   - 全件再インデックス手順をRunbookに記載する
 - [x] Elasticsearchの日本語アナライザと正規化方針
   - 日本語のタイトル / 著者 / タグ検索にはカスタムアナライザを使用する
@@ -992,7 +994,6 @@
 | 変換リソース上限 | アップロード、展開、画像デコード、一時領域、同時実行数、タイムアウトの設定名、既定値、上限超過時のエラーとジョブ状態。既定値は画像変換設計にあるが、実装時のプロパティ名と検証箇所を確定する。 | [画像変換設計](04_design/07_image_conversion_design.md#リソース制限と設定)、[アップロードAPI契約](04_design/03_api_contracts/02_book_api.md) |
 | 認証トークン / セッションのデータモデル | トークン、ワンタイムコード、セッションIDのハッシュ方式、pepper、鍵管理、期限、試行回数、再送制限、期限切れレコード削除方針。 | [データモデル](04_design/04_data_model.md)、[認可設計](04_design/08_authorization_design/01_authorization_design.md)、[アカウントAPI契約](04_design/03_api_contracts/06_account_api.md)、[セキュリティルール](../rules/SECURITY.md) |
 | Elasticsearch必須プラグイン前提 | `analysis-kuromoji` と `analysis-icu` の導入確認、未導入時の起動時またはインデックス作成前チェック、Docker ComposeとRunbookの復旧手順。 | [技術スタック](03_architecture/02_technology_stack.md#elasticsearch必須プラグイン)、[Elasticsearchインデックス設計](04_design/05_search_design/02_search_index_design.md#必須プラグイン確認)、[Runbook](07_operations/01_runbook.md) |
-| 検索更新責務とOutbox方針 | PostgreSQL更新後のElasticsearch更新責務、失敗記録、再試行配送、Outboxテーブルを使うか、RabbitMQ再試行キューだけで扱うか、冪等な再生成単位。 | [検索設計](04_design/05_search_design/01_search_design.md#更新失敗時の再試行)、[Elasticsearchインデックス設計](04_design/05_search_design/02_search_index_design.md#更新タイミング)、[データフロー](03_architecture/06_data_flow.md) |
 
 ### Beta以降
 
@@ -1022,13 +1023,13 @@
 | [システム概要](03_architecture/01_system_overview.md#今後詳細化するドキュメント) | 後続ドキュメント作成先の案内。 | 完了済みの案内であり、未決事項としては扱わない。 |
 | [技術スタック](03_architecture/02_technology_stack.md#今後詳細化する事項) | ADR、設計、環境設定の具体化。 | 多くは完了済み。Elasticsearch必須プラグイン確認は実装前必須。 |
 | [コンテナ図](03_architecture/05_container_diagram.md#今後詳細化する事項) | Docker Composeサービス名、ネットワーク、監視、ログ、リソース制限。 | サービス名と必須プラグイン確認は実装前必須。監視、ログ、リソース調整は運用で確定。 |
-| [データフロー](03_architecture/06_data_flow.md#今後詳細化する事項) | 変換ジョブ状態、検索更新失敗、再試行、整合性回復。 | ジョブ状態と検索更新責務は実装前必須。整合性回復の運用手順は運用で確定。 |
+| [データフロー](03_architecture/06_data_flow.md#今後詳細化する事項) | 変換ジョブ状態、検索更新失敗、再試行、整合性回復。 | ジョブ状態は実装前必須。検索更新責務はOutbox方針を反映済み。整合性回復の運用手順は運用で確定。 |
 | [品質特性](03_architecture/07_quality_attributes.md#今後詳細化する事項) | 負荷試験、監視、容量不足時の手順。 | 監視基盤とSLOはBeta以降。容量警告しきい値と手順は運用で確定。 |
 | [UIフロー](04_design/01_ui_flows.md#後続で詳細化する事項) / [画面メモ](04_design/02_screen_notes.md#後続で詳細化する事項) | ワイヤーフレーム、見開き、拡大縮小、管理ダッシュボード表示。 | UIの後続機能としてBeta以降。 |
-| [データモデル](04_design/04_data_model.md#後続設計で詳細化する事項) | 認証秘密情報、権限、保存、検索更新状態。 | 認証トークン / セッションと検索更新状態は実装前必須。権限や保存の拡張は対象機能の実装前に確定する。 |
+| [データモデル](04_design/04_data_model.md#後続設計で詳細化する事項) | 認証秘密情報、権限、保存、検索更新状態。 | 検索更新状態はOutbox方針を反映済み。認証トークン / セッション、権限、保存の拡張は対象機能の実装前に確定する。 |
 | [ファイル保存設計](04_design/06_file_storage_design.md#後続設計で詳細化する事項) | 物理削除、再変換差し替え、サムネイル命名。 | 削除・再変換の実装前に確定。用途別サムネイル拡張はBeta以降。 |
 | [画像変換設計](04_design/07_image_conversion_design.md#後続設計で詳細化する事項) | サムネイル、WebP条件、RabbitMQ、再実行、Runbook、画像処理ライブラリ。 | 変換リソース上限、RabbitMQ、失敗コード、ライブラリは実装前必須。Runbook細部と同時実行調整は運用で確定。 |
-| [検索設計](04_design/05_search_design/01_search_design.md#elasticsearchインデックス設計との関係) / [Elasticsearchインデックス設計](04_design/05_search_design/02_search_index_design.md) | インデックス定義、必須プラグイン、更新失敗、再インデックス、補完。 | 必須プラグインと検索更新責務は実装前必須。補完や高度な部分一致はBeta以降。 |
+| [検索設計](04_design/05_search_design/01_search_design.md#elasticsearchインデックス設計との関係) / [Elasticsearchインデックス設計](04_design/05_search_design/02_search_index_design.md) | インデックス定義、必須プラグイン、更新失敗、再インデックス、補完。 | 検索更新責務はOutbox方針を反映済み。必須プラグインは実装前必須。補完や高度な部分一致はBeta以降。 |
 | [API契約](04_design/03_api_contracts/) | 各APIの追加契約、エラー、権限、キャッシュ、管理操作。 | MVP対象APIの実装前に確定。サジェスト、見開き、管理拡張はBeta以降。 |
 | [受入条件・受入テスト](02_backlog/03_acceptance_criteria/) / [受入テスト](06_testing/02_acceptance_tests/) | 重複アップロード、冪等性、物理削除、詳細E2E。 | 対象機能の実装前に確定。MVP外の復元や詳細E2EはBeta以降。 |
 

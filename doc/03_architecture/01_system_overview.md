@@ -252,7 +252,7 @@ sequenceDiagram
 7. rar / 7zip の展開が必要な場合、7-Zip for Linux コンソール版を外部プロセスとして呼び出す。
 8. 変換ワーカーが画像ファイルをページ順に整理し、WebP画像とサムネイルを生成する。
 9. 変換ワーカーが生成結果をファイル保存領域へ保存し、PostgreSQLのジョブ状態とページ情報を更新する。
-10. 必要に応じてElasticsearchインデックス更新を実行またはキューへ投入する。
+10. 必要に応じて検索更新Outboxを記録し、Elasticsearchインデックス更新を即時試行する。
 
 ファイル名、パス、アーカイブ内エントリ、展開先パスは、パストラバーサルや不正なファイル操作を防ぐためにサーバ側で検証する。
 
@@ -268,14 +268,20 @@ flowchart LR
   api["バックエンドAPI"]
   db[("PostgreSQL<br>正本")]
   es[("Elasticsearch<br>派生インデックス")]
-  retry["再試行キュー"]
+  outbox[("検索更新Outbox<br>PostgreSQL正本")]
+  retry["RabbitMQ<br>再試行通知"]
+  retryWorker["再試行ワーカー"]
 
   admin -->|"メタ情報登録 / 更新"| frontend
   frontend -->|"更新API"| api
   api -->|"正本更新"| db
-  api -->|"インデックス更新"| es
-  api -. 更新失敗時 .-> retry
-  retry -. 再試行 .-> es
+  api -->|"Outbox記録"| outbox
+  api -->|"即時インデックス更新"| es
+  api -. 更新失敗時 .-> outbox
+  api -. Outbox ID通知 .-> retry
+  retry -. 再試行要求 .-> retryWorker
+  retryWorker -->|"最新正本読み直し"| db
+  retryWorker -->|"再インデックス"| es
 
   general -->|"検索条件入力"| frontend
   frontend -->|"検索API"| api
@@ -287,14 +293,16 @@ flowchart LR
 
 1. 管理ユーザが書籍メタ情報を登録または更新する。
 2. バックエンドAPIがPostgreSQLを更新する。
-3. 検索対象項目の変更に応じて、Elasticsearchインデックス更新を実行またはキューへ投入する。
-4. 一般ユーザがNext.jsフロントエンドから検索条件を入力する。
-5. バックエンドAPIが検索条件を検証し、Elasticsearchへ検索要求を送る。
-6. Elasticsearchがタイトル、著者、タグ、シリーズなどの検索結果候補を返す。
-7. 必要に応じてバックエンドAPIがPostgreSQLの正本データを参照し、権限や表示可能状態を確認する。
-8. バックエンドAPIが検索結果をフロントエンドへ返す。
+3. 検索対象項目の変更に応じて、検索更新OutboxをPostgreSQLへ記録する。
+4. バックエンドAPIがElasticsearchインデックス更新を即時試行する。
+5. 更新失敗時はOutboxを再試行待ちにし、RabbitMQで再試行ワーカーへ通知する。
+6. 一般ユーザがNext.jsフロントエンドから検索条件を入力する。
+7. バックエンドAPIが検索条件を検証し、Elasticsearchへ検索要求を送る。
+8. Elasticsearchがタイトル、著者、タグ、シリーズなどの検索結果候補を返す。
+9. 必要に応じてバックエンドAPIがPostgreSQLの正本データを参照し、権限や表示可能状態を確認する。
+10. バックエンドAPIが検索結果をフロントエンドへ返す。
 
-Elasticsearchの更新に失敗した場合は再試行キューに積み、PostgreSQLを正として再インデックスできるようにする。
+Elasticsearchの更新に失敗した場合はPostgreSQLの検索更新Outboxを正本として残し、RabbitMQは再試行通知として扱う。再試行ワーカーはPostgreSQLの最新正本から再インデックスする。
 
 ## データ責務
 
@@ -309,7 +317,7 @@ PostgreSQLは次のデータの正本とする。
 - 変換ジョブ状態
 - 閲覧履歴
 - お気に入り
-- 検索インデックス更新状態
+- 検索更新Outbox
 
 Elasticsearchは、検索性能と日本語検索のための派生データを保持する。Elasticsearchインデックスは破棄しても、PostgreSQLと保存済みメタ情報から再構築できる前提とする。
 
@@ -326,7 +334,7 @@ flowchart TB
     jobs["変換ジョブ状態"]
     history["閲覧履歴"]
     favorites["お気に入り"]
-    indexState["検索インデックス更新状態"]
+    indexState["検索更新Outbox"]
   end
 
   subgraph derived["再構築可能な派生データ"]

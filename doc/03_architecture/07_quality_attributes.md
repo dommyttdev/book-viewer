@@ -222,7 +222,7 @@
 - PostgreSQLを正本とする。
 - Elasticsearchは派生データとして扱い、PostgreSQLから再インデックスできるようにする。
 - 変換済みWebPとサムネイルは、原本ファイルと変換条件から再生成できるようにする。
-- 変換ジョブ状態、失敗理由、検索インデックス更新状態をPostgreSQLへ記録する。
+- 変換ジョブ状態、失敗理由、検索更新OutboxをPostgreSQLへ記録する。
 - キューの配送状態だけを業務上の正本にしない。
 
 整合性回復の詳細な流れは [doc/03_architecture/06_data_flow.md](06_data_flow.md) で扱う。
