@@ -20,8 +20,9 @@
 4. [リリース計画](scrum/03_release_plan.md)
 5. [スプリント計画初期版](scrum/04_sprint_plan.md)
 6. [GitHub Projects運用マニュアル](scrum/05_github_projects_manual.md)
-7. [TDD実践方針](tdd/01_tdd_strategy.md)
-8. [テスト観点マトリクス](tdd/02_test_matrix.md)
+7. [GitHub Project Issue一覧](scrum/06_github_project_issue_list.md)
+8. [TDD実践方針](tdd/01_tdd_strategy.md)
+9. [テスト観点マトリクス](tdd/02_test_matrix.md)
 
 ## 更新ルール
 
