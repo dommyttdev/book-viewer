@@ -292,6 +292,31 @@
     - DBをジョブ配送キューとして使わず、RabbitMQで配送する
     - 変換ワーカーの同時実行数: 具体値は画像変換設計のリソース制限と設定を正本とする
     - 将来的なスケール
+- [x] 認証方式とサーバ側セッション採用ADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/09_ADR-0008-use-email-authentication-and-server-side-sessions.md](03_architecture/03_adr/09_ADR-0008-use-email-authentication-and-server-side-sessions.md)
+  - 判断観点:
+    - メール認証
+    - ログイン時のメール2段階認証
+    - パスワードリセット
+    - HTTP onlyかつSecure属性付きCookieによるサーバ側セッション
+    - 認証トークン、チャレンジ、セッションのPostgreSQL正本管理
+    - JWTおよび外部IDプロバイダとの比較
+- [x] バックアップなし運用ADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/10_ADR-0009-no-backup-policy.md](03_architecture/03_adr/10_ADR-0009-no-backup-policy.md)
+  - 判断観点:
+    - 初期運用の単純さ
+    - PostgreSQLと原本ファイル喪失時の復旧不能リスク
+    - 派生データの再構築範囲
+    - RPO / RTOを定義しない方針
+    - バックアップ方針を見直す条件
+- [x] 原本ファイル保存方針ADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/11_ADR-0010-keep-original-book-files.md](03_architecture/03_adr/11_ADR-0010-keep-original-book-files.md)
+  - 判断観点:
+    - 原本ファイルを通常運用で保存し続ける
+    - WebPとサムネイルの再生成
+    - 再変換と変換条件変更への対応
+    - 業務上の保存容量上限なし
+    - 技術的安全上限との分離
 
 ### 主要設計
 
