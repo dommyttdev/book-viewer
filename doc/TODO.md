@@ -317,6 +317,29 @@
     - 再変換と変換条件変更への対応
     - 業務上の保存容量上限なし
     - 技術的安全上限との分離
+- [x] Next.js採用ADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/12_ADR-0011-use-nextjs.md](03_architecture/03_adr/12_ADR-0011-use-nextjs.md)
+  - 判断観点:
+    - 一般ユーザ向け画面と管理ユーザ向け画面を同一フロントエンドで提供する
+    - API呼び出しと画面状態管理
+    - 認証Cookie利用
+    - 画像ビューアとの相性
+    - React SPA、Vue / Nuxt、Spring MVC / Thymeleafとの比較
+- [x] 単一Linuxホスト / Docker Compose運用ADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md](03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md)
+  - 判断観点:
+    - 初期本番運用の単純さ
+    - Next.js、Spring Boot API、Spring Boot変換ワーカー、PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域の同一ホスト配置
+    - 将来的なAPI / Worker / ミドルウェア分離余地
+    - Kubernetes、クラウドマネージドサービス、複数ホスト構成、手動プロセス運用との比較
+- [x] 一般ユーザの書籍非保持と管理者のみアップロードADRを作成する
+  - 作成先: [doc/03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md)
+  - 判断観点:
+    - 一般ユーザは書籍を保持しない
+    - 書籍アップロードは管理ユーザのみ可能
+    - 一般ユーザ同士の書籍共有をしない
+    - 管理者による一般ユーザ所有書籍の閲覧 / 削除、退会時のアップロード済み書籍削除は対象外
+    - 権限設計、データモデル、退会処理、検索 / 閲覧範囲への影響
 
 ### 主要設計
 
@@ -897,6 +920,7 @@
 ## 決定事項
 
 - [x] フロントエンド技術: Next.js
+  - 判断理由は [ADR-0011](03_architecture/03_adr/12_ADR-0011-use-nextjs.md) を正本とする
 - [x] Javaバージョン: 25
 - [x] Spring Bootバージョン: 4.0.6
 - [x] Spring Bootプロジェクト構成: 単一アプリ内モジュールとする
@@ -917,15 +941,20 @@
 - [x] サムネイル: 生成する
 - [x] 閲覧履歴: 保存する
 - [x] 一般ユーザ同士の書籍共有: しない
+  - 判断理由は [ADR-0013](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md) を正本とする
 - [x] 書籍アップロード権限: 管理者のみアップロード可能とする
   - 一般ユーザは書籍を保持しない
+  - 判断理由は [ADR-0013](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md) を正本とする
 - [x] 管理者による一般ユーザ所有書籍の閲覧: 対象外
   - 一般ユーザは書籍を保持しないため
   - 管理ユーザの `book.view` は管理対象書籍の内容確認・品質確認を意味し、詳細は [doc/04_design/08_authorization_design/02_permission_matrix.md](04_design/08_authorization_design/02_permission_matrix.md) を正本とする
+  - 判断理由は [ADR-0013](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md) を正本とする
 - [x] 管理者による一般ユーザの書籍削除: 対象外
   - 一般ユーザは書籍を保持しないため
+  - 判断理由は [ADR-0013](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md) を正本とする
 - [x] 退会時のアップロード済み書籍削除: 対象外
   - 一般ユーザは書籍を保持しないため
+  - 判断理由は [ADR-0013](03_architecture/03_adr/14_ADR-0013-admin-only-book-upload.md) を正本とする
 - [x] メール認証: 行う
   - 登録時だけでなく、ログイン時の2段階認証にもメールを活用する
 - [x] パスワードリセット: 提供する
@@ -938,6 +967,7 @@
   - 具体的な運用手順は [doc/07_operations/01_runbook.md](07_operations/01_runbook.md) を正本とする
 - [x] デプロイ方式: Spring Boot APIと変換ワーカーを同一ホストに配置する
   - 今後の規模拡大を想定し、別ホストへ分離可能な構成にする
+  - 判断理由は [ADR-0012](03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md) を正本とする
 - [x] rar / 7zip の解凍方式: 外部アプリケーションの 7-Zip for Linux コンソール版を使用する
   - https://7-zip.opensource.jp/download.html
   - Java標準ライブラリおよび Apache Commons Compress の rar 対応には依存しない
@@ -969,9 +999,10 @@
   - 漫画や小説の本文・セリフの可読性を確保しつつ、過度な高品質設定にはしない
   - application.propertiesで設定可能にする
 - [x] 本番運用環境: 単一Linuxホスト上のDocker Compose構成とする
-  - Spring Boot API / Worker、Next.js、PostgreSQL、Elasticsearch、RabbitMQを同一ホストに配置する
+  - Spring Boot API / Worker、Next.js、PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域を同一ホストに配置する
   - 7-Zip for Linux コンソール版を変換ワーカーコンテナ内で利用する
   - 将来的にAPI / Worker / ミドルウェアを別ホストへ分離可能な構成にする
+  - 判断理由は [ADR-0012](03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md) を正本とする
 
 ## 未決事項
 
