@@ -63,13 +63,13 @@
 | Issue | Red / Green / Documentの焦点 |
 | --- | --- |
 | #81 | 完了。`issue-81-project-structure.md` で構成とビルドツールを確定し、以後のsub-issueが同じ前提で進められるようにした。 |
-| #82 | Next.jsの最小起動、lintまたは最小確認、API接続先設定を確認する。 |
+| #82 | `issue-82-frontend-minimal.md` で実装入力を整理済み。Next.jsの最小起動、lint、typecheck、build、API接続先設定を確認する。実際の依存関係インストールと起動確認は環境構築担当が実施する。 |
 | #83 | APIの起動テストとヘルスチェックをTDDの最初の対象にする。 |
 | #84 | Workerの起動単位、プロファイル、設定読み込みを確認する。 |
 | #85 | PostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認する。 |
 | #86 | API / Workerの外部依存接続と環境変数差し替えを確認する。 |
-| #87 | 各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備する。 |
-| #88 | 実装結果を開発手順、環境構築手順、TODO、Issueへ反映する。 |
+| #87 | 各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備する。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
+| #88 | 実装結果を開発手順、環境構築手順、TODO、Issueへ反映する。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新で扱う。 |
 
 ## 完了メモ
 
