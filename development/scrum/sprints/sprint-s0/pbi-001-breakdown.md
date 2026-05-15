@@ -64,7 +64,7 @@
 | --- | --- |
 | #81 | 完了。`issue-81-project-structure.md` で構成とビルドツールを確定し、以後のsub-issueが同じ前提で進められるようにした。 |
 | #82 | `issue-82-frontend-minimal.md` で実装入力を整理済み。Next.jsの最小起動、lint、typecheck、build、API接続先設定を確認する。実際の依存関係インストールと起動確認は環境構築担当が実施する。 |
-| #83 | APIの起動テストとヘルスチェックをTDDの最初の対象にする。 |
+| #83 | `issue-83-api-minimal.md` で実装入力と実施結果を整理済み。Spring Boot API最小構成、ルートGradle統合、最小テスト、bootRun、`/actuator/health` を確認した。 |
 | #84 | Workerの起動単位、プロファイル、設定読み込みを確認する。 |
 | #85 | PostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認する。 |
 | #86 | API / Workerの外部依存接続と環境変数差し替えを確認する。 |
@@ -79,6 +79,7 @@
 - 更新したドキュメント:
   - `development/scrum/sprints/sprint-s0/planning.md`
   - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
+  - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
   - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
   - `development/scrum/sprints/sprint-s0/review.md`
