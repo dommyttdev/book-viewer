@@ -51,6 +51,7 @@
 
 ### 開発
 
+- [プロジェクト構成](05_development/00_project_structure.md)
 - [コーディングルール](05_development/01_coding_rules.md)
 - [ブランチ戦略](05_development/02_branch_strategy.md)
 - [環境構築手順](05_development/03_environment_setup.md)

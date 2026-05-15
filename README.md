@@ -7,14 +7,9 @@
 
 ## リポジトリ構成
 
-```text
-.
-├── doc/          # プロダクト、バックログ、設計、開発、テスト、運用ドキュメント
-├── development/  # 開発プロセス、スクラム、TDD、テンプレート
-├── rules/        # コーディング、アーキテクチャ、セキュリティ、貢献ルール
-├── AGENTS.md     # AIエージェント向け作業ルール
-└── README.md
-```
+リポジトリ構成の正本は [プロジェクト構成](doc/05_development/00_project_structure.md) を参照してください。
+
+このREADMEでは構成ツリーを重複管理しません。開発環境の準備は [環境構築手順](doc/05_development/03_environment_setup.md)、日常の起動と確認コマンドは [ローカル開発手順](doc/05_development/04_local_development.md) を参照してください。
 
 ## ドキュメント
 
