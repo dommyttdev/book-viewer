@@ -24,6 +24,11 @@
 hs_err_pid*
 replay_pid*
 
+### Gradle ###
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
 ### NextJS ###
 # dependencies
 /node_modules
@@ -61,3 +66,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+### VS Code ###
+.vscode/
