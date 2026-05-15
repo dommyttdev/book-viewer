@@ -14,6 +14,7 @@
 | GitHub確認 | `gh issue view 48 --json ...` | issue #48の本文、受入条件、sub-issue #81から#88、Project status Todoを確認。 |
 | GitHub確認 | `gh issue view 81 --json ...` | issue #81の本文、受入条件、Project status Todoを確認。 |
 | GitHub確認 | `gh issue view 83 --repo dommyttdev/book-viewer` | issue #83の本文、受入条件、Project status Todoを確認。実際の環境構築は担当者が実施する前提で、Sprint S0の実装入力を整理する。 |
+| GitHub確認 | `gh issue view 84 --repo dommyttdev/book-viewer` | issue #84の本文、受入条件、ラベル `type:feature` / `area:worker` を確認。実際の環境構築は担当者が実施する前提で、Spring Initializr設定値と依存関係を整理する。 |
 | 設計確認 | #81プロジェクト構成とビルド方針 | `apps/frontend`、`apps/api`、`apps/worker`、`libs/backend-common`、Gradle Wrapper、npm、API / Worker別プロセス方針を決定。 |
 | フロントエンド確認 | `npx create-next-app@latest . --typescript --eslint --app --src-dir false --import-alias "@/*" --use-npm` | 成功。`apps/frontend/` にNext.js 16.2.6 / React 19.2.4 / TypeScript構成を作成。実際の構成は `src/app/`。 |
 | フロントエンド確認 | `npm.cmd run lint` | 成功。ESLintエラーなし。 |
@@ -25,13 +26,18 @@
 | API確認 | `.\gradlew.bat :apps:api:bootRun --args="--spring.profiles.active=local --server.port=18080 --debug=false"` | 成功。8080は既存プロセスと競合したため、確認時は18080を使用。Tomcat started on port 18080 と Started ApiApplication を確認。 |
 | API確認 | `Invoke-RestMethod http://localhost:18080/actuator/health` | 成功。`{"groups":["liveness","readiness"],"status":"UP"}` を確認。 |
 | APIログ確認 | 起動ログの秘密情報確認 | 成功。`generated security password`、`token`、`secret`、`PasswordConfigured` の実値出力がないことを確認。確認後、bootRun確認用プロセスを停止。 |
+| Worker確認 | `.\gradlew.bat :apps:worker:dependencies --configuration testRuntimeClasspath` | 成功。issue #84で定義したWorker用依存関係が解決できることを確認。 |
+| Worker確認 | `.\gradlew.bat :apps:worker:compileTestJava` | 成功。生成されたWorkerテストコードのコンパイルに必要な依存関係が揃っていることを確認。 |
+| Worker確認 | `.\gradlew.bat :apps:worker:test` | 成功。初回は生成直後の `@Import(TestcontainersConfiguration.class)` がDockerを要求して失敗したため、S0最小テストでは外部依存を起動しない構成へ修正した。 |
+| Worker確認 | `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local'` | 成功。`Started WorkerApplication` と `manga-worker started. Waiting for conversion jobs is not enabled in Sprint S0 minimal setup.` を確認。Workerは常駐するため、確認後に対象プロセスを停止した。 |
+| Workerログ確認 | 起動ログの秘密情報確認 | 成功。パスワード、トークン、シークレット、接続文字列の実値出力がないことを確認。 |
 
 ## 未実行のテスト
 
 | テスト | 未実行理由 | 次の扱い |
 | --- | --- | --- |
 | Spring Boot API起動テスト | APIプロジェクト生成後、`test`、`bootRun`、`/actuator/health` は確認済み。 | 外部依存接続は #86 で確認する。 |
-| Spring Boot Worker起動確認 | 今回は実際の基盤構築を行わない依頼のため。 | #84で実施する。 |
+| Spring Boot Worker外部依存接続確認 | S0のWorker最小確認では外部依存を必須にしないため。 | #86でPostgreSQL、RabbitMQ、Elasticsearch接続を確認する。 |
 | Docker Composeミドルウェア起動 | 今回は実際の基盤構築を行わない依頼のため。 | #85でPostgreSQL、Elasticsearch、RabbitMQを確認する。 |
 | PostgreSQL接続 / DBマイグレーション | 実装構成とマイグレーションツール未確定のため。 | #81で方針確定後、#86または#87で確認する。 |
 | Elasticsearch必須プラグイン確認 | Compose構成未作成のため。 | #85で起動確認、SPIKE-003 / PBI-014で詳細確認する。 |
@@ -64,6 +70,7 @@
 - `development/scrum/sprints/sprint-s0/planning.md`
 - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
 - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
+- `development/scrum/sprints/sprint-s0/issue-84-worker-minimal.md`
 - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
 - `development/scrum/sprints/sprint-s0/test-report.md`
 - `development/scrum/sprints/sprint-s0/review.md`
