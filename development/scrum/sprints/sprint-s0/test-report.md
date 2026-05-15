@@ -31,6 +31,16 @@
 | Worker確認 | `.\gradlew.bat :apps:worker:test` | 成功。初回は生成直後の `@Import(TestcontainersConfiguration.class)` がDockerを要求して失敗したため、S0最小テストでは外部依存を起動しない構成へ修正した。 |
 | Worker確認 | `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local'` | 成功。`Started WorkerApplication` と `manga-worker started. Waiting for conversion jobs is not enabled in Sprint S0 minimal setup.` を確認。Workerは常駐するため、確認後に対象プロセスを停止した。 |
 | Workerログ確認 | 起動ログの秘密情報確認 | 成功。パスワード、トークン、シークレット、接続文字列の実値出力がないことを確認。 |
+| Docker Compose確認 | `docker compose config` | Red確認では `compose.yaml` 未作成のため `no configuration file provided: not found` で失敗。実装後は成功し、`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
+| Docker Compose確認 | `docker compose up -d postgres elasticsearch rabbitmq` | 成功。初回はDocker Desktop Linux engineへ接続できず失敗したが、Docker Desktop起動後に権限付きで再実行して成功。Elasticsearchカスタムイメージのbuild、PostgreSQL / RabbitMQのpull、3サービス起動を確認。 |
+| Docker環境確認 | `docker version` | 成功。Docker Desktop 4.38.0、Docker Engine 27.5.1、context `desktop-linux` を確認。 |
+| Docker Compose状態確認 | `docker compose ps` | 成功。`manga-postgres`、`manga-elasticsearch`、`manga-rabbitmq` がすべてhealthy。 |
+| PostgreSQL確認 | `docker compose exec postgres pg_isready -U manga -d manga` | 成功。`/var/run/postgresql:5432 - accepting connections` を確認。 |
+| Elasticsearch確認 | `Invoke-RestMethod http://localhost:9200` | 成功。Elasticsearch 8.17.0のHTTP応答を確認。 |
+| Elasticsearchプラグイン確認 | `docker compose exec elasticsearch bin/elasticsearch-plugin list` / `http://localhost:9200/_cat/plugins` | 成功。`analysis-icu` と `analysis-kuromoji` を確認。 |
+| RabbitMQ確認 | `docker compose exec rabbitmq rabbitmqctl status` | 成功。RabbitMQ 4.3.0、AMQP 5672、管理UI 15672のlistenerを確認。 |
+| Docker Composeログ確認 | `docker compose logs --tail=30 postgres`、`elasticsearch`、`rabbitmq` | 成功。各サービスの起動ログを確認。ログに本番秘密情報、トークン、不要な個人情報は見当たらない。 |
+| Docker Compose停止確認 | `docker compose down` | 成功。3コンテナと既定ネットワークが停止、削除された。volumeは削除していない。 |
 
 ## 未実行のテスト
 
@@ -38,16 +48,17 @@
 | --- | --- | --- |
 | Spring Boot API起動テスト | APIプロジェクト生成後、`test`、`bootRun`、`/actuator/health` は確認済み。 | 外部依存接続は #86 で確認する。 |
 | Spring Boot Worker外部依存接続確認 | S0のWorker最小確認では外部依存を必須にしないため。 | #86でPostgreSQL、RabbitMQ、Elasticsearch接続を確認する。 |
-| Docker Composeミドルウェア起動 | 今回は実際の基盤構築を行わない依頼のため。 | #85でPostgreSQL、Elasticsearch、RabbitMQを確認する。 |
+| Docker Composeミドルウェア起動 | #85の範囲では確認済み。 | API / Workerからの外部依存接続は #86 で確認する。 |
 | PostgreSQL接続 / DBマイグレーション | 実装構成とマイグレーションツール未確定のため。 | #81で方針確定後、#86または#87で確認する。 |
-| Elasticsearch必須プラグイン確認 | Compose構成未作成のため。 | #85で起動確認、SPIKE-003 / PBI-014で詳細確認する。 |
-| RabbitMQ接続確認 | Compose構成未作成のため。 | #85 / #86で確認する。 |
+| Elasticsearch必須プラグイン確認 | #85の範囲では確認済み。 | 検索実装上の詳細確認はSPIKE-003 / PBI-014で扱う。 |
+| RabbitMQ接続確認 | #85の範囲では `rabbitmqctl status` を確認済み。 | API / Workerからの接続は #86 で確認する。 |
 | ログの秘密情報確認 | 実アプリケーションログ未生成のため。 | #87で起動確認時に確認する。 |
 
 ## 確認した異常系
 
 - PowerShellで `npm --version` を実行すると、`npm.ps1` が実行ポリシーによりブロックされる可能性がある。
 - Docker / Docker Composeはバージョン取得できるが、Docker設定ファイルへのアクセス拒否警告が出る環境がある。
+- Docker daemonへ接続できない場合、`docker compose config` は成功しても `docker compose up`、`docker compose ps`、`docker version` のServer確認は失敗する。Docker Desktop起動後、権限付き実行では `desktop-linux` contextで確認できた。
 - `gradle` はグローバルコマンドとして利用できないため、実装時はWrapperを前提にするのが安全である。
 - `create-next-app` の実行結果は、当初想定した `app/` 直下ではなく `src/app/` 構成である。Next.jsの最小構成として問題ないため、Sprint S0では生成結果を採用する。
 - `package.json` には `typecheck` script が未追加である。必要に応じて `tsc --noEmit` を追加する。
@@ -61,8 +72,9 @@
 - Sprint S0の完了には、#81から#88の実作業、起動確認、テスト、ドキュメント更新が必要。
 - Spring Boot APIはSpring Initializr生成物を `apps/api/` に配置済み。生成時のgroup / packageは `com.dommy.manga` / `com.dommy.manga.api` を採用する。
 - #83ではルートGradle Wrapperと `settings.gradle.kts` を追加し、`:apps:api:test`、`:apps:api:bootRun`、`/actuator/health` を確認した。8080競合のため、HTTP疎通確認は18080で実施した。
-- Elasticsearch必須プラグインの導入方式は、S0ではCompose手順に前提を残し、検索実装の詳細とは分離する必要がある。
+- Elasticsearch必須プラグインの導入方式は、`docker/elasticsearch/Dockerfile` で `analysis-kuromoji` と `analysis-icu` を導入する方針にした。実際のプラグイン導入は `_cat/plugins` で確認済み。
 - Docker設定ファイルのアクセス拒否がCompose起動時にも影響する場合、ローカル環境側の権限調整が必要になる。
+- #85では `compose.yaml`、`.env.example`、`docker/elasticsearch/Dockerfile` を追加した。`.env.example` は安全なサンプル値のみを含み、実値を含む `.env` はGit管理外とする。PostgreSQL、Elasticsearch、RabbitMQの実コンテナ起動、状態確認、ログ確認、停止確認は完了。
 - 設計判断を先行するsub-issueの完了扱いは、[Definition of Done](../../../../doc/05_development/05_definition_of_done.md#設計判断を先行するsub-issueの扱い) を参照する。
 
 ## 更新したドキュメント
@@ -71,6 +83,7 @@
 - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
 - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
 - `development/scrum/sprints/sprint-s0/issue-84-worker-minimal.md`
+- `development/scrum/sprints/sprint-s0/issue-85-local-middleware-compose.md`
 - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
 - `development/scrum/sprints/sprint-s0/test-report.md`
 - `development/scrum/sprints/sprint-s0/review.md`
