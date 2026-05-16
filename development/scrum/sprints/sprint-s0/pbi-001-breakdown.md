@@ -25,21 +25,21 @@
 
 ## 受入条件
 
-- [ ] プロジェクト構成が決まり、フロントエンド、API、Workerのディレクトリ、ビルドツール、起動単位がREADMEまたは開発手順から分かる。
-- [ ] Next.jsフロントエンドの最小構成が作成され、ローカルで開発サーバを起動できる。
-- [ ] Spring Boot 4.0.6 / Java 25 のバックエンドAPI最小構成が作成され、ローカルで起動できる。
-- [ ] バックエンドAPIにヘルスチェックまたは同等の疎通確認手段があり、起動確認に利用できる。
-- [ ] Spring Boot 4.0.6 / Java 25 の変換ワーカー最小構成が作成され、APIとは別プロセスまたは別起動モードとしてローカルで起動できる。
-- [ ] PostgreSQL、Elasticsearch、RabbitMQをDocker Composeでローカル起動できる。
-- [ ] Docker Composeでミドルウェアの状態確認、ログ確認、停止ができる。
-- [ ] APIとWorkerのローカル設定で、PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパスを環境差分として扱える。
-- [ ] Elasticsearch必須プラグインの扱いは技術スタックを参照し、PBI-001で実装する範囲とSPIKE-003 / PBI-014へ委ねる範囲を明記する。
-- [ ] WebP品質値の既定値80を設定可能値として扱う方針が、APIまたはWorkerの設定に反映されるか、後続実装で反映する場所が明記されている。
+- [x] プロジェクト構成が決まり、フロントエンド、API、Workerのディレクトリ、ビルドツール、起動単位がREADMEまたは開発手順から分かる。
+- [x] Next.jsフロントエンドの最小構成が作成され、ローカルで開発サーバを起動できる。
+- [x] Spring Boot 4.0.6 / Java 25 のバックエンドAPI最小構成が作成され、ローカルで起動できる。
+- [x] バックエンドAPIにヘルスチェックまたは同等の疎通確認手段があり、起動確認に利用できる。
+- [x] Spring Boot 4.0.6 / Java 25 の変換ワーカー最小構成が作成され、APIとは別プロセスまたは別起動モードとしてローカルで起動できる。
+- [x] PostgreSQL、Elasticsearch、RabbitMQをDocker Composeでローカル起動できる。
+- [x] Docker Composeでミドルウェアの状態確認、ログ確認、停止ができる。
+- [x] APIとWorkerのローカル設定で、PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパスを環境差分として扱える。
+- [x] Elasticsearch必須プラグインの扱いは技術スタックを参照し、PBI-001で実装する範囲とSPIKE-003 / PBI-014へ委ねる範囲を明記する。
+- [x] WebP品質値の既定値80を設定可能値として扱う方針が、APIまたはWorkerの設定に反映されるか、後続実装で反映する場所が明記されている。
 - [x] フロントエンド、API、Workerについて、最低限のテストまたは起動確認コマンドが用意されている。
-- [ ] ローカル起動時のログに、シークレット、パスワード、トークン、不要な個人情報が出力されないことを確認する。
-- [ ] `doc/05_development/03_environment_setup.md` と `doc/05_development/04_local_development.md` の仮コマンド、サービス名、ディレクトリ名が実構成に合わせて更新されている。
-- [ ] 変更に応じて `doc/TODO.md` の関連項目と本Issueのチェックリストが更新されている。
-- [ ] 完了時に、実行した起動確認、テスト、手動確認の結果をIssueまたはPull Requestへ記録している。
+- [x] ローカル起動時のログに、シークレット、パスワード、トークン、不要な個人情報が出力されないことを確認する。
+- [x] `doc/05_development/03_environment_setup.md` と `doc/05_development/04_local_development.md` の仮コマンド、サービス名、ディレクトリ名が実構成に合わせて更新されている。
+- [x] 変更に応じて `doc/TODO.md` の関連項目と本Issueのチェックリストが更新されている。
+- [x] 完了時に、実行した起動確認、テスト、手動確認の結果をIssueまたはPull Requestへ記録している。
 
 ## TDD観点
 
@@ -53,35 +53,45 @@
 
 ## 実装タスク
 
-- [ ] Red: APIヘルスチェックまたはアプリケーションコンテキスト起動確認の失敗テストを追加する。
-- [ ] Green: Spring Boot API最小構成を追加し、テストを通す。
-- [ ] Refactor: API、Worker、共通設定、インフラ設定の責務境界を見直す。
-- [ ] Document: 実構成に合わせてローカル開発手順、環境構築手順、TODO、Issueチェックリストを更新する。
+- [x] Red: APIヘルスチェックまたはアプリケーションコンテキスト起動確認の失敗テストを追加する。
+- [x] Green: Spring Boot API最小構成を追加し、テストを通す。
+- [x] Refactor: API、Worker、共通設定、インフラ設定の責務境界を見直す。
+- [x] Document: 実構成に合わせてローカル開発手順、環境構築手順、TODO、Issueチェックリストを更新する。
 
 ## sub-issueへの分割
 
 | Issue | Red / Green / Documentの焦点 |
 | --- | --- |
 | #81 | 完了。`issue-81-project-structure.md` で構成とビルドツールを確定し、以後のsub-issueが同じ前提で進められるようにした。 |
-| #82 | `issue-82-frontend-minimal.md` で実装入力を整理済み。Next.jsの最小起動、lint、typecheck、build、API接続先設定を確認する。実際の依存関係インストールと起動確認は環境構築担当が実施する。 |
+| #82 | 完了。`issue-82-frontend-minimal.md` で実装入力を整理し、Next.jsの最小起動、lint、typecheck、build、API接続先設定を確認した。 |
 | #83 | `issue-83-api-minimal.md` で実装入力と実施結果を整理済み。Spring Boot API最小構成、ルートGradle統合、最小テスト、bootRun、`/actuator/health` を確認した。 |
-| #84 | Workerの起動単位、プロファイル、設定読み込みを確認する。 |
-| #85 | PostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認する。 |
-| #86 | API / Workerの外部依存接続と環境変数差し替えを確認する。 |
+| #84 | 完了。`issue-84-worker-minimal.md` でWorkerの起動単位、プロファイル、設定読み込みを確認した。 |
+| #85 | 完了。`issue-85-local-middleware-compose.md` でPostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認した。 |
+| #86 | 完了。`issue-86-api-worker-local-dependencies.md` でAPI / Workerの外部依存接続と環境変数差し替えを確認した。 |
 | #87 | 完了。`issue-87-minimal-test-commands.md` で各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備した。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
-| #88 | 実装結果を開発手順、環境構築手順、TODO、Issueへ反映する。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新で扱う。 |
+| #88 | 完了。`issue-88-local-development-docs.md` で実装結果を開発手順、環境構築手順、TODO、Issueへ反映した。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新へ反映済み。 |
 
 ## 完了メモ
 
-- 実行したテスト: #87で `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、フロントエンド開発サーバHTTP 200、`.\gradlew.bat :apps:api:test :apps:worker:test`、`docker compose config` を確認した。詳細は `test-report.md` に記録する。
-- 手動確認: Java、Node.js、Docker、Docker Compose、Gradle、npmの利用可否を確認した。
-- 未対応事項: 実際のNext.js / Spring Boot / Docker Compose構成作成、起動確認、テスト追加、Issueチェックリスト更新。
+- 実行したテスト: #87 / #88で `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、フロントエンド開発サーバHTTP 200、`.\gradlew.bat :apps:api:test :apps:worker:test`、`docker compose config` を確認した。詳細は `test-report.md` に記録済み。
+- 手動確認: Java、Node.js、Docker、Docker Compose、Gradle、npmの利用可否、PostgreSQL、Elasticsearch、RabbitMQの起動、状態、ログ、停止、API / Worker local profileの外部依存疎通を確認した。
+- 未対応事項: 業務API、認証、アップロード、変換ジョブ、検索インデックスなどのPBI-001対象外機能。7-Zip実行確認はローカルPATHで未検出のため、後続の変換実装またはWorkerコンテナ化で扱う。
 - 更新したドキュメント:
   - `development/scrum/sprints/sprint-s0/planning.md`
   - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
+  - `development/scrum/sprints/sprint-s0/issue-82-frontend-minimal.md`
   - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
+  - `development/scrum/sprints/sprint-s0/issue-84-worker-minimal.md`
+  - `development/scrum/sprints/sprint-s0/issue-85-local-middleware-compose.md`
+  - `development/scrum/sprints/sprint-s0/issue-86-api-worker-local-dependencies.md`
   - `development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md`
+  - `development/scrum/sprints/sprint-s0/issue-88-local-development-docs.md`
   - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
   - `development/scrum/sprints/sprint-s0/review.md`
   - `development/scrum/sprints/sprint-s0/retrospective.md`
+  - `README.md`
+  - `doc/05_development/00_project_structure.md`
+  - `doc/05_development/03_environment_setup.md`
+  - `doc/05_development/04_local_development.md`
+  - `doc/05_development/05_definition_of_done.md`
