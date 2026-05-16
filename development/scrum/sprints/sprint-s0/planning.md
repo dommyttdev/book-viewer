@@ -30,7 +30,7 @@
 | #85 | ローカルミドルウェアのDocker Composeを用意する。 | #81と並行可能。 | PostgreSQL、Elasticsearch、RabbitMQの起動、状態確認、ログ確認、停止ができる。 |
 | #86 | APIとWorkerのローカル設定と外部依存の疎通確認を整える。 | #83、#84、#85の後。 | PostgreSQL、Elasticsearch、RabbitMQ、保存領域、Worker作業ディレクトリ、7-Zipパス、WebP品質値を環境差分として扱える。 |
 | #87 | 最小テストと確認コマンドを整備する。 | #82から#86の実装に合わせて実施する。 | フロントエンド、API、Worker、ミドルウェアの最小確認コマンドが記録されている。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
-| #88 | ローカル開発手順とTODOを実装結果に合わせて更新する。 | 最後に実施する。 | `doc/05_development/03_environment_setup.md`、`doc/05_development/04_local_development.md`、`doc/TODO.md`、issue #48のチェックリストが実構成と整合している。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` を `.env.example` と手順に反映する。 |
+| #88 | ローカル開発手順とTODOを実装結果に合わせて更新する。 | 最後に実施する。 | 完了。`doc/05_development/03_environment_setup.md`、`doc/05_development/04_local_development.md`、`doc/TODO.md`、issue #48のチェックリストが実構成と整合している。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` を `.env.example` と手順に反映した。 |
 
 ## タスク分解
 
@@ -44,6 +44,7 @@
 | PBI-001のTDD分解を作成する。 | ドキュメント | シニアアーキテクト | `pbi-001-breakdown.md` にテスト観点と実装着手前のRed方針が記録されている。 |
 | 環境確認結果を記録する。 | ドキュメント | シニアアーキテクト | 実装前のローカル前提確認と注意点が `test-report.md` に記録されている。 |
 | #87の最小テストと確認コマンドを整備する。 | 実装 / ドキュメント | シニアアーキテクト | フロントエンド、API、Worker、Docker Composeの最小確認コマンドが `issue-87-minimal-test-commands.md` とローカル開発手順へ記録され、フロントエンドの `typecheck` scriptが実行できる。 |
+| #88のローカル開発手順とTODOを更新する。 | 実装 / ドキュメント | シニアアーキテクト | 完了。`issue-88-local-development-docs.md`、`.env.example`、環境構築手順、ローカル開発手順、TODOへ実構成を反映した。 |
 | 実装担当へ渡すDoDを整理する。 | ドキュメント | シニアアーキテクト | 実装時に満たすべき受入条件、ログ、安全性、ドキュメント更新が追跡可能である。 |
 
 ## リスク

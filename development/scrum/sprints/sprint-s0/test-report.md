@@ -20,6 +20,7 @@
 | フロントエンド確認 | `npm.cmd run lint` | 成功。ESLintエラーなし。 |
 | フロントエンド確認 | `npm.cmd run typecheck` | 成功。#87で `typecheck` scriptを追加し、`tsc --noEmit` で型エラーなしを確認。 |
 | フロントエンド確認 | `npm.cmd run build` | 成功。Turbopackでコンパイル、TypeScript確認、`/` と `/_not-found` の静的生成が完了。 |
+| フロントエンド確認 | #88 `NEXT_PUBLIC_API_BASE_URL` 反映後の `npm.cmd run lint` / `npm.cmd run typecheck` / `npm.cmd run build` | 成功。`process.env.NEXT_PUBLIC_API_BASE_URL` を読む最小導線を追加した状態で、lint、型チェック、ビルドが成功。 |
 | フロントエンド確認 | `npm.cmd run dev` | 成功。Next.js 16.2.6 / Turbopackで起動。#87では `http://127.0.0.1:3000` がHTTP 200を返すことを確認し、確認後にプロセスを停止。 |
 | フロントエンド確認 | `GET /` | 成功。`GET / 200` を確認。 |
 | フロントエンド確認 | `git check-ignore -v apps\frontend\node_modules apps\frontend\.next apps\frontend\next-env.d.ts` | 成功。`node_modules/`、`.next/`、`next-env.d.ts` は `apps/frontend/.gitignore` でignore済み。 |
@@ -34,6 +35,7 @@
 | Workerログ確認 | 起動ログの秘密情報確認 | 成功。パスワード、トークン、シークレット、接続文字列の実値出力がないことを確認。 |
 | Docker Compose確認 | `docker compose config` | Red確認では `compose.yaml` 未作成のため `no configuration file provided: not found` で失敗。実装後は成功し、`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
 | Docker Compose確認 | `docker compose config` | #87で再確認。`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
+| Docker Compose確認 | #88 `docker compose config` | 成功。`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
 | Docker Compose確認 | `docker compose up -d postgres elasticsearch rabbitmq` | 成功。初回はDocker Desktop Linux engineへ接続できず失敗したが、Docker Desktop起動後に権限付きで再実行して成功。Elasticsearchカスタムイメージのbuild、PostgreSQL / RabbitMQのpull、3サービス起動を確認。 |
 | Docker環境確認 | `docker version` | 成功。Docker Desktop 4.38.0、Docker Engine 27.5.1、context `desktop-linux` を確認。 |
 | Docker Compose状態確認 | `docker compose ps` | 成功。`manga-postgres`、`manga-elasticsearch`、`manga-rabbitmq` がすべてhealthy。 |
@@ -44,6 +46,7 @@
 | Docker Composeログ確認 | `docker compose logs --tail=30 postgres`、`elasticsearch`、`rabbitmq` | 成功。各サービスの起動ログを確認。ログに本番秘密情報、トークン、不要な個人情報は見当たらない。 |
 | Docker Compose停止確認 | `docker compose down` | 成功。3コンテナと既定ネットワークが停止、削除された。volumeは削除していない。 |
 | API / Worker設定テスト | `.\gradlew.bat :apps:api:test :apps:worker:test` | 成功。APIの `BookStorageProperties`、Workerの `BookStorageProperties` / `ConversionProperties` が外部依存なしのテストでバインドできることを確認。 |
+| API / Worker設定テスト | #88 `.\gradlew.bat :apps:api:test :apps:worker:test` | 初回はGradle Wrapper配布物取得がネットワーク制限で失敗。権限付き再実行で成功。 |
 | API local外部依存確認 | `.\gradlew.bat :apps:api:bootRun --args='--spring.profiles.active=local --server.port=18081 --debug=false'` 後に `Invoke-RestMethod http://localhost:18081/actuator/health` | 成功。health詳細で `db=UP`、`elasticsearch=UP`、`rabbit=UP` を確認。PostgreSQL 17.10、Elasticsearch cluster `docker-cluster` green、RabbitMQ 4.3.0。 |
 | Worker local外部依存確認 | `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local --debug=false'` | 成功。起動ログでPostgreSQL接続、RabbitMQ接続、`manga-worker local dependency health: db=UP, elasticsearch=UP, rabbit=UP` を確認。 |
 | 7-Zip確認 | `Get-Command 7z` | 未検出。`SEVENZIP_EXECUTABLE_PATH` で差し替え可能な設定は追加済み。実行確認は7-Zip導入後またはWorkerコンテナ化時に行う。 |
@@ -85,6 +88,7 @@
 - #85では `compose.yaml`、`.env.example`、`docker/elasticsearch/Dockerfile` を追加した。`.env.example` は安全なサンプル値のみを含み、実値を含む `.env` はGit管理外とする。PostgreSQL、Elasticsearch、RabbitMQの実コンテナ起動、状態確認、ログ確認、停止確認は完了。
 - #86ではAPI / Workerの `local` プロファイルでPostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパス、WebP品質値を設定から扱えるようにした。API healthとWorker local health loggerで外部依存疎通を確認済み。7-ZipはローカルPATH未設定のため実行未確認。
 - #87ではフロントエンドの `lint`、`typecheck`、`build`、開発サーバHTTP 200、API / Workerの最小テスト、Docker Compose `config` を確認済み。API / Workerの `local` profile起動とミドルウェア実疎通は#86の確認結果を最小確認コマンドとして引き継ぐ。
+- #88では `NEXT_PUBLIC_API_BASE_URL` によるフロントエンドのローカルAPI接続先差し替え導線を追加し、`.env.example`、環境構築手順、ローカル開発手順、TODOを実構成へ更新した。`npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、`.\gradlew.bat :apps:api:test :apps:worker:test`、`docker compose config` は成功。
 - 設計判断を先行するsub-issueの完了扱いは、[Definition of Done](../../../../doc/05_development/05_definition_of_done.md#設計判断を先行するsub-issueの扱い) を参照する。
 
 ## 更新したドキュメント
@@ -96,6 +100,7 @@
 - `development/scrum/sprints/sprint-s0/issue-85-local-middleware-compose.md`
 - `development/scrum/sprints/sprint-s0/issue-86-api-worker-local-dependencies.md`
 - `development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md`
+- `development/scrum/sprints/sprint-s0/issue-88-local-development-docs.md`
 - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
 - `development/scrum/sprints/sprint-s0/test-report.md`
 - `development/scrum/sprints/sprint-s0/review.md`

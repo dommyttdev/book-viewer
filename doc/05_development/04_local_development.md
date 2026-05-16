@@ -19,9 +19,9 @@
 ## 基本の開発フロー
 
 1. [doc/TODO.md](../TODO.md) と関連Issueを確認する。
-2. 必要な環境変数を `.env` などのGit管理外ファイルへ設定する。
+2. `.env.example` を `.env` へコピーし、必要な環境変数をGit管理外ファイルへ設定する。
 3. Docker ComposeでPostgreSQL、Elasticsearch、RabbitMQを起動する。
-4. DBマイグレーションまたは初期化処理を実行する。
+4. Sprint S0ではDBマイグレーションを無効のまま起動する。業務スキーマ追加後はDBマイグレーションまたは初期化処理を実行する。
 5. Spring BootバックエンドAPIを起動する。
 6. Spring Boot変換ワーカーを起動する。
 7. Next.jsフロントエンドを起動する。
@@ -59,7 +59,18 @@ docker compose logs --tail=200 rabbitmq
 docker compose down
 ```
 
-サービス名は候補であり、実際のCompose定義に合わせて更新する。データボリュームを削除するコマンドは、開発用データを初期化してよい場合だけ実行する。
+Sprint S0のサービス名は `postgres`、`elasticsearch`、`rabbitmq` である。データボリュームを削除するコマンドは、開発用データを初期化してよい場合だけ実行する。
+
+疎通確認:
+
+```bash
+docker compose exec postgres pg_isready -U manga -d manga
+curl http://localhost:9200
+docker compose exec elasticsearch bin/elasticsearch-plugin list
+docker compose exec rabbitmq rabbitmqctl status
+```
+
+Windows PowerShellでは、ElasticsearchのHTTP確認に `Invoke-RestMethod http://localhost:9200` を使用できる。
 
 ## Spring BootバックエンドAPIの起動
 
@@ -78,10 +89,10 @@ docker compose down
 起動コマンド:
 
 ```bash
-./gradlew :apps:api:bootRun --args='--spring.profiles.active=local'
+./gradlew :apps:api:bootRun --args='--spring.profiles.active=local --server.port=18081 --debug=false'
 ```
 
-Windows PowerShellで実行する場合は `.\gradlew.bat :apps:api:bootRun --args='--spring.profiles.active=local'` を使用する。
+Windows PowerShellで実行する場合は `.\gradlew.bat :apps:api:bootRun --args='--spring.profiles.active=local --server.port=18081 --debug=false'` を使用する。8080が空いている場合は、ポート指定を省略してもよい。
 
 起動後の確認:
 
@@ -89,6 +100,14 @@ Windows PowerShellで実行する場合は `.\gradlew.bat :apps:api:bootRun --ar
 - PostgreSQL、Elasticsearch、RabbitMQへの接続エラーが出ていない。
 - ログにシークレットや不要な個人情報が出ていない。
 - アップロード、検索、閲覧などの主要APIが実装済み範囲で応答する。
+
+health確認:
+
+```bash
+curl http://localhost:18081/actuator/health
+```
+
+Windows PowerShellでは `Invoke-RestMethod http://localhost:18081/actuator/health` を使用する。
 
 ## Spring Boot変換ワーカーの起動
 
@@ -107,10 +126,10 @@ Windows PowerShellで実行する場合は `.\gradlew.bat :apps:api:bootRun --ar
 起動コマンド:
 
 ```bash
-./gradlew :apps:worker:bootRun --args='--spring.profiles.active=local'
+./gradlew :apps:worker:bootRun --args='--spring.profiles.active=local --debug=false'
 ```
 
-Windows PowerShellで実行する場合は `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local'` を使用する。
+Windows PowerShellで実行する場合は `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local --debug=false'` を使用する。
 
 起動後の確認:
 
@@ -119,6 +138,7 @@ Windows PowerShellで実行する場合は `.\gradlew.bat :apps:worker:bootRun -
 - 7-Zip実行ファイルパスの設定が読み込まれている。
 - Worker作業ディレクトリの作成または利用に失敗していない。
 - 起動直後に不要な変換ジョブを実行していない。
+- 起動ログに `manga-worker local dependency health: db=UP, elasticsearch=UP, rabbit=UP` が出ている。
 
 ## Next.jsフロントエンドの起動
 
@@ -128,8 +148,16 @@ Windows PowerShellで実行する場合は `.\gradlew.bat :apps:worker:bootRun -
 
 - Node.jsを使用できる。
 - パッケージ依存関係をインストール済みである。
-- APIの接続先URLが環境変数で設定されている。
+- APIの接続先URLが `NEXT_PUBLIC_API_BASE_URL` で設定されている。
 - ブラウザへ公開してよい値だけをNext.jsの公開環境変数として扱っている。
+
+ローカルAPI接続先:
+
+```dotenv
+NEXT_PUBLIC_API_BASE_URL=http://localhost:18081
+```
+
+`NEXT_PUBLIC_` が付いた値はブラウザへ公開されるため、秘密情報を入れない。APIのポートを変える場合は `.env` の `NEXT_PUBLIC_API_BASE_URL` も合わせて変更する。
 
 依存関係インストール:
 
@@ -144,7 +172,7 @@ npm install
 npm run dev
 ```
 
-Windows PowerShellで `npm.ps1` が実行ポリシーによりブロックされる場合は、`npm.cmd install`、`npm.cmd run dev` を使用する。
+Windows PowerShellで `npm.ps1` が実行ポリシーによりブロックされる場合は、`npm.cmd install`、`npm.cmd run dev` を使用する。Sprint S0の確認コマンドでは `npm.cmd` を正として記録している。
 
 起動後の確認:
 
@@ -226,6 +254,12 @@ Windows PowerShellで実行する場合は、`npm` の代わりに `npm.cmd` を
 ./gradlew test
 ```
 
+Sprint S0のAPI / Worker最小テスト:
+
+```bash
+./gradlew :apps:api:test :apps:worker:test
+```
+
 APIのみ:
 
 ```bash
@@ -288,8 +322,9 @@ docker compose logs -f worker
 | バックエンドテスト | `./gradlew test` |
 | APIテスト | `./gradlew :apps:api:test` |
 | Workerテスト | `./gradlew :apps:worker:test` |
-| API起動 | `./gradlew :apps:api:bootRun --args='--spring.profiles.active=local'` |
-| Worker起動 | `./gradlew :apps:worker:bootRun --args='--spring.profiles.active=local'` |
+| API起動 | `./gradlew :apps:api:bootRun --args='--spring.profiles.active=local --server.port=18081 --debug=false'` |
+| API health確認 | `curl http://localhost:18081/actuator/health` |
+| Worker起動 | `./gradlew :apps:worker:bootRun --args='--spring.profiles.active=local --debug=false'` |
 | フロントエンド依存関係インストール | `cd apps/frontend && npm install` |
 | フロントエンドlint | `cd apps/frontend && npm run lint` |
 | フロントエンド型チェック | `cd apps/frontend && npm run typecheck` |
@@ -305,7 +340,7 @@ Windows PowerShellで `npm.ps1` が実行ポリシーによりブロックされ
 | --- | --- |
 | APIが起動しない | Java 25、環境変数、PostgreSQL接続、ポート競合を確認する。 |
 | Workerがジョブを取得しない | RabbitMQ接続、キュー名、Worker起動プロファイル、同時実行数を確認する。 |
-| 7-Zip実行に失敗する | `SEVEN_ZIP_PATH`、実行権限、コンテナ内配置、対象アーカイブ形式を確認する。 |
+| 7-Zip実行に失敗する | `SEVENZIP_EXECUTABLE_PATH`、実行権限、コンテナ内配置、対象アーカイブ形式を確認する。 |
 | 検索結果が古い | PostgreSQLを正として、Elasticsearch再インデックス対象か確認する。 |
 | Elasticsearchインデックス作成に失敗する | `_cat/plugins`で技術スタック上の必須プラグインが導入済みか確認し、不足している場合はElasticsearchイメージまたはコンテナを修正して再起動する。 |
 | 画像が表示されない | PostgreSQLのページ情報、WebP保存領域、APIの画像配信、ファイル権限を確認する。 |
