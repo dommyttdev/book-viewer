@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { apiBaseUrl } from "@/lib/runtimeConfig";
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -32,6 +34,9 @@ export default function Home() {
               Learning
             </a>{" "}
             center.
+          </p>
+          <p className="max-w-md text-sm leading-6 text-zinc-500 dark:text-zinc-500">
+            Local API: {apiBaseUrl}
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
