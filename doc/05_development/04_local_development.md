@@ -206,6 +206,20 @@ DBマイグレーションツールは実装時に確定する。Flywayまたは
 
 変更範囲に応じて、単体テスト、結合テスト、E2Eテスト、手動確認を使い分ける。
 
+Sprint S0の最小確認コマンドは [Issue #87の作業記録](../../development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md) を正本とする。後続PBIでテスト種別が増えた場合も、短時間で基盤破損を検出する最小セットはこの節へ反映する。
+
+フロントエンドの最小確認:
+
+```bash
+cd apps/frontend
+npm run lint
+npm run typecheck
+npm run build
+npm run dev
+```
+
+Windows PowerShellで実行する場合は、`npm` の代わりに `npm.cmd` を使用できる。
+
 バックエンドのテスト例:
 
 ```bash
@@ -277,6 +291,9 @@ docker compose logs -f worker
 | API起動 | `./gradlew :apps:api:bootRun --args='--spring.profiles.active=local'` |
 | Worker起動 | `./gradlew :apps:worker:bootRun --args='--spring.profiles.active=local'` |
 | フロントエンド依存関係インストール | `cd apps/frontend && npm install` |
+| フロントエンドlint | `cd apps/frontend && npm run lint` |
+| フロントエンド型チェック | `cd apps/frontend && npm run typecheck` |
+| フロントエンドビルド | `cd apps/frontend && npm run build` |
 | フロントエンド起動 | `cd apps/frontend && npm run dev` |
 | フロントエンドテスト | `cd apps/frontend && npm test` |
 

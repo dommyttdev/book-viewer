@@ -80,7 +80,7 @@ apps/frontend/
 | `build` | 本番ビルド確認 |
 | `start` | ビルド済みアプリ起動 |
 | `lint` | Next.js / ESLint確認 |
-| `typecheck` | TypeScript型チェック。現時点の `package.json` には未追加。必要に応じて `tsc --noEmit` を追加する。 |
+| `typecheck` | TypeScript型チェック。#87で `tsc --noEmit` として追加済み。 |
 
 確認コマンド:
 
@@ -117,7 +117,7 @@ npm.cmd run dev
 ## 実装タスク
 
 - [x] Red: `apps/frontend/` が存在しない、または `npm run build` を実行できない状態を確認する。
-- [x] Green: Next.js最小構成を追加し、`npm install`、`npm run lint`、`npm run build`、`npm run dev` が成功する状態にする。`typecheck` scriptは未追加。
+- [x] Green: Next.js最小構成を追加し、`npm install`、`npm run lint`、`npm run build`、`npm run dev` が成功する状態にする。`typecheck` scriptは#87で追加済み。
 - [~] Refactor: 最小画面、環境変数名、npm scriptsが後続の業務画面実装を妨げないか確認する。
 - [~] Document: 実構成に合わせて `development/scrum/sprints/sprint-s0/test-report.md` を更新する。`doc/05_development/03_environment_setup.md`、`doc/05_development/04_local_development.md` は #88 でまとめて更新する。
 
@@ -151,6 +151,7 @@ npm.cmd run dev
 | React | 19.2.4 |
 | TypeScript | `^5` |
 | `npm.cmd run lint` | 成功。ESLintエラーなし。 |
+| `npm.cmd run typecheck` | 成功。`tsc --noEmit` で型エラーなし。 |
 | `npm.cmd run build` | 成功。Turbopackで `/` と `/_not-found` の静的生成を確認。 |
 | `npm.cmd run dev` | 成功。Local URLは `http://localhost:3000`、Network URLは `http://192.168.0.10:3000`。 |
 | 最小画面応答 | 成功。`GET / 200` を確認。 |
@@ -158,9 +159,9 @@ npm.cmd run dev
 
 ## 現時点の完了メモ
 
-- 実行したテスト: `npm.cmd run lint`、`npm.cmd run build`、`npm.cmd run dev`。
+- 実行したテスト: `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、`npm.cmd run dev`。
 - 手動確認: GitHub Issue #82の本文、受入条件、親Issue #48との関係、生成ディレクトリ構成、ignore設定を確認した。
-- 未対応事項: `typecheck` script追加、API接続先環境変数の最小表示または設定、issueチェックリスト更新。`vercel.svg` の画像比率警告は生成直後テンプレート由来で、S0の起動基盤としてはブロッカーにしない。
+- 未対応事項: API接続先環境変数の最小表示または設定、issueチェックリスト更新。`vercel.svg` の画像比率警告は生成直後テンプレート由来で、S0の起動基盤としてはブロッカーにしない。
 - 更新したドキュメント:
   - `development/scrum/sprints/sprint-s0/issue-82-frontend-minimal.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
@@ -169,7 +170,6 @@ npm.cmd run dev
 
 | 項目 | 引き継ぎ先 | 理由 | 推奨する受け入れ条件 |
 | --- | --- | --- | --- |
-| `typecheck` script追加 | #87 最小テストと確認コマンドを整備する | フロントエンドの最小確認コマンドに含めるのが自然であり、#82の最小起動とは分離できる。 | フロントエンドの最小確認コマンドとして `lint`、`typecheck`、`build`、開発サーバ起動確認が用意されている。 |
 | `NEXT_PUBLIC_API_BASE_URL` の最小設定 | #88 ローカル開発手順とTODOを実装結果に合わせて更新する | フロントエンド単体起動は完了しており、API接続先はローカル開発手順、`.env.example`、実構成の整合として扱うのが自然である。 | フロントエンドのローカルAPI接続先を `NEXT_PUBLIC_API_BASE_URL` で差し替えられることが `.env.example` とローカル開発手順に記録されている。 |
 
 #86はAPIとWorkerのローカル設定、外部依存疎通を主対象にしているため、フロントエンド公開環境変数は#88へ寄せる。

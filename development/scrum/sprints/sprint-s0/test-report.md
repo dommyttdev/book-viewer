@@ -18,8 +18,9 @@
 | 設計確認 | #81プロジェクト構成とビルド方針 | `apps/frontend`、`apps/api`、`apps/worker`、`libs/backend-common`、Gradle Wrapper、npm、API / Worker別プロセス方針を決定。 |
 | フロントエンド確認 | `npx create-next-app@latest . --typescript --eslint --app --src-dir false --import-alias "@/*" --use-npm` | 成功。`apps/frontend/` にNext.js 16.2.6 / React 19.2.4 / TypeScript構成を作成。実際の構成は `src/app/`。 |
 | フロントエンド確認 | `npm.cmd run lint` | 成功。ESLintエラーなし。 |
+| フロントエンド確認 | `npm.cmd run typecheck` | 成功。#87で `typecheck` scriptを追加し、`tsc --noEmit` で型エラーなしを確認。 |
 | フロントエンド確認 | `npm.cmd run build` | 成功。Turbopackでコンパイル、TypeScript確認、`/` と `/_not-found` の静的生成が完了。 |
-| フロントエンド確認 | `npm.cmd run dev` | 成功。Next.js 16.2.6 / Turbopackで起動。Local URLは `http://localhost:3000`、Network URLは `http://192.168.0.10:3000`。 |
+| フロントエンド確認 | `npm.cmd run dev` | 成功。Next.js 16.2.6 / Turbopackで起動。#87では `http://127.0.0.1:3000` がHTTP 200を返すことを確認し、確認後にプロセスを停止。 |
 | フロントエンド確認 | `GET /` | 成功。`GET / 200` を確認。 |
 | フロントエンド確認 | `git check-ignore -v apps\frontend\node_modules apps\frontend\.next apps\frontend\next-env.d.ts` | 成功。`node_modules/`、`.next/`、`next-env.d.ts` は `apps/frontend/.gitignore` でignore済み。 |
 | API確認 | `.\gradlew.bat :apps:api:test` | 成功。初回はGradle配布物と依存関係取得のためネットワーク許可が必要だった。`ApiApplicationTests.contextLoads` はTestcontainersを起動しない最小コンテキスト確認として実行。 |
@@ -32,6 +33,7 @@
 | Worker確認 | `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local'` | 成功。`Started WorkerApplication` と `manga-worker started. Waiting for conversion jobs is not enabled in Sprint S0 minimal setup.` を確認。Workerは常駐するため、確認後に対象プロセスを停止した。 |
 | Workerログ確認 | 起動ログの秘密情報確認 | 成功。パスワード、トークン、シークレット、接続文字列の実値出力がないことを確認。 |
 | Docker Compose確認 | `docker compose config` | Red確認では `compose.yaml` 未作成のため `no configuration file provided: not found` で失敗。実装後は成功し、`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
+| Docker Compose確認 | `docker compose config` | #87で再確認。`postgres`、`elasticsearch`、`rabbitmq`、3つのvolume、既定ネットワークが展開されることを確認。Docker設定ファイルへのアクセス拒否警告は継続。 |
 | Docker Compose確認 | `docker compose up -d postgres elasticsearch rabbitmq` | 成功。初回はDocker Desktop Linux engineへ接続できず失敗したが、Docker Desktop起動後に権限付きで再実行して成功。Elasticsearchカスタムイメージのbuild、PostgreSQL / RabbitMQのpull、3サービス起動を確認。 |
 | Docker環境確認 | `docker version` | 成功。Docker Desktop 4.38.0、Docker Engine 27.5.1、context `desktop-linux` を確認。 |
 | Docker Compose状態確認 | `docker compose ps` | 成功。`manga-postgres`、`manga-elasticsearch`、`manga-rabbitmq` がすべてhealthy。 |
@@ -67,7 +69,7 @@
 - Docker daemonへ接続できない場合、`docker compose config` は成功しても `docker compose up`、`docker compose ps`、`docker version` のServer確認は失敗する。Docker Desktop起動後、権限付き実行では `desktop-linux` contextで確認できた。
 - `gradle` はグローバルコマンドとして利用できないため、実装時はWrapperを前提にするのが安全である。
 - `create-next-app` の実行結果は、当初想定した `app/` 直下ではなく `src/app/` 構成である。Next.jsの最小構成として問題ないため、Sprint S0では生成結果を採用する。
-- `package.json` には `typecheck` script が未追加である。必要に応じて `tsc --noEmit` を追加する。
+- Next.jsの `next/font/google` はビルド時にGoogle Fonts取得が必要になり、ネットワーク制限下で `npm.cmd run build` が失敗した。#87で外部フォント依存を外し、system font指定へ変更した。
 - 開発サーバ確認時に、生成直後テンプレートの `vercel.svg` について画像の縦横比に関するブラウザ警告が出ている。S0の起動基盤としてはブロッカーにしない。
 
 ## 残リスク
@@ -82,6 +84,7 @@
 - Docker設定ファイルのアクセス拒否がCompose起動時にも影響する場合、ローカル環境側の権限調整が必要になる。
 - #85では `compose.yaml`、`.env.example`、`docker/elasticsearch/Dockerfile` を追加した。`.env.example` は安全なサンプル値のみを含み、実値を含む `.env` はGit管理外とする。PostgreSQL、Elasticsearch、RabbitMQの実コンテナ起動、状態確認、ログ確認、停止確認は完了。
 - #86ではAPI / Workerの `local` プロファイルでPostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパス、WebP品質値を設定から扱えるようにした。API healthとWorker local health loggerで外部依存疎通を確認済み。7-ZipはローカルPATH未設定のため実行未確認。
+- #87ではフロントエンドの `lint`、`typecheck`、`build`、開発サーバHTTP 200、API / Workerの最小テスト、Docker Compose `config` を確認済み。API / Workerの `local` profile起動とミドルウェア実疎通は#86の確認結果を最小確認コマンドとして引き継ぐ。
 - 設計判断を先行するsub-issueの完了扱いは、[Definition of Done](../../../../doc/05_development/05_definition_of_done.md#設計判断を先行するsub-issueの扱い) を参照する。
 
 ## 更新したドキュメント
@@ -92,6 +95,7 @@
 - `development/scrum/sprints/sprint-s0/issue-84-worker-minimal.md`
 - `development/scrum/sprints/sprint-s0/issue-85-local-middleware-compose.md`
 - `development/scrum/sprints/sprint-s0/issue-86-api-worker-local-dependencies.md`
+- `development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md`
 - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
 - `development/scrum/sprints/sprint-s0/test-report.md`
 - `development/scrum/sprints/sprint-s0/review.md`

@@ -35,7 +35,7 @@
 - [ ] APIとWorkerのローカル設定で、PostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパスを環境差分として扱える。
 - [ ] Elasticsearch必須プラグインの扱いは技術スタックを参照し、PBI-001で実装する範囲とSPIKE-003 / PBI-014へ委ねる範囲を明記する。
 - [ ] WebP品質値の既定値80を設定可能値として扱う方針が、APIまたはWorkerの設定に反映されるか、後続実装で反映する場所が明記されている。
-- [ ] フロントエンド、API、Workerについて、最低限のテストまたは起動確認コマンドが用意されている。
+- [x] フロントエンド、API、Workerについて、最低限のテストまたは起動確認コマンドが用意されている。
 - [ ] ローカル起動時のログに、シークレット、パスワード、トークン、不要な個人情報が出力されないことを確認する。
 - [ ] `doc/05_development/03_environment_setup.md` と `doc/05_development/04_local_development.md` の仮コマンド、サービス名、ディレクトリ名が実構成に合わせて更新されている。
 - [ ] 変更に応じて `doc/TODO.md` の関連項目と本Issueのチェックリストが更新されている。
@@ -68,18 +68,19 @@
 | #84 | Workerの起動単位、プロファイル、設定読み込みを確認する。 |
 | #85 | PostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認する。 |
 | #86 | API / Workerの外部依存接続と環境変数差し替えを確認する。 |
-| #87 | 各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備する。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
+| #87 | 完了。`issue-87-minimal-test-commands.md` で各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備した。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
 | #88 | 実装結果を開発手順、環境構築手順、TODO、Issueへ反映する。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新で扱う。 |
 
 ## 完了メモ
 
-- 実行したテスト: 今回は実装を行わないため未実行。`test-report.md` に環境確認のみ記録する。
+- 実行したテスト: #87で `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、フロントエンド開発サーバHTTP 200、`.\gradlew.bat :apps:api:test :apps:worker:test`、`docker compose config` を確認した。詳細は `test-report.md` に記録する。
 - 手動確認: Java、Node.js、Docker、Docker Compose、Gradle、npmの利用可否を確認した。
 - 未対応事項: 実際のNext.js / Spring Boot / Docker Compose構成作成、起動確認、テスト追加、Issueチェックリスト更新。
 - 更新したドキュメント:
   - `development/scrum/sprints/sprint-s0/planning.md`
   - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
   - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
+  - `development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md`
   - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
   - `development/scrum/sprints/sprint-s0/review.md`

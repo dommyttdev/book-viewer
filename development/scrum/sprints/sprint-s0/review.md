@@ -32,7 +32,7 @@
 | #84 Spring Boot Worker最小構成 | 実装未実施。 | APIとバックエンド構成確定後に実施する。 |
 | #85 Docker Composeミドルウェア | 実装未実施。 | PostgreSQL、Elasticsearch、RabbitMQの起動とログ確認を実施する。 |
 | #86 ローカル設定と疎通確認 | 実装未実施。 | #83から#85の成果に合わせて実施する。 |
-| #87 最小テストと確認コマンド | 実装未実施。 | 各構成作成後に確認コマンドを固定する。 |
+| #87 最小テストと確認コマンド | 完了。 | `issue-87-minimal-test-commands.md` に確認コマンドを固定し、フロントエンド `typecheck` scriptを追加した。 |
 | #88 開発手順とTODO更新 | 実構成未確定。 | 実装結果に合わせて `doc/` とissueチェックリストを更新する。 |
 
 ## フィードバック
@@ -53,6 +53,7 @@
 - 更新した開発成果物:
   - `development/scrum/sprints/sprint-s0/planning.md`
   - `development/scrum/sprints/sprint-s0/issue-81-project-structure.md`
+  - `development/scrum/sprints/sprint-s0/issue-87-minimal-test-commands.md`
   - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
   - `development/scrum/sprints/sprint-s0/review.md`
