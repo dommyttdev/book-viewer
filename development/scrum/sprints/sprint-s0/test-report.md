@@ -41,18 +41,24 @@
 | RabbitMQ確認 | `docker compose exec rabbitmq rabbitmqctl status` | 成功。RabbitMQ 4.3.0、AMQP 5672、管理UI 15672のlistenerを確認。 |
 | Docker Composeログ確認 | `docker compose logs --tail=30 postgres`、`elasticsearch`、`rabbitmq` | 成功。各サービスの起動ログを確認。ログに本番秘密情報、トークン、不要な個人情報は見当たらない。 |
 | Docker Compose停止確認 | `docker compose down` | 成功。3コンテナと既定ネットワークが停止、削除された。volumeは削除していない。 |
+| API / Worker設定テスト | `.\gradlew.bat :apps:api:test :apps:worker:test` | 成功。APIの `BookStorageProperties`、Workerの `BookStorageProperties` / `ConversionProperties` が外部依存なしのテストでバインドできることを確認。 |
+| API local外部依存確認 | `.\gradlew.bat :apps:api:bootRun --args='--spring.profiles.active=local --server.port=18081 --debug=false'` 後に `Invoke-RestMethod http://localhost:18081/actuator/health` | 成功。health詳細で `db=UP`、`elasticsearch=UP`、`rabbit=UP` を確認。PostgreSQL 17.10、Elasticsearch cluster `docker-cluster` green、RabbitMQ 4.3.0。 |
+| Worker local外部依存確認 | `.\gradlew.bat :apps:worker:bootRun --args='--spring.profiles.active=local --debug=false'` | 成功。起動ログでPostgreSQL接続、RabbitMQ接続、`manga-worker local dependency health: db=UP, elasticsearch=UP, rabbit=UP` を確認。 |
+| 7-Zip確認 | `Get-Command 7z` | 未検出。`SEVENZIP_EXECUTABLE_PATH` で差し替え可能な設定は追加済み。実行確認は7-Zip導入後またはWorkerコンテナ化時に行う。 |
+| Docker Compose停止確認 | `docker compose down` | 成功。#86確認で起動したPostgreSQL、Elasticsearch、RabbitMQを停止、削除した。volumeは削除していない。 |
 
 ## 未実行のテスト
 
 | テスト | 未実行理由 | 次の扱い |
 | --- | --- | --- |
-| Spring Boot API起動テスト | APIプロジェクト生成後、`test`、`bootRun`、`/actuator/health` は確認済み。 | 外部依存接続は #86 で確認する。 |
-| Spring Boot Worker外部依存接続確認 | S0のWorker最小確認では外部依存を必須にしないため。 | #86でPostgreSQL、RabbitMQ、Elasticsearch接続を確認する。 |
+| Spring Boot API起動テスト | APIプロジェクト生成後、`test`、`bootRun`、`/actuator/health` は確認済み。#86で外部依存healthも確認済み。 | 業務API実装時に対象機能のテストを追加する。 |
+| Spring Boot Worker外部依存接続確認 | #86でPostgreSQL、RabbitMQ、Elasticsearch接続を確認済み。 | RabbitMQ listener、queue宣言、変換処理は後続PBIで確認する。 |
 | Docker Composeミドルウェア起動 | #85の範囲では確認済み。 | API / Workerからの外部依存接続は #86 で確認する。 |
-| PostgreSQL接続 / DBマイグレーション | 実装構成とマイグレーションツール未確定のため。 | #81で方針確定後、#86または#87で確認する。 |
+| PostgreSQL接続 / DBマイグレーション | PostgreSQL接続は#86で確認済み。DBマイグレーションはスキーマ未整備のため未実行。 | 後続PBIでFlyway migrationを追加して確認する。 |
 | Elasticsearch必須プラグイン確認 | #85の範囲では確認済み。 | 検索実装上の詳細確認はSPIKE-003 / PBI-014で扱う。 |
-| RabbitMQ接続確認 | #85の範囲では `rabbitmqctl status` を確認済み。 | API / Workerからの接続は #86 で確認する。 |
-| ログの秘密情報確認 | 実アプリケーションログ未生成のため。 | #87で起動確認時に確認する。 |
+| RabbitMQ接続確認 | #85の範囲では `rabbitmqctl status` を確認済み。#86でAPI / Workerからの接続も確認済み。 | 業務queueとlistenerは後続PBIで確認する。 |
+| 7-Zip実行確認 | WindowsローカルPATHで `7z` が見つからなかったため。 | 7-Zip導入後またはWorkerコンテナ化時に `SEVENZIP_EXECUTABLE_PATH` を設定して確認する。 |
+| ログの秘密情報確認 | #86のAPI / Worker local起動ログではパスワード、トークン、本番秘密情報が出ていないことを確認済み。 | 業務処理ログは各機能実装時に確認する。 |
 
 ## 確認した異常系
 
@@ -75,6 +81,7 @@
 - Elasticsearch必須プラグインの導入方式は、`docker/elasticsearch/Dockerfile` で `analysis-kuromoji` と `analysis-icu` を導入する方針にした。実際のプラグイン導入は `_cat/plugins` で確認済み。
 - Docker設定ファイルのアクセス拒否がCompose起動時にも影響する場合、ローカル環境側の権限調整が必要になる。
 - #85では `compose.yaml`、`.env.example`、`docker/elasticsearch/Dockerfile` を追加した。`.env.example` は安全なサンプル値のみを含み、実値を含む `.env` はGit管理外とする。PostgreSQL、Elasticsearch、RabbitMQの実コンテナ起動、状態確認、ログ確認、停止確認は完了。
+- #86ではAPI / Workerの `local` プロファイルでPostgreSQL、Elasticsearch、RabbitMQ、書籍ファイル保存領域、Worker作業ディレクトリ、7-Zip実行ファイルパス、WebP品質値を設定から扱えるようにした。API healthとWorker local health loggerで外部依存疎通を確認済み。7-ZipはローカルPATH未設定のため実行未確認。
 - 設計判断を先行するsub-issueの完了扱いは、[Definition of Done](../../../../doc/05_development/05_definition_of_done.md#設計判断を先行するsub-issueの扱い) を参照する。
 
 ## 更新したドキュメント
@@ -84,6 +91,7 @@
 - `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`
 - `development/scrum/sprints/sprint-s0/issue-84-worker-minimal.md`
 - `development/scrum/sprints/sprint-s0/issue-85-local-middleware-compose.md`
+- `development/scrum/sprints/sprint-s0/issue-86-api-worker-local-dependencies.md`
 - `development/scrum/sprints/sprint-s0/pbi-001-breakdown.md`
 - `development/scrum/sprints/sprint-s0/test-report.md`
 - `development/scrum/sprints/sprint-s0/review.md`
