@@ -4,7 +4,7 @@
 
 issue #48 / PBI-001 のsub-issueとして、`apps/api/` にSpring Boot APIの最小構成を作成するための実装入力、受け入れ条件、TDD開始点、確認記録欄を整理する。
 
-この文書はSprint S0の作業成果物であり、実際の環境構築、Spring Bootプロジェクト生成、Gradle Wrapper配置、依存関係取得、起動確認は環境構築担当が実施する。
+この文書はSprint S0の作業成果物である。Spring Boot API最小構成、Gradle Wrapper配置、依存関係取得、テスト、local profile起動、ヘルスチェック確認結果をこの文書と `test-report.md` に記録した。
 
 ## GitHub Issue
 
@@ -162,8 +162,8 @@ curl http://localhost:8080/actuator/health
 - [x] Red: `apps/api/` 未作成またはAPIテスト未定義の状態で、API最小テストが実行できないことを確認する。
 - [x] Green: Spring Boot 4.0.6 / Java 25 のAPI最小構成を作成し、アプリケーションコンテキスト起動テストを通す。
 - [x] Green: ヘルスチェックまたは同等APIでHTTP疎通を確認できるようにする。
-- [ ] Refactor: API固有の責務と、Worker / backend-commonへ送るべき責務が混ざっていないことを確認する。
-- [~] Document: 実行したコマンド、バージョン、起動URL、未実行項目、ログ安全性確認を `test-report.md` へ追記する。
+- [x] Refactor: API固有の責務と、Worker / backend-commonへ送るべき責務が混ざっていないことを確認する。
+- [x] Document: 実行したコマンド、バージョン、起動URL、未実行項目、ログ安全性確認を `test-report.md` へ追記する。
 
 ## 対象外
 
@@ -184,5 +184,5 @@ curl http://localhost:8080/actuator/health
 - 実行したテストコマンドと結果: `.\gradlew.bat :apps:api:test` 成功。初回はGradle配布物と依存関係取得のためネットワーク許可が必要だった。
 - 起動コマンド、起動URL、ヘルスチェックURL、HTTP応答: `.\gradlew.bat :apps:api:bootRun --args="--spring.profiles.active=local --server.port=18080 --debug=false"` で起動。`http://localhost:18080/actuator/health` が `{"groups":["liveness","readiness"],"status":"UP"}` を返した。
 - ログに秘密情報が出力されていないことの確認結果: `generated security password`、`token`、`secret`、`PasswordConfigured` の実値出力がないことを確認した。S0の `local` 単体起動ではSecurity自動設定を除外する。
-- 未実行の確認と理由: 外部依存の接続設定は #86 で扱う。
+- 未実行の確認と理由: DBマイグレーション、業務API、認証、RabbitMQへの業務ジョブ投入、Elasticsearchインデックス作成は後続PBIで扱う。外部依存の基本疎通は #86 で確認済み。
 - 更新したドキュメント: `development/scrum/sprints/sprint-s0/issue-83-api-minimal.md`、`development/scrum/sprints/sprint-s0/test-report.md`。

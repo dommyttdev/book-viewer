@@ -77,10 +77,10 @@
 
 ## 残リスク
 
-- GitHub Issue #48のチェックリストは、実装未実施のため未更新。
+- GitHub Issue #48のチェックリストは、リポジトリ内成果物の完了状況に合わせてProject運用タイミングで更新する。
 - GitHub Issue #82のチェックリストは、GitHub Project運用タイミングで更新する。
 - GitHub Issue #81のチェックリストは、`doc/05_development/00_project_structure.md` を正本としてREADME、環境構築手順、ローカル開発手順から参照できることをProject運用タイミングで更新する。
-- Sprint S0の完了には、#81から#88の実作業、起動確認、テスト、ドキュメント更新が必要。
+- Sprint S0のリポジトリ内成果物は、#81から#88の実作業、起動確認、テスト、ドキュメント更新まで完了した。GitHub Issue / Project更新は #88 の残タスクとして扱う。
 - Spring Boot APIはSpring Initializr生成物を `apps/api/` に配置済み。生成時のgroup / packageは `com.dommy.manga` / `com.dommy.manga.api` を採用する。
 - #83ではルートGradle Wrapperと `settings.gradle.kts` を追加し、`:apps:api:test`、`:apps:api:bootRun`、`/actuator/health` を確認した。8080競合のため、HTTP疎通確認は18080で実施した。
 - Elasticsearch必須プラグインの導入方式は、`docker/elasticsearch/Dockerfile` で `analysis-kuromoji` と `analysis-icu` を導入する方針にした。実際のプラグイン導入は `_cat/plugins` で確認済み。

@@ -4,7 +4,7 @@
 
 issue #48 / PBI-001 のsub-issueとして、`apps/frontend/` にNext.jsフロントエンドの最小構成を作成するための実装方針、受入条件、確認コマンド、残リスクを整理する。
 
-この成果物はSprint S0の実装入力である。実際の依存関係インストール、開発サーバ起動、ブラウザ確認は環境構築担当が実施し、結果をこの文書または `test-report.md` へ追記する。
+この成果物はSprint S0の作業成果物である。Next.js最小構成、依存関係インストール、開発サーバ起動、HTTP応答、API接続先設定の確認結果をこの文書と `test-report.md` に記録した。
 
 ## GitHub Issue
 
@@ -118,8 +118,8 @@ npm.cmd run dev
 
 - [x] Red: `apps/frontend/` が存在しない、または `npm run build` を実行できない状態を確認する。
 - [x] Green: Next.js最小構成を追加し、`npm install`、`npm run lint`、`npm run build`、`npm run dev` が成功する状態にする。`typecheck` scriptは#87で追加済み。
-- [~] Refactor: 最小画面、環境変数名、npm scriptsが後続の業務画面実装を妨げないか確認する。
-- [~] Document: 実構成に合わせて `development/scrum/sprints/sprint-s0/test-report.md` を更新する。`doc/05_development/03_environment_setup.md`、`doc/05_development/04_local_development.md` は #88 でまとめて更新する。
+- [x] Refactor: 最小画面、環境変数名、npm scriptsが後続の業務画面実装を妨げないか確認する。
+- [x] Document: 実構成に合わせて `development/scrum/sprints/sprint-s0/test-report.md`、`doc/05_development/03_environment_setup.md`、`doc/05_development/04_local_development.md` を更新する。
 
 ## 対象外
 
@@ -161,10 +161,12 @@ npm.cmd run dev
 
 - 実行したテスト: `npm.cmd run lint`、`npm.cmd run typecheck`、`npm.cmd run build`、`npm.cmd run dev`。
 - 手動確認: GitHub Issue #82の本文、受入条件、親Issue #48との関係、生成ディレクトリ構成、ignore設定を確認した。
-- 未対応事項: API接続先環境変数の最小表示または設定、issueチェックリスト更新。`vercel.svg` の画像比率警告は生成直後テンプレート由来で、S0の起動基盤としてはブロッカーにしない。
+- 未対応事項: GitHub Issueチェックリスト更新。`vercel.svg` の画像比率警告は生成直後テンプレート由来で、S0の起動基盤としてはブロッカーにしない。
 - 更新したドキュメント:
   - `development/scrum/sprints/sprint-s0/issue-82-frontend-minimal.md`
   - `development/scrum/sprints/sprint-s0/test-report.md`
+  - `doc/05_development/03_environment_setup.md`
+  - `doc/05_development/04_local_development.md`
 
 ## 後続Issueへの引き継ぎ
 

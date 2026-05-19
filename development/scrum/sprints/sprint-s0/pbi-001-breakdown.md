@@ -38,8 +38,8 @@
 - [x] フロントエンド、API、Workerについて、最低限のテストまたは起動確認コマンドが用意されている。
 - [x] ローカル起動時のログに、シークレット、パスワード、トークン、不要な個人情報が出力されないことを確認する。
 - [x] `doc/05_development/03_environment_setup.md` と `doc/05_development/04_local_development.md` の仮コマンド、サービス名、ディレクトリ名が実構成に合わせて更新されている。
-- [x] 変更に応じて `doc/TODO.md` の関連項目と本Issueのチェックリストが更新されている。
-- [x] 完了時に、実行した起動確認、テスト、手動確認の結果をIssueまたはPull Requestへ記録している。
+- [x] 変更に応じて `doc/TODO.md` の関連項目とこのPBI分解文書のチェックリストが更新されている。
+- [x] 完了時に、実行した起動確認、テスト、手動確認の結果をスプリント成果物へ記録している。GitHub Issue / Projectへの反映は #88 の残タスクとして扱う。
 
 ## TDD観点
 
@@ -56,7 +56,7 @@
 - [x] Red: APIヘルスチェックまたはアプリケーションコンテキスト起動確認の失敗テストを追加する。
 - [x] Green: Spring Boot API最小構成を追加し、テストを通す。
 - [x] Refactor: API、Worker、共通設定、インフラ設定の責務境界を見直す。
-- [x] Document: 実構成に合わせてローカル開発手順、環境構築手順、TODO、Issueチェックリストを更新する。
+- [x] Document: 実構成に合わせてローカル開発手順、環境構築手順、TODO、このPBI分解文書のチェックリストを更新する。GitHub Issue / Project更新は #88 の残タスクとして扱う。
 
 ## sub-issueへの分割
 
@@ -64,12 +64,12 @@
 | --- | --- |
 | #81 | 完了。`issue-81-project-structure.md` で構成とビルドツールを確定し、以後のsub-issueが同じ前提で進められるようにした。 |
 | #82 | 完了。`issue-82-frontend-minimal.md` で実装入力を整理し、Next.jsの最小起動、lint、typecheck、build、API接続先設定を確認した。 |
-| #83 | `issue-83-api-minimal.md` で実装入力と実施結果を整理済み。Spring Boot API最小構成、ルートGradle統合、最小テスト、bootRun、`/actuator/health` を確認した。 |
+| #83 | 完了。`issue-83-api-minimal.md` でSpring Boot API最小構成、ルートGradle統合、最小テスト、bootRun、`/actuator/health` を確認した。 |
 | #84 | 完了。`issue-84-worker-minimal.md` でWorkerの起動単位、プロファイル、設定読み込みを確認した。 |
 | #85 | 完了。`issue-85-local-middleware-compose.md` でPostgreSQL、Elasticsearch、RabbitMQのCompose起動、状態確認、ログ確認、停止を確認した。 |
 | #86 | 完了。`issue-86-api-worker-local-dependencies.md` でAPI / Workerの外部依存接続と環境変数差し替えを確認した。 |
 | #87 | 完了。`issue-87-minimal-test-commands.md` で各コンポーネントの最小テスト、起動確認、停止確認コマンドを整備した。フロントエンドは `lint`、`typecheck`、`build`、開発サーバ起動確認を含める。 |
-| #88 | 完了。`issue-88-local-development-docs.md` で実装結果を開発手順、環境構築手順、TODO、Issueへ反映した。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新へ反映済み。 |
+| #88 | リポジトリ内成果物は完了。`issue-88-local-development-docs.md` で実装結果を開発手順、環境構築手順、TODOへ反映した。フロントエンドのローカルAPI接続先 `NEXT_PUBLIC_API_BASE_URL` は `.env.example` と手順更新へ反映済み。GitHub Issue / Project更新は #88 の残タスクとして扱う。 |
 
 ## 完了メモ
 

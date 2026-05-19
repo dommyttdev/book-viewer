@@ -158,7 +158,7 @@ Issue #81 の方針が実装された時点で、次の文書を更新する。
 | #85 | ルート `compose.yaml` に `postgres`、`elasticsearch`、`rabbitmq` を定義する。 |
 | #86 | API / Workerのlocal profileで環境変数と外部依存設定を読み込めるようにする。 |
 | #87 | `npm run lint`、`npm run typecheck`、`./gradlew test`、Compose確認コマンドを整備する。 |
-| #88 | 実装結果を `README.md`、環境構築手順、ローカル開発手順、TODO、Issueへ反映する。 |
+| #88 | 実装結果を `README.md`、環境構築手順、ローカル開発手順、TODOへ反映する。GitHub Issue / Project更新は #88 の残タスクとして扱う。 |
 
 ## 未決事項
 
