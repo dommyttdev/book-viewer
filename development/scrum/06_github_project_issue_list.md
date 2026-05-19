@@ -32,7 +32,7 @@
 
 | ID | Issueタイトル | System | Priority | Ready | Size | Sprint | Status | Labels | Ready条件 / 備考 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| SPIKE-001 | 認証トークンとセッションの実装詳細を確定する | Cross-cutting | P0: Critical | NotReady | 3 | S1: 一般ユーザ認証 | - | `type:spike`, `area:security`, `risk:high` | PBI-002、PBI-003、PBI-004の着手前に、ハッシュ方式、pepper管理、期限、試行回数、期限切れレコード削除方針を実装観点で確定する。 |
+| SPIKE-001 | 認証トークンとセッションの実装詳細を確定する | Cross-cutting | P0: Critical | Ready | 3 | S1: 一般ユーザ認証 | In Progress | `type:spike`, `area:security`, `risk:high` | PBI-002、PBI-003、PBI-004の着手前に、ハッシュ方式、pepper管理、期限、試行回数、期限切れレコード削除方針を実装観点で確定する。 |
 | SPIKE-002 | 画像変換リソース上限と設定名を確定する | Conversion Worker | P0: Critical | NotReady | 3 | S4: zip変換縦切り | - | `type:spike`, `area:worker`, `risk:high` | PBI-010の着手前に、アップロード、展開、画像デコード、一時領域、同時実行数、タイムアウトのプロパティ名と上限超過時のジョブ状態を確定する。 |
 | SPIKE-003 | Elasticsearch必須プラグイン確認と起動失敗方針を確定する | Search | P0: Critical | NotReady | 2 | S6: メタ情報と検索 | - | `type:spike`, `area:search`, `area:infra`, `risk:high` | PBI-014の着手前に、`analysis-kuromoji`、`analysis-icu` の導入確認、未導入時の失敗方針、Docker ComposeとRunbookへの反映範囲を確定する。 |
 
@@ -41,8 +41,8 @@
 | ID | Issueタイトル | System | Priority | Ready | Size | Sprint | Status | Labels | 関連PBI | Ready条件 / 備考 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | PBI-001 | 開発者として、フロントエンド、API、ワーカーをローカルで起動できるようにしたい | Infrastructure | P0: Critical | Ready | 5 | S0: 実装基盤と開発運用 | Todo | `type:feature`, `area:infra`, `area:api`, `area:frontend`, `area:worker` | プロジェクト基盤を作る | Project初期セットアップ完了後に着手する。 |
-| PBI-002 | 一般ユーザとして、メール確認後に会員登録を完了したい | Cross-cutting | P0: Critical | NotReady | 5 | S1: 一般ユーザ認証 | - | `type:feature`, `area:api`, `area:frontend`, `area:security` | 一般ユーザ登録とメール確認を実装する | SPIKE-001完了後、受入条件とTDD観点をIssue本文へ具体化する。 |
-| PBI-003 | 利用者として、メール2段階認証でログインして安全なセッションを取得したい | Cross-cutting | P0: Critical | NotReady | 8 | S1: 一般ユーザ認証 | - | `type:feature`, `area:api`, `area:frontend`, `area:security`, `risk:high` | ログイン、メール2段階認証、セッションを実装する | SPIKE-001完了後、セッション分離とレート制限の受入条件を具体化する。 |
+| PBI-002 | 一般ユーザとして、メール確認後に会員登録を完了したい | Cross-cutting | P0: Critical | Ready | 5 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security` | 一般ユーザ登録とメール確認を実装する | SPIKE-001完了後、受入条件とTDD観点をIssue本文へ具体化する。 |
+| PBI-003 | 利用者として、メール2段階認証でログインして安全なセッションを取得したい | Cross-cutting | P0: Critical | Ready | 8 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security`, `risk:high` | ログイン、メール2段階認証、セッションを実装する | SPIKE-001完了後、セッション分離とレート制限の受入条件を具体化する。 |
 | PBI-004 | 一般ユーザとして、パスワードを忘れたときに再設定したい | Cross-cutting | P1: High | NotReady | 3 | S2: 復旧と管理認可 | - | `type:feature`, `area:api`, `area:frontend`, `area:security` | パスワードリセットを実装する | SPIKE-001完了後、既存セッション失効の扱いを確認する。 |
 | PBI-005 | 管理者として、初期super_adminと固定ロールで管理操作を制御したい | Cross-cutting | P0: Critical | NotReady | 5 | S2: 復旧と管理認可 | - | `type:feature`, `area:api`, `area:security`, `risk:high` | 初期管理ユーザと固定ロール認可を実装する | 初期super_admin作成手順と最後のsuper_admin保護をIssue本文へ具体化する。 |
 | PBI-006 | 開発者として、書籍メタ情報のドメインモデルを扱えるようにしたい | Backend API | P1: High | NotReady | 3 | S3: アップロードとジョブ作成 | - | `type:feature`, `area:api`, `area:db` | 書籍メタ情報のドメインモデルを作る | データモデル参照と最小マイグレーション範囲を確認する。 |
