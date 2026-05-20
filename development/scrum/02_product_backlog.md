@@ -19,9 +19,9 @@
 | ID | PBI | 価値 | 主なTDD観点 | 設計参照 | 優先度 |
 | --- | --- | --- | --- | --- | --- |
 | PBI-001 | プロジェクト基盤を作る | フロントエンド、API、ワーカーを継続的に実装できる。 | 起動確認、ヘルスチェック、最小API応答、DBマイグレーション、ミドルウェア接続、メール送信境界 | [技術スタック](../../doc/03_architecture/02_technology_stack.md), [ローカル開発手順](../../doc/05_development/04_local_development.md), [ADR-0012](../../doc/03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md) | 高 |
-| PBI-002 | 一般ユーザ登録とメール確認を実装する | 一般ユーザがメール確認後に利用開始できる。 | 入力検証、メール重複、トークンハッシュ、有効期限、再送制限、開発用メール確認 | [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md), [データモデル](../../doc/04_design/04_data_model.md) | 高 |
-| PBI-003 | ログイン、メール2段階認証、セッションを実装する | 一般ユーザと管理ユーザが安全にログインできる。 | 認証失敗、challengeId、code_hash、メール送信、セッション分離、セッション失効、レート制限 | [ADR-0008](../../doc/03_architecture/03_adr/09_ADR-0008-use-email-authentication-and-server-side-sessions.md), [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md), [管理API](../../doc/04_design/03_api_contracts/07_admin_api.md), [管理ユーザログイン](../../doc/02_backlog/02_user_stories/11_admin_login_logout.md) | 高 |
-| PBI-004 | パスワードリセットを実装する | パスワードを忘れた利用者が復旧できる。 | 存在推測防止、トークンハッシュ、メール送信、有効期限、既存セッション失効 | [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md) | 高 |
+| PBI-002 | 一般ユーザ登録、メール確認、Passkey登録を実装する | 一般ユーザがメール確認後にPasskeyを登録し、パスワードなしで利用開始できる。 | 入力検証、メール重複、トークンハッシュ、有効期限、再送制限、WebAuthn登録チャレンジ、credential保存、開発用メール確認 | [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md), [データモデル](../../doc/04_design/04_data_model.md), [ADR-0014](../../doc/03_architecture/03_adr/15_ADR-0014-use-passkey-webauthn-and-server-side-sessions.md) | 高 |
+| PBI-003 | Passkeyログイン、WebAuthn認証、セッションを実装する | 一般ユーザと管理ユーザがPasskeyで安全にログインできる。 | 認証失敗、WebAuthn認証チャレンジ、credential検証、セッション分離、セッション失効、レート制限 | [ADR-0014](../../doc/03_architecture/03_adr/15_ADR-0014-use-passkey-webauthn-and-server-side-sessions.md), [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md), [管理API](../../doc/04_design/03_api_contracts/07_admin_api.md), [管理ユーザログイン](../../doc/02_backlog/02_user_stories/11_admin_login_logout.md) | 高 |
+| PBI-004R | アカウント復旧を実装する | Passkeyを使えない利用者が本人確認を経て利用を再開できる。 | 存在推測防止、復旧チャレンジ、credential再登録、既存セッション失効、レート制限 | [アカウントAPI](../../doc/04_design/03_api_contracts/06_account_api.md), [ADR-0014](../../doc/03_architecture/03_adr/15_ADR-0014-use-passkey-webauthn-and-server-side-sessions.md) | 高 |
 | PBI-005 | 初期管理ユーザと固定ロール認可を実装する | 初期 `super_admin` を用意し、管理操作を `super_admin`, `admin`, `operator`, `viewer` の権限に限定できる。 | 初期管理ユーザ作成、未認証、一般ユーザ、管理ロール別アクセス、最後のsuper_admin保護 | [権限設計](../../doc/04_design/08_authorization_design/01_authorization_design.md), [権限マトリクス](../../doc/04_design/08_authorization_design/02_permission_matrix.md), [管理ユーザ管理](../../doc/02_backlog/02_user_stories/12_admin_user_management.md) | 高 |
 | PBI-006 | 書籍メタ情報のドメインモデルを作る | 本を検索、閲覧、整理する基盤を作る。 | タイトル必須、著者、タグ、シリーズ、公開状態、論理削除 | [データモデル](../../doc/04_design/04_data_model.md), [書籍API](../../doc/04_design/03_api_contracts/02_book_api.md) | 高 |
 | PBI-007 | RabbitMQ基盤と変換ジョブ配送を実装する | APIと重い変換処理を疎結合にする。 | queue設定、ack、再配送、DLQ、冪等性、PostgreSQL状態との分離 | [ADR-0007](../../doc/03_architecture/03_adr/08_ADR-0007-use-async-conversion-worker.md), [データモデル](../../doc/04_design/04_data_model.md) | 高 |
@@ -38,7 +38,7 @@
 | PBI-018 | 読みかけ位置を保存できる | 再閲覧しやすくなる。 | 最終ページ、範囲外ページ、ユーザ別保存 | [ビューアAPI](../../doc/04_design/03_api_contracts/05_viewer_api.md) | 中 |
 | PBI-019 | お気に入り登録、解除、一覧表示ができる | よく読む本へ戻りやすくなる。 | 重複防止、解除、ユーザ別、未認証 | [お気に入り受入条件](../../doc/02_backlog/03_acceptance_criteria/02_favorite.md) | 中 |
 | PBI-020 | 本番相当Docker Compose統合を確認する | 主要コンポーネントをまとめて検証できる。 | API、Worker、Frontend、PostgreSQL、Elasticsearch、RabbitMQ、永続ボリューム、設定差し替え | [ADR-0012](../../doc/03_architecture/03_adr/13_ADR-0012-use-single-linux-host-docker-compose.md), [ローカル開発手順](../../doc/05_development/04_local_development.md), [Runbook](../../doc/07_operations/01_runbook.md) | 中 |
-| PBI-021 | MVP主要フローのE2Eを作る | 回帰を検知できる。 | ログイン、アップロード、検索、閲覧、権限不足 | [テスト戦略](../../doc/06_testing/01_test_strategy.md), [回帰テスト一覧](../../doc/06_testing/03_regression_tests.md) | 中 |
+| PBI-021 | MVP主要フローのE2Eを作る | 回帰を検知できる。 | 登録、メール確認、Passkey登録、Passkeyログイン、アップロード、検索、閲覧、権限不足 | [テスト戦略](../../doc/06_testing/01_test_strategy.md), [回帰テスト一覧](../../doc/06_testing/03_regression_tests.md) | 中 |
 
 ## Beta / v1.0候補バックログ
 

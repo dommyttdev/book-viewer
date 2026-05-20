@@ -1,5 +1,17 @@
 # Issue #45 認証トークンとセッションの実装詳細
 
+## 取り下げ
+
+このIssueは取り下げ済みである。
+
+- GitHub Issue: #45
+- 取り下げ日: 2026-05-20
+- 理由: 本Issueはパスワード認証、ログイン時メール2段階認証、パスワードリセットを前提にしている。認証方式を一般ユーザと管理ユーザともにPasskey / WebAuthn方式へ変更するため、この前提では継続しない。
+- 後継Issue: #89 Passkey / WebAuthn認証とセッションの実装詳細を確定する
+- 後継作業メモ: `development/scrum/sprints/sprint-s1/issue-89-passkey-webauthn-auth-session-spike.md`
+
+以下は取り下げ前の記録として残す。
+
 ## 目的
 
 PBI-002、PBI-003、PBI-004の着手前に、認証トークン、ログイン2段階認証チャレンジ、サーバ側セッションの実装詳細を確定する。

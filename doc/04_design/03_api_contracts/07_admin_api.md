@@ -18,12 +18,14 @@
 管理ユーザの認証は一般ユーザと分離する。
 
 ```http
-POST /api/v1/admin/auth/login
-POST /api/v1/admin/auth/login/confirm
+POST /api/v1/admin/auth/passkeys/authentication-options
+POST /api/v1/admin/auth/passkeys/authentication
 POST /api/v1/admin/auth/logout
 ```
 
-メールアドレス、パスワード、メール2段階認証を使う。成功時は管理ユーザ用セッションCookieを発行する。
+Passkey / WebAuthn認証を使う。成功時は管理ユーザ用セッションCookieを発行する。管理ユーザ用セッションは一般ユーザ用セッションと分離する。
+
+WebAuthn認証時は、`webauthn_authentication_challenge`と`webauthn_credential`を検証し、RP ID、origin、challenge、user presence、user verification、署名、必要に応じてsign countを確認する。
 
 ## 管理ユーザ一覧
 
@@ -69,7 +71,7 @@ POST /api/v1/admin/admin-users
 }
 ```
 
-初期パスワード設定方法は、招待メールまたは初回設定トークン方式を候補とする。平文パスワードを管理者に通知しない。
+初回Passkey登録方法は、招待メールまたは初回登録トークン方式を候補とする。パスワードは設定、保存、通知しない。
 
 ## 管理ユーザ編集
 
@@ -167,7 +169,9 @@ POST /api/v1/admin/users/{userId}/activate
 
 ## 後続で詳細化する事項
 
-- 管理ユーザ招待、初回パスワード設定フロー。
+- 管理ユーザ招待、初回Passkey登録フロー。
+- 初期super_adminのcredential登録手順。
+- 管理ユーザがcredentialを喪失した場合の緊急復旧手順。
 - 権限マトリクス変更時のAPI権限確認単位との同期。
 - 管理操作の監査ログ。
 - 固定ロールとカスタムロールの境界。

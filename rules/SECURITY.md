@@ -42,10 +42,11 @@ Rules:
 - Check access before returning book metadata, images, thumbnails, search results, or job details.
 - Avoid leaking whether private resources exist when the user is not authorized to access them.
 - Use consistent handling for authentication failures and authorization failures.
-- Do not store plaintext authentication tokens, one-time codes, or session identifiers.
-- Store only purpose-specific hashes for email verification tokens, login challenge codes, password reset tokens, and session identifiers.
-- Track expiration, used, revoked, attempt count, and resend count fields for authentication tokens where applicable.
-- Revoke sessions and unused authentication tokens when users withdraw, accounts are suspended, passwords change, emails change, or logout is performed.
+- Do not store plaintext authentication tokens, WebAuthn challenges, recovery tokens, or session identifiers.
+- Do not store WebAuthn credential private keys. Store only credential IDs, public keys, counters, transports, and state needed for verification.
+- Store only purpose-specific hashes for email verification tokens, WebAuthn registration/authentication challenges, account recovery challenges, and session identifiers.
+- Track expiration, used, revoked, attempt count, and resend count fields for authentication challenges where applicable.
+- Revoke sessions and unused authentication challenges when users withdraw, accounts are suspended, credentials are disabled, account recovery completes, emails change, or logout is performed.
 
 ## File Upload and Archive Extraction
 
@@ -113,8 +114,10 @@ Do not log:
 - Passwords
 - Tokens
 - Session identifiers
+- WebAuthn challenges
 - One-time authentication codes
 - Token hashes or session identifier hashes
+- Credential private keys
 - Private keys
 - Full private file contents
 - Unnecessary personal data

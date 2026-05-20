@@ -32,18 +32,20 @@
 
 | ID | Issueタイトル | System | Priority | Ready | Size | Sprint | Status | Labels | Ready条件 / 備考 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| SPIKE-001 | 認証トークンとセッションの実装詳細を確定する | Cross-cutting | P0: Critical | Ready | 3 | S1: 一般ユーザ認証 | In Progress | `type:spike`, `area:security`, `risk:high` | PBI-002、PBI-003、PBI-004の着手前に、ハッシュ方式、pepper管理、期限、試行回数、期限切れレコード削除方針を実装観点で確定する。 |
+| SPIKE-001 | 認証トークンとセッションの実装詳細を確定する | Cross-cutting | P0: Critical | Drop | 3 | S1: 一般ユーザ認証 | Done | `type:spike`, `area:security`, `risk:high` | Issue #45。パスワード認証、メール2段階認証、パスワードリセットを前提にしたスパイクのため取り下げ。後継はSPIKE-004 / Issue #89。 |
 | SPIKE-002 | 画像変換リソース上限と設定名を確定する | Conversion Worker | P0: Critical | NotReady | 3 | S4: zip変換縦切り | - | `type:spike`, `area:worker`, `risk:high` | PBI-010の着手前に、アップロード、展開、画像デコード、一時領域、同時実行数、タイムアウトのプロパティ名と上限超過時のジョブ状態を確定する。 |
 | SPIKE-003 | Elasticsearch必須プラグイン確認と起動失敗方針を確定する | Search | P0: Critical | NotReady | 2 | S6: メタ情報と検索 | - | `type:spike`, `area:search`, `area:infra`, `risk:high` | PBI-014の着手前に、`analysis-kuromoji`、`analysis-icu` の導入確認、未導入時の失敗方針、Docker ComposeとRunbookへの反映範囲を確定する。 |
+| SPIKE-004 | Passkey / WebAuthn認証とセッションの実装詳細を確定する | Cross-cutting | P0: Critical | Ready | 5 | S1: 一般ユーザ認証 | In Progress | `type:spike`, `area:security`, `risk:high` | Issue #89。#45を取り下げた後継スパイク。PBI-002 / PBI-003 / アカウント復旧Issue / PBI-005 / PBI-021の受入条件とTDD観点を具体化する。 |
 
 ## MVP Issue一覧
 
 | ID | Issueタイトル | System | Priority | Ready | Size | Sprint | Status | Labels | 関連PBI | Ready条件 / 備考 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | PBI-001 | 開発者として、フロントエンド、API、ワーカーをローカルで起動できるようにしたい | Infrastructure | P0: Critical | Ready | 5 | S0: 実装基盤と開発運用 | Todo | `type:feature`, `area:infra`, `area:api`, `area:frontend`, `area:worker` | プロジェクト基盤を作る | Project初期セットアップ完了後に着手する。 |
-| PBI-002 | 一般ユーザとして、メール確認後に会員登録を完了したい | Cross-cutting | P0: Critical | Ready | 5 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security` | 一般ユーザ登録とメール確認を実装する | SPIKE-001完了後、受入条件とTDD観点をIssue本文へ具体化する。 |
-| PBI-003 | 利用者として、メール2段階認証でログインして安全なセッションを取得したい | Cross-cutting | P0: Critical | Ready | 8 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security`, `risk:high` | ログイン、メール2段階認証、セッションを実装する | SPIKE-001完了後、セッション分離とレート制限の受入条件を具体化する。 |
-| PBI-004 | 一般ユーザとして、パスワードを忘れたときに再設定したい | Cross-cutting | P1: High | NotReady | 3 | S2: 復旧と管理認可 | - | `type:feature`, `area:api`, `area:frontend`, `area:security` | パスワードリセットを実装する | SPIKE-001完了後、既存セッション失効の扱いを確認する。 |
+| PBI-002 | 一般ユーザとして、メール確認後に会員登録を完了したい | Cross-cutting | P0: Critical | Ready | 5 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security` | 一般ユーザ登録とメール確認を実装する | SPIKE-004完了後、Passkey登録順序、受入条件、TDD観点をIssue本文へ具体化する。 |
+| PBI-003 | 利用者として、Passkeyでログインして安全なセッションを取得したい | Cross-cutting | P0: Critical | Ready | 8 | S1: 一般ユーザ認証 | Todo | `type:feature`, `area:api`, `area:frontend`, `area:security`, `risk:high` | Passkeyログイン、WebAuthn認証、セッションを実装する | SPIKE-004完了後、WebAuthn認証、セッション分離、レート制限の受入条件を具体化する。 |
+| PBI-004 | 一般ユーザとして、パスワードを忘れたときに再設定したい | Cross-cutting | P1: High | Drop | 3 | S2: 復旧と管理認可 | Done | `type:feature`, `area:api`, `area:frontend`, `area:security` | パスワードリセットを実装する | Issue #51。Passkey / WebAuthn方式ではパスワードを保持しないため廃止。置換IssueはPBI-004R / Issue #90。 |
+| PBI-004R | 一般ユーザとして、Passkeyを使えないときにアカウントを復旧したい | Cross-cutting | P1: High | NotReady | 3 | S2: 復旧と管理認可 | - | `type:feature`, `area:api`, `area:frontend`, `area:security` | アカウント復旧を実装する | Issue #90。SPIKE-004完了後、Passkey / WebAuthnのcredential保存、復旧用トークンまたはチャレンジ、レート制限、既存セッション失効の方針をIssue本文へ反映する。 |
 | PBI-005 | 管理者として、初期super_adminと固定ロールで管理操作を制御したい | Cross-cutting | P0: Critical | NotReady | 5 | S2: 復旧と管理認可 | - | `type:feature`, `area:api`, `area:security`, `risk:high` | 初期管理ユーザと固定ロール認可を実装する | 初期super_admin作成手順と最後のsuper_admin保護をIssue本文へ具体化する。 |
 | PBI-006 | 開発者として、書籍メタ情報のドメインモデルを扱えるようにしたい | Backend API | P1: High | NotReady | 3 | S3: アップロードとジョブ作成 | - | `type:feature`, `area:api`, `area:db` | 書籍メタ情報のドメインモデルを作る | データモデル参照と最小マイグレーション範囲を確認する。 |
 | PBI-007 | 開発者として、RabbitMQで変換ジョブを安全に配送したい | Infrastructure | P0: Critical | NotReady | 5 | S3: アップロードとジョブ作成 | - | `type:feature`, `area:infra`, `area:worker`, `area:db`, `risk:high` | RabbitMQ基盤と変換ジョブ配送を実装する | ack、再配送、DLQ、冪等性の確認方法をIssue本文へ具体化する。 |
@@ -84,7 +86,7 @@
 | 先行Issue | 後続Issue | 理由 |
 | --- | --- | --- |
 | OPS-001 | 全Issue | Projectフィールド、ラベル、ビューがないと運用状態を一貫して管理できない。 |
-| SPIKE-001 | PBI-002, PBI-003, PBI-004 | 認証トークン、チャレンジ、セッションの保存方式と期限管理が未確定だと手戻りが大きい。 |
+| SPIKE-004 | PBI-002, PBI-003, PBI-004R, PBI-005, PBI-021 | Passkey / WebAuthn credential、登録/認証チャレンジ、セッション、復旧、初期super_admin登録方式が未確定だと手戻りが大きい。 |
 | PBI-001 | PBI-002以降 | フロントエンド、API、ワーカー、DB、ミドルウェア、メール境界の最小基盤が前提になる。 |
 | PBI-005 | PBI-008, PBI-012, PBI-013 | 管理操作は固定ロール認可の境界が必要になる。 |
 | PBI-006 | PBI-008, PBI-013, PBI-014, PBI-016 | 書籍メタ情報モデルがアップロード、編集、検索、一覧の土台になる。 |
@@ -103,17 +105,17 @@
 
 | 区分 | 結果 | 備考 |
 | --- | --- | --- |
-| MVP PBI | 一致 | `02_product_backlog.md` の PBI-001〜PBI-021 をすべてIssue一覧へ反映済み。IssueタイトルはGitHub向けにユーザーストーリー寄りへ言い換えているが、`関連PBI` で正本PBI名を保持する。 |
+| MVP PBI | 認証系のみ差分あり | `02_product_backlog.md` の PBI-001〜PBI-021 を初期反映済み。2026-05-20の認証方針変更により、PBI-003はPasskeyログインへ変更し、PBI-004はDropしてPBI-004R / Issue #90へ置換する。後続で `02_product_backlog.md` も正本として更新する。 |
 | Beta / v1.0候補PBI | 一致 | `02_product_backlog.md` の PBI-101〜PBI-112 をすべてIssue一覧へ反映済み。 |
 | PBI番号の追加 | 一致 | 追加候補は `02_product_backlog.md` へ PBI-108〜PBI-112 として正式追加し、Issue一覧も同じIDへ振り直した。 |
-| 補助Issue | 意図的な追加 | `OPS-001`、`SPIKE-001`〜`SPIKE-003` はProject運用と実装前必須の未決事項を扱うため、PBIとは別枠で追加した。 |
+| 補助Issue | 意図的な追加 | `OPS-001`、`SPIKE-001`〜`SPIKE-004` はProject運用と実装前必須の未決事項を扱うため、PBIとは別枠で追加した。`SPIKE-001` は仕様変更によりDropし、後継として `SPIKE-004` / Issue #89 を追加した。 |
 
 ## カバレッジ確認メモ
 
 | 観点 | 確認結果 | 対応Issue |
 | --- | --- | --- |
 | MVP主導線: 登録、アップロード、変換、検索、閲覧 | カバー済み。MVP PBI-001からPBI-021に対応する。 | PBI-001〜PBI-021 |
-| 実装前必須の未決事項 | 認証トークン、変換リソース上限、Elasticsearch必須プラグイン確認を補助Issue化済み。 | SPIKE-001〜SPIKE-003 |
+| 実装前必須の未決事項 | Passkey / WebAuthn認証、変換リソース上限、Elasticsearch必須プラグイン確認を補助Issue化済み。 | SPIKE-002〜SPIKE-004 |
 | 会員情報編集、退会 | 会員情報編集と退会をPBI化済み。 | PBI-105, PBI-108 |
 | 本削除 | 受入条件とユーザーストーリーに基づきPBI化済み。 | PBI-109 |
 | 変換運用改善 | 再実行、キャンセル、失敗理由、状態絞り込み、ページ順確認をPBI化済み。 | PBI-101, PBI-102, PBI-110 |

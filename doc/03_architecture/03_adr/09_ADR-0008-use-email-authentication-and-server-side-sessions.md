@@ -2,7 +2,11 @@
 
 ## Status
 
-Accepted
+Superseded
+
+2026-05-20: Passkey / WebAuthn認証へ方針変更したため、本ADRの「メールアドレス、パスワード、メール2段階認証、パスワードリセットを初期認証方式とする」判断は廃止する。サーバ側セッションを採用する判断は、ADR-0014へ引き継ぐ。
+
+Superseded by: [ADR-0014: Passkey / WebAuthn認証とサーバ側セッションを採用する](15_ADR-0014-use-passkey-webauthn-and-server-side-sessions.md)
 
 ## Context
 
